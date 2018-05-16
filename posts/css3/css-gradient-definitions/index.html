@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      CSS Gradient Definitions |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_css3 posts_css3_css-gradient-definitions posts_css3_css-gradient-definitions_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/css3/css-gradient-definitions/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2010-12-23 03:26:19 UTC'>December 23, 2010</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/css3/">CSS3</a>
+                </p>
+              </div>
+              <h2><a href="/posts/css3/css-gradient-definitions/">CSS Gradient Definitions</a></h2>
+              <p class='post-tags'>
+              </p>
+            </header>
+            <p>I&#39;ve just released an update to the <a href="http://gradients.glrzad.com">CSS3 Gradient Generator</a> which changes the way the code sample is generated for users to copy and paste.</p>
+            
+            <p>The sample has moved to using the <code>background-image</code> property instead of the <code>background</code> property alone. This change has been made to resolve issues that occur when defining a background with the CSS based gradient but leaving out the other properties common to a background such as position or repeat.  When these attributes are left out, browsers define default values which can yield unexpected results with the CSS gradients.</p>
+            
+            <p>So, the following:</p>
+            
+            <pre><code class="css">background: -webkit-gradient(&#x000A;    linear,&#x000A;    left bottom,&#x000A;    left top,&#x000A;    color-stop(0.33, rgb(99,168,125)),&#x000A;    color-stop(0.67, rgb(129,202,163)),&#x000A;    color-stop(0.84, rgb(155,243,196))&#x000A;);&#x000A;&#x000A;background: -moz-linear-gradient(&#x000A;    center bottom,&#x000A;    rgb(99,168,125) 33%,&#x000A;    rgb(129,202,163) 67%,&#x000A;    rgb(155,243,196) 84%&#x000A;);&#x000A;</code></pre>
+            
+            <p>Becomes,</p>
+            
+            <pre><code class="css">background-image: -webkit-gradient(&#x000A;    linear,&#x000A;    left bottom,&#x000A;    left top,&#x000A;    color-stop(0.33, rgb(99,168,125)),&#x000A;    color-stop(0.67, rgb(129,202,163)),&#x000A;    color-stop(0.84, rgb(155,243,196))&#x000A;);&#x000A;&#x000A;background-image: -moz-linear-gradient(&#x000A;    center bottom,&#x000A;    rgb(99,168,125) 33%,&#x000A;    rgb(129,202,163) 67%,&#x000A;    rgb(155,243,196) 84%&#x000A;);&#x000A;</code></pre>
+            
+            <p>The live sample on the page also makes use of background-image as well, so you can view that as another reference to this update as well.</p>
+            
+            <p>Thanks to Avi Mahbubani for pointing out the issue and helping come to a resolution.</p>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

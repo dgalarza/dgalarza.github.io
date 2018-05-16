@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      A look at Decorators and Presenters |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_ruby-on-rails posts_ruby-on-rails_A-look-at-decorators-and-presenters posts_ruby-on-rails_A-look-at-decorators-and-presenters_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/ruby-on-rails/A-look-at-decorators-and-presenters/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2012-10-03 16:38:27 UTC'>October 03, 2012</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/ruby-on-rails/">Ruby on Rails</a>
+                </p>
+              </div>
+              <h2><a href="/posts/ruby-on-rails/A-look-at-decorators-and-presenters/">A look at Decorators and Presenters</a></h2>
+              <p class='post-tags'>
+                <a href="/posts/tags/rails3/">rails3</a>
+                |
+                <a href="/posts/tags/decorators/">decorators</a>
+              </p>
+            </header>
+            <h1>Posts: Decorators and Presenters</h1>
+            
+            <p>As part of an effort to clean up some of the complexity behind the views with posts on QFive a major refactoring was done on our current &#39;presenters&#39; implementation.  </p>
+            
+            <p>Since starting on the project I and several others have often opened up the presenters with the distinct feeling of being lost. The next step usually was a look at the base Presenter class which usually helped but would leave us with a sinking feeling with what was going on.</p>
+            
+            <pre><code class="ruby">class Presenter &lt; BasicObject&#x000A;  undef_method :==&#x000A;&#x000A;  def initialize(component)&#x000A;    @component = component&#x000A;  end&#x000A;&#x000A;  def method_missing(name, *args, &amp;block)&#x000A;    @component.send(name, *args, &amp;block)&#x000A;  end&#x000A;&#x000A;  def respond_to?(method_id)&#x000A;    if @component.respond_to?(method_id)&#x000A;      true&#x000A;    else&#x000A;      super&#x000A;    end&#x000A;  end&#x000A;&#x000A;  def send(symbol, *args)&#x000A;    __send__(symbol, *args)&#x000A;  end&#x000A;end&#x000A;</code></pre>
+            
+            <p>A quick look at the base presenter reveals a few things. First, it inherits from BasicObject rather than the typical Object class. Next, it goes a step further to undefine the == method for comparison purposes. We could probably simplify the implementation. Either way now with the project coming to life and knowing much more about the use cases we can revisit this and clean up.</p>
+            
+            <h2>Decorators masked as Presenters</h2>
+            
+            <p>Another problem with our &#39;presenters&#39; is that they actually function as decorators. The topic of &#39;Decorators vs Presenters&#39; is usually widely debated and I have not seen one final answer that seems to be accepted. However The decorator pattern is one of the original GoF design patterns. However, the decorator pattern does have an accepted definition, wikipedia defines it as:</p>
+            
+            <p>&#39;The decorator pattern can be used to extend (decorate) the functionality of a certain object at run-time, independently of other instances of the same class, provided some groundwork is done at design time. This is achieved by designing a new decorator class that wraps the original class.&#39;</p>
+            
+            <p>While the presenter pattern is often found as part of the &#39;Model-View-Presenter&#39; pattern where the &#39;all presentation logic is pushed to the presenter&#39;.</p>
+            
+            <h2>Single Responsibility Principle</h2>
+            
+            <p>One thing was clear on the Presenters we had in place for posts. They were responsible for way to much. Our single Post presenter class (and any subsets of it) were responsible for:</p>
+            
+            <ol>
+            <li>Generating a hash which represents a post for sending it to Facebook in a share for &#39;post to facebook&#39; functionality.</li>
+            <li>Generating a tweet text for sharing a post directly to Twitter.</li>
+            <li>Generating open graph tags for TwitterCards</li>
+            <li>Determining SOME open graph tags for Facebook (but not all)</li>
+            <li>Some minor post presentation updates for the view</li>
+            <li>Determining how to display a title of a post for the view (is it a topic your following? is it a team post? is it a repost?)</li>
+            </ol>
+            
+            <p>and more</p>
+            
+            <h2>View Coupling with Presenters</h2>
+            
+            <p>Next up, some weird coupling and usage in the view.</p>
+            
+            <p>If a presenter is intended for view logic, then why was our only usage of a presenter within app/views/posts/show.html.slim this:</p>
+            
+            <pre><code class="ruby">- presenter = PostPresenter.present(@post, self, true)&#x000A;- content_for :title, truncate(@post.text, :length =&gt; 17, :separator =&gt; &#39; &#39;).html_safe if @post.text&#x000A;- content_for :og_title, truncate(@post.text, :length =&gt; 17, :separator =&gt; &#39; &#39;).html_safe if @post.text&#x000A;- content_for :og_type, &quot;website&quot;&#x000A;- content_for :prefix, &quot;og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object#&quot;&#x000A;</code></pre>
+            
+            <p>There was no other reference to the presenter in the view. Another sign of failing SRP and coupling.</p>
+            
+            <h2>Cleaning up</h2>
+            
+            <p>Before diving in I looked around into a few different solutions which all pointed back to <a href="https://github.com/jcasimir/draper">Draper</a> so I figured we would give it a shot. With a large amount of refactoring and cleaning up ahead of me I set out with the following goals:</p>
+            
+            <ol>
+            <li>Follow SRP, don&#39;t end up with one massive class which is responsible for presenting a post for every possible situation.</li>
+            <li>Extensibility: We have many different places for posts: mobile, the web application, sharing on Facebook, Sharing on Twitter. We should be able to provide flexibility for this. We even have different sources or destinations: clubs, teams, topics. Extensibility and flexibility were key. I will elaborate on this later.</li>
+            </ol>
+            
+            <p>Cleaning up also did not mean that we needed to drop presenters in favor of decorators or vice versa. Rather, understand their differences and build on each of their strengths. It&#39;s important to not mask a decorator as a presenter. Looking in the application now we can find 2 folders: app/decorators and app/presenters.</p>
+            
+            <p>So, when should you be using a decorator and when should you be using a presenter? Simply follow these 2 guidelines:</p>
+            
+            <p>First, are you just augmenting functionality, whether or not it&#39;s related to the view? Use a decorator.</p>
+            
+            <p>Take for example our use of cache keys for post partials. Posts can appear in either a user&#39;s news feed or their profile / activity feed. Post partials are cached for each user viewing them but we must cache them differently based on whether they are a repost, or which feed they appear in. Enter the decorator.</p>
+            
+            <p>Within app/views/posts/_post.html.slim</p>
+            
+            <pre><code class="ruby">- cache post.partial_cache_key(:activity_stream, cache_key, current_user)  do  &#x000A;  div id=&quot;post_#{post.id}&quot; class=&quot;post&quot;&#x000A;  ...&#x000A;</code></pre>
+            
+            <p>app/decorators/post_decorator.rb</p>
+            
+            <pre><code class="ruby"> # Advanced handling for generating an array for the cache key. A repost must be cached&#x000A; # separately from the original post but it&#39;s own cache must be cleared when a user acts&#x000A; # upon the original post such as a like or a repost&#x000A; def partial_cache_key(*segments)&#x000A;   segments &lt;&lt; model&#x000A;   if model.is_a_repost?&#x000A;     segments &lt;&lt; model.source&#x000A;   end &#x000A;&#x000A;   segments&#x000A; end&#x000A;</code></pre>
+            
+            <p>This allows us to handle reposts transparently to the view.</p>
+            
+            <p>Second, are you taking something and drastically providing different logic for the view? Use a presenter.</p>
+            
+            <p>A perfect example of a presenter in use in QFive is the notifications presenter. This presenter is not aiming to add additional logic behind the notification based on it&#39;s use. It does not provide any value other than providing presentation on the view while handling its polymorphic roots.</p>
+            
+            <pre><code class="ruby">class NotificationPresenter &lt; Presenter                                                                                                                                                                                                                                                                                                                                     &#x000A;&#x000A;  class &lt;&lt; self                                                                                                                                                                                                                                                                                                                                                             &#x000A;    def present(notification, context = nil)                                                                                                                                                                                                                                                                                                                                &#x000A;      presenter = presenter_for(notification).new(notification, context)                                                                                                                                                                                                                                                                                                    &#x000A;      presenter.present                                                                                                                                                                                                                                                                                                                                                     &#x000A;    end                                                                                                                                                                                                                                                                                                                                                                     &#x000A;&#x000A;    def presenter_for(notification)                                                                                                                                                                                                                                                                                                                                         &#x000A;      &quot;#{notification.notifiable_type}_notification_presenter&quot;.classify.safe_constantize || NotificationPresenter                                                                                                                                                                                                                                                           &#x000A;    end                                                                                                                                                                                                                                                                                                                                                                     &#x000A;  end                                                                                                                                                                                                                                                                                                                                                                       &#x000A;&#x000A;  def initialize(notification, context = nil)                                                                                                                                                                                                                                                                                                                               &#x000A;    @notification = notification                                                                                                                                                                                                                                                                                                                                            &#x000A;    @context = context                                                                                                                                                                                                                                                                                                                                                      &#x000A;  end                                                                                                                                                                                                                                                                                                                                                                       &#x000A;&#x000A;  def present                                                                                                                                                                                                                                                                                                                                                               &#x000A;    sender_avatar_link + notification_presentation                                                                                                                                                                                                                                                                                                                          &#x000A;  end &#x000A;&#x000A;  …&#x000A;</code></pre>
+            
+            <p>QFive has notifications for many things like comments, likes, follows, reposts, etc. and we have a sinple page which lists out the various notifications you can receive. There needs to be a way to transform a universal &#39;Notification&#39; object for viewing purposes to the user. We could have a view littered with if else blocks which would quickly become a nightmare to maintain. Or we could abstract this into a presenter.</p>
+            
+            <p>In our view you can find a simple partial for handling notifications:</p>
+            
+            <pre><code class="ruby">.media&#x000A;    = notification_message(notification)&#x000A;</code></pre>
+            
+            <p>This in turn calls a helper method:</p>
+            
+            <pre><code class="ruby">def notification_message(notification)&#x000A;    NotificationPresenter.present(notification, self).html_safe&#x000A;end&#x000A;</code></pre>
+            
+            <p>So we simply output the results of the notification presenter to the view. Taking a look at the present method, we simply generate an avatar link for the sender of the notification and then a call to notification_presentation which can then proxy based off the different types of notifications:</p>
+            
+            <pre><code class="ruby">  def notification_presentation                                                                                                                                                                                                                                                                                                                                             &#x000A;    klass = &#39;bd&#39;                                                                                                                                                                                                                                                                                                                                                            &#x000A;    method = @notification.notifiable_type.underscore.downcase + &#39;_notification&#39;                                                                                                                                                                                                                                                                                            &#x000A;    message = self.send(method.to_sym)                                                                                                                                                                                                                                                                                                                                      &#x000A;&#x000A;    content_tag(:div, class: klass) do                                                                                                                                                                                                                                                                                                                                      &#x000A;      link_to(@notification.sender.name, @notification.sender) + &#39; &#39; + message.html_safe                                                                                                                                                                                                                                                                                    &#x000A;    end                                                                                                                                                                                                                                                                                                                                                                     &#x000A;  end  &#x000A;</code></pre>
+            
+            <p>From here, we simply determine the kind of notification that is being presented (comment, follow, etc) and delegate to a method matching the convention <code>#{notifialbe_type.underscore.downcase}_notification</code> which for example in the scenario of a repost will call:</p>
+            
+            <pre><code class="ruby">def repost_notification                                                                                                                                                                                                                                                                                                                                                   &#x000A;  &quot;reposted #{notification_for_post}&quot;                                                                                                                                                                                                                                                                                                                                     &#x000A;end&#x000A;</code></pre>
+            
+            <p>We can also abstract logic for the following conditions:
+            * A user reposts a post for a club that I manage
+            * A user reposts a post for a post I made</p>
+            
+            <p>With the various targets and receivers for a notification the permutations behind the kinds of ways a simple notification can be presented grows quickly.</p>
+            
+            <h2>Flexibility</h2>
+            
+            <p>One last topic I will cover is the flexibility that the decorators provide. Let&#39;s take a scenario for a post which is posted within a topic that I follow. Assuming I do not follow the user but rather the post shows up in my newsfeed because I follow the topic, I should see the post with the common &quot;Josh has posted in a topic you follow&quot;. This seems straightfoward enough. However if we start to think of the use case of visiting Josh&#39;s profile it no longer makes sense to display that heading. We are viewing this post in the context of Josh&#39;s profile rather than in our newsfeed, therefor &quot;Josh posted in a topic that you follow&quot; has lost its context in this view.</p>
+            
+            <p>Enter feeds.</p>
+            
+            <p>I will not get into the details of feeds in this post, but instead I will cover some background. A feed is a collection of posts to view on a page. There are different kinds of feeds, NewsFeed&#39;s which cover the case of displaying posts in your news feed when you log in, and activity feeds which pulls in content for a user or club, or team.</p>
+            
+            <p>Since these feeds act as a context point towards the kinds of posts you are viewing at the time, we can inject decorators into the scene in order to provide flexibility for us.</p>
+            
+            <pre><code class="ruby"># NewsFeed&#x000A;def decorated_posts                                                                                                                                                                                                                                                                                                                                                       &#x000A;  NewsFeedPostDecorator.decorate posts                                                                                                                                                                                                                                                                                                                                    &#x000A;end     &#x000A;&#x000A;# ActivityFeed&#x000A;def decorated_posts                                                                                                                                                                                                                                                                                                                                                       &#x000A;  PostDecorator.decorate posts                                                                                                                                                                                                                                                                                                                                            &#x000A;end&#x000A;</code></pre>
+            
+            <p>The view is no longer concerned with how to display a post within a news feed or an activity feed. Instead the view simply can call post.title and it will have the proper title generated.</p>
+            
+            <p>For example, within NewsFeedPostDecorator:</p>
+            
+            <pre><code class="ruby">  def title                                                                                                                                                                                                                                                                                                                                                                 &#x000A;    if model.is_a_repost?                                                                                                                                                                                                                                                                                                                                                   &#x000A;      repost_title                                                                                                                                                                                                                                                                                                                                                          &#x000A;    elsif model.team_post?                                                                                                                                                                                                                                                                                                                                                  &#x000A;      team_post_title                                                                                                                                                                                                                                                                                                                                                       &#x000A;    elsif followed_topic?                                                                                                                                                                                                                                                                                                                                                   &#x000A;      topic_post_title                                                                                                                                                                                                                                                                                                                                                      &#x000A;    else                                                                                                                                                                                                                                                                                                                                                                    &#x000A;      generic_title                                                                                                                                                                                                                                                                                                                                                         &#x000A;    end                                                                                                                                                                                                                                                                                                                                                                     &#x000A;  end &#x000A;</code></pre>
+            
+            <p>And then in PostDecorator:</p>
+            
+            <pre><code class="ruby">def title                                                                                                                                                                                                                                                                                                                                                                 &#x000A;  if model.is_a_repost?                                                                                                                                                                                                                                                                                                                                                   &#x000A;    repost_title                                                                                                                                                                                                                                                                                                                                                          &#x000A;  else                                                                                                                                                                                                                                                                                                                                                                    &#x000A;    generic_title                                                                                                                                                                                                                                                                                                                                                         &#x000A;  end                                                                                                                                                                                                                                                                                                                                                                     &#x000A;end   &#x000A;</code></pre>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

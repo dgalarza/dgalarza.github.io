@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      Simple Sinatra Service Proxy |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_ruby posts_ruby_simple-sinatra-service-proxy posts_ruby_simple-sinatra-service-proxy_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/ruby/simple-sinatra-service-proxy/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2012-04-02 00:00:00 UTC'>April 02, 2012</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/ruby/">Ruby</a>
+                </p>
+              </div>
+              <h2><a href="/posts/ruby/simple-sinatra-service-proxy/">Simple Sinatra Service Proxy</a></h2>
+              <p class='post-tags'>
+                <a href="/posts/tags/sinatra/">sinatra</a>
+                |
+                <a href="/posts/tags/ruby/">ruby</a>
+              </p>
+            </header>
+            <p>Recently I came across the situation where I would need to communicate with a third party API on the front
+            end via JavaScript and some AJAX requests. Unfortunately JavaScript does not allow ajax requests across different
+            domains which caused an issue for us since the service does not support a JSONP service to get around this.</p>
+            
+            <p>Instead, I set out to build a back end service which would consume our third party API and we could interact
+            with on the front end. However, I did not want to spend a great deal of time on building this midpoint between
+            the services.</p>
+            
+            <h3>Ruby and Sinatra to the Rescue</h3>
+            
+            <p>Armed with the task at hand I set out to build the simplest approach possible to begin consuming our third party
+            API as quickly as possible. I started out with Rails and a look into ActiveResource but quickly found that there was
+            to much overhead and complexity for what I needed. With this in mind I decided to move onto a simple Sinatra application which
+            would aim to mimic the third party services in API methods and forward requests for us.</p>
+            
+            <p>For our test case, let&#39;s look at the Twitter API. Note, Twitter does in fact support a JSONP service so this isn&#39;t really necessary.
+            We are simply using it as a test case for the post.</p>
+            
+            <h4>Fetching a user&#39;s timeline</h4>
+            
+            <pre><code class="ruby">require &#39;sintra&#39;&#x000A;require &#39;net/http&#39;&#x000A;&#x000A;get &quot;/1/statuses/user_timeline&quot; do&#x000A;    uri = URI::HTTP.build(&#x000A;        :host =&gt; api.twitter.com,&#x000A;        :path =&gt; request.path_info,&#x000A;        :query =&gt; request.query_string&#x000A;    )&#x000A;&#x000A;    content_type &#39;application/json&#39;, :charset =&gt; &#39;utf-8&#39;&#x000A;&#x000A;    Net::HTTP.get(uri)&#x000A;end&#x000A;</code></pre>
+            
+            <p>In order to fetch a user&#39;s timeline we will need to make a request to the following API path: <code>/1/statuses/user_timeline</code>. Along with this path
+            the API documentation by twitter specifies that we can send various parameters along in the query string. What we have done here is we created a path which matches
+            twitter&#39;s and from there we access the request information provided by Sinatra. We build a URI using the API URL, <code>request.path</code>, and <code>request.query</code>. This will allow us
+            to quickly forward the request to Twitter&#39;s API through a NET::HTTP.get request.</p>
+            
+            <p>Now that we&#39;ve done that we can either mount our Sinatra app somewhere in the same domain or proxy requests to it on another domain.  In my case, I&#39;ve set up a simple
+            proxy through Apache at /services.</p>
+            
+            <pre><code>&lt;IfModule mod_proxy.c&gt;&#x000A;    ProxyRequests Off&#x000A;    ProxyVia On&#x000A;&#x000A;    &lt;Proxy *&gt;&#x000A;        AddDefaultCharset off&#x000A;        Order deny, allow&#x000A;        Allow from all&#x000A;    &lt;/Proxy&gt;&#x000A;&#x000A;    ProxyPass /services http://127.0.0.1:9393&#x000A;    ProxyPassReverse /services http://127.0.0.1:9393&#x000A;&lt;/IfModule&gt;&#x000A;</code></pre>
+            
+            <p>So assuming I have my Sinatra application up and running on port 9393. I now have a proxy which will forward all requests to /services in my web application
+            to the Sinatra application. This will then forward all requests to the Twitter API and return the results. Visit the <a href="http://httpd.apache.org/docs/2.0/mod/mod_proxy.html">mod_proxy</a> documentation
+            for more information about HTTP proxies with Apache.</p>
+            
+            <h4>Drying up our application</h4>
+            
+            <p>In our case right now we have a single method that we are forwarding, but what if we wanted to support more API methods provided by twitter.  Well we could go ahead and write out
+            each method and its block, or we could take advantage of the flexibility we have available to us.</p>
+            
+            <pre><code class="ruby">require &#39;sinatra&#39;&#x000A;require &#39;net/http&#39;&#x000A;&#x000A;def api_request(path, query_string)&#x000A;    uri = URI::HTTP.build(&#x000A;        :host =&gt; api.twitter.com,&#x000A;        :path =&gt; path,&#x000A;        :query =&gt; query_string&#x000A;    )&#x000A;&#x000A;    Net::HTTP.get uri&#x000A;end&#x000A;&#x000A;request_handler = -> do&#x000A;    content_type = &#39;application/json&#39;, :charset =&gt; &#39;utf-8&#39;&#x000A;    api_request request.path_info, request.query_string&#x000A;end&#x000A;&#x000A;%w{&#x000A;    /1/statues/user_timeline&#x000A;    /1/statuses/mentions&#x000A;    /1/statuses/retweeted_by_me&#x000A;}.each { |route| get route, &amp;request_handler }&#x000A;</code></pre>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

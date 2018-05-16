@@ -1,0 +1,1 @@
+(function(){angular.module("dgalarza").service("githubProjects",function($http){var BASE_URL;return BASE_URL="https://api.github.com/users/{{USERNAME}}/repos?callback=JSON_CALLBACK",{getProjects:function(username){return $http.jsonp(BASE_URL.replace("{{USERNAME}}",username))}}})}).call(this);

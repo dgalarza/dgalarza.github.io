@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      AssetPath with ActionController::Metal |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_ruby-on-rails posts_ruby-on-rails_assetpath-with-actioncontroller-metal posts_ruby-on-rails_assetpath-with-actioncontroller-metal_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/ruby-on-rails/assetpath-with-actioncontroller-metal/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2012-08-13 02:26:53 UTC'>August 13, 2012</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/ruby-on-rails/">Ruby on Rails</a>
+                </p>
+              </div>
+              <h2><a href="/posts/ruby-on-rails/assetpath-with-actioncontroller-metal/">AssetPath with ActionController::Metal</a></h2>
+              <p class='post-tags'>
+                <a href="/posts/tags/rails3/">rails3</a>
+                |
+                <a href="/posts/tags/asset-pipeline/">asset-pipeline</a>
+              </p>
+            </header>
+            <p>At QFive we&#39;re building an API to serve our iOS application and throughout the site for ajax requests. Since our API only serves JSON we could slim down our controllers being used for the API to speed up requests as much as possible. In order to achieve this we&#39;ve built a base controller for our API which inherits from ActionController::Metal instead of ActionController::Base. I was originally introduced to this idea in the book &quot;Crafting Rails Applications&quot; by Jose Valim.</p>
+            
+            <p>One issue we&#39;ve run into we&#39;ve run into is related to the asset pipeline and serving assets from a custom asset host.</p>
+            
+            <p>For example:</p>
+            
+            <p><em>config/environments/production.rb</em></p>
+            
+            <pre><code class="ruby">Example::Application.configure do&#x000A;    config.action_controller.asset_host = &quot;//static.example/com&quot;&#x000A;end&#x000A;</code></pre>
+            
+            <p>Typically the usage behind this in a rails application is masked, whenever you use <em>image_tag</em> the image will be routed to the asset host on its own behind the scenes. However since we&#39;re inheriting from ActionController::Base there is some work to be done. We&#39;ll need to include a couple of modules and ensure that the load hooks are loaded in our base controller, something that happens behind the scenes when inheriting from ActionController::Base.</p>
+            
+            <pre><code class="ruby">class Api::V1::BaseController &lt; ActionController::Metal&#x000A;    include AbstractController::AssetPaths&#x000A;&#x000A;    include ActionController::Redirecting&#x000A;    include ActionController::Rendering&#x000A;    include ActionController::Caching&#x000A;    include ActionController::Renderers::All&#x000A;    include ActionController::ConditionalGet&#x000A;    include ActionController::ParamsWrapper&#x000A;    include ActionController::MimeResponds&#x000A;&#x000A;    ActiveSupport.run_load_hooks(:action_controller, self)&#x000A;end&#x000A;</code></pre>
+            
+            <p>Of course, depending on what your application is using your mileage may vary. Our actual API BaseController looks something more like:</p>
+            
+            <pre><code class="ruby">class Api::V1::BaseController &lt; ActionController::Metal&#x000A;    include AbstractController::AssetPaths&#x000A;    include ActionController::Helpers&#x000A;&#x000A;    include ActionController::Redirecting&#x000A;    include ActionController::Rendering&#x000A;    include ActionController::Caching&#x000A;    include ActionController::Renderers::All&#x000A;    include ActionController::ConditionalGet&#x000A;    include ActionController::ParamsWrapper&#x000A;&#x000A;    include ActionController::MimeResponds&#x000A;    include ActionController::RequestForgeryProtection&#x000A;    include AbstractController::Callbacks&#x000A;&#x000A;    include ActionController::Instrumentation&#x000A;    include ActionController::Rescue&#x000A;&#x000A;    Rails.application.routes.default_url_options = ActionMailer::Base.default_url_options&#x000A;    include Rails.application.routes.url_helpers&#x000A;&#x000A;    append_view_path &quot;#{Rails.root}/app/views&quot;&#x000A;&#x000A;    protect_from_forgery&#x000A;&#x000A;    ActiveSupport.run_load_hooks(:action_controller, self)&#x000A;end&#x000A;</code></pre>
+            
+            <p>Be sure to check out the rails ActionController::Base to see what else is included by default and tweak as you see fit.</p>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+(function(){angular.module("dgalarza").controller("GithubProjectsCtrl",function($scope,githubProjects){var setProjects;return setProjects=function(response){return $scope.projects=response.data},githubProjects.getProjects("dgalarza").success(setProjects)})}).call(this);

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      Getting Started with iOS Development |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_ios posts_ios_getting-started-with-ios-development posts_ios_getting-started-with-ios-development_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/ios/getting-started-with-ios-development/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2015-06-12 00:00:00 UTC'>June 12, 2015</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/ios/">iOS</a>
+                </p>
+              </div>
+              <h2><a href="/posts/ios/getting-started-with-ios-development/">Getting Started with iOS Development</a></h2>
+              <p class='post-tags'>
+                <a href="/posts/tags/swift/">swift</a>
+              </p>
+            </header>
+            <p>Around April I started digging into iOS and Swift. I figured it would
+            be helpful to share my experience with others who may also want to learn it.
+            Note, this comes from the perspective of someone who already has a programming
+            background and previously spent time becoming familiar with Objective-C and
+            Apple&#39;s Cocoa Touch frameworks.</p>
+            
+            <p>When I first got started, I decided to search for some online iOS with Swift
+            courses. I was hoping to find some courses on Code School or something similar.
+            Unfortunately, I couldn&#39;t find a course like this. The courses that I found
+            were focused around learning iOS with Objective-C. I decided if I was going to
+            start learning iOS, I wanted to learn it with the modern Swift language rather
+            than Objective-C.</p>
+            
+            <p>That&#39;s not to say that having Objective-C knowledge isn&#39;t valuable. It&#39;s
+            especially important to have Objective-C experience to work with older
+            applications. For example, <a href="http://troposweather.com/">Tropos</a> is built with
+            Objective-C. In order to contribute to this project, I needed to think back to
+            my Objective-C learnings. The specifics around iOS development tend to be the
+            frameworks that Apple provides to its developers. These frameworks have great
+            documentation and are in both, Swift and Objective-C. If you&#39;re learning how to
+            use these libraries and the concepts behind iOS, it shouldn&#39;t be difficult to
+            apply them to Objective-C.</p>
+            
+            <p>Initially I was disappointed to see that there weren&#39;t many resources to get
+            started in iOS from a beginner&#39;s perspective with Swift. Then after spending
+            some more time searching I found that Stanford University has a free course on
+            iTunes university titled <a href="https://itunes.apple.com/us/course/developing-ios-8-apps-swift/id961180099">Developing iOS 8 Apps with
+            Swift</a>.
+            This has been an immensely useful resource. Paul Hegarty is a great instructor.
+            He is really good at explaining the concepts and demonstrating things in real
+            time. I highly recommend checking it out.</p>
+            
+            <p>These are a few of the important things I&#39;ve learned so far:</p>
+            
+            <ul>
+            <li><p><strong><a href="https://developer.apple.com/library/ios/documentation/UserExperience/Conceptual/MobileHIG/">Read the iOS Human Interface
+            Guidelines</a></strong>
+            This may go without saying but Apple has done a ton of research behind the
+            user experience of iOS and its native applications. A fun fact that I learned
+            was the loading screen for an iOS application shouldn&#39;t be used as a splash
+            page. Instead, it should be a representation of the inactive application to
+            give the illusion of a quick load.</p></li>
+            <li><p><strong>Have a project idea</strong> While reading and following the Stanford online course
+            was immensely useful to start learning, I always feel that I need a concrete
+            project to work on to apply my learnings. Without this, I usually can&#39;t keep
+            sustained interest. I recommend coming up with a simple app idea to work on
+            while learning.</p></li>
+            <li><p><strong>Read through Apple&#39;s developer documentation</strong> While developing for iOS you
+            have a large number of frameworks provided by Apple at your disposal.
+            Apple also provides excellent documentation around all of these frameworks;
+            XCode even has a documentation browser built in. I recommend taking the time
+            to familiarize yourself with these documents and learn to navigate them, it
+            will be a huge benefit in the long run.</p></li>
+            <li><p><strong>Use the Apple developer forums</strong> I wasn&#39;t immediately aware of how useful
+            the Apple developer forums would be. I was running into trouble getting an
+            archive of my app sent to iTunes connect and spent hours if not days searching
+            for support. Most of my searching turned up various StackOverflow posts which
+            were not helpful, but after checking in the thoughtbot XCode slack channel I
+            found that someone else had recently run into a similar issue. They lead me to
+            the specific post on the Apple developer forums regarding the issue and I was
+            able to work around it in a few minutes. Lesson I learned; search the Apple
+            developer forums.</p></li>
+            </ul>
+            
+            <h2>Recommended Reading</h2>
+            
+            <ul>
+            <li><a href="https://developer.apple.com/swift/resources/">Swift Programming Series (iBooks
+            Store)</a> This is the offical
+            Swift book by Apple. It is a great resource on getting started with learning
+            swift.</li>
+            <li><a href="http://www.amazon.com/Beginning-iPhone-Development-Swift-Exploring/dp/1484204107/ref=sr_1_1?ie=UTF8&amp;qid=1433530778&amp;sr=8-1&amp;keywords=iPhone+Development+with+Swift">Beginning iPhone Development with
+            Swift</a>
+            This is a great book to get started with learning iOS and Swift.</li>
+            <li><a href="http://www.raywenderlich.com/">RayWenderlich</a> Great blog with tutorials on
+            iOS and Swift</li>
+            <li><a href="http://www.appcoda.com/">AppCoda</a> Great resource for various tutorials</li>
+            <li><a href="https://robots.thoughtbot.com/tags/ios">Giant Robots Smashing into Other Giant
+            Robots</a> There may not be as many
+            beginner content here but there has been very useful blog posts on Swift and
+            functional programming in Swift.</li>
+            </ul>
+            
+            <h2>Design Resources</h2>
+            
+            <ul>
+            <li><a href="http://iosdesign.ivomynttinen.com/">The iOS Design Guidelines</a> Guide to
+            design apps around the Apple HIG.</li>
+            <li><a href="http://www.teehanlax.com/tools/iphone/">iOS 8 GUI PSD (iPhone 6)</a> Template of
+            the GUI elements found in iOS 8</li>
+            <li><a href="http://martiancraft.com/blog/2014/09/vector-images-xcode6/">Using Vector Images in XCode
+            6</a> Turns out you
+            no longer have to generate several versions of an image asset to use within your
+            app. XCode supports vector images which it will scale appropriately for various
+            sizes. IE: @1x, @2x, @3x</li>
+            </ul>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

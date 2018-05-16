@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      Using Uploadify with Rails 3 |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_ruby-on-rails posts_ruby-on-rails_using-uploadify-with-rails-3 posts_ruby-on-rails_using-uploadify-with-rails-3_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/ruby-on-rails/using-uploadify-with-rails-3/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2010-08-25 02:29:53 UTC'>August 25, 2010</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/ruby-on-rails/">Ruby on Rails</a>
+                </p>
+              </div>
+              <h2><a href="/posts/ruby-on-rails/using-uploadify-with-rails-3/">Using Uploadify with Rails 3</a></h2>
+              <p class='post-tags'>
+                <a href="/posts/tags/rails3/">rails3</a>
+                |
+                <a href="/posts/tags/uploadify/">uploadify</a>
+              </p>
+            </header>
+            <p>I recently worked on a couple of Rails projects which both implemented the ability to upload photos to the server.  One of these projects required the ability to upload multiple files at once and since HTML5 multi-file uploads aren&#39;t ready yet I needed another solution. So I decided to move forward using a Flash based uploader, specifically <a href="http://www.uploadify.com/">Uploadify</a>. Uploadify is a jQuery plugin which allows you to upload multiple files through a Flash based interface which provides helpful functionality like progress bars and multi-upload queuing, along with this, it&#39;s super easy to use.</p>
+            
+            <p>Well that is until you&#39;re trying to work with a Rails application.  There are lots of resources around that go into the details of how to get this to work but the real issue that I had was that they were mostly for Rails 2.3.8 and my application is now using Rails 3 and the methods described in all of these articles don&#39;t completely apply to Rails 3.</p>
+            
+            <h3>Why is this extra work needed?</h3>
+            
+            <p>Before moving forward on how to get everything working let&#39;s take a look at why it&#39;s not working in the first place to better understand what we&#39;re dealing with and how we&#39;re fixing the problem.</p>
+            
+            <p>Requests made via POST, PUT, DELETE all require a valid authentication token and session information in order to complete the request successfully in order to protect against Cross-site request forgery.  When building out forms using Rails form helpers, a hidden input is created which contains the authenticity token to prove the authenticity of the request along with your session cookie data.</p>
+            
+            <p>This poses 2 problems for us using Flash to upload files.</p>
+            
+            <p>First, Uploadify is not going to automatically send the authenticity token with the POST request. Second, Flash based requests do not send our session information along with the request. The first situation is pretty easy to fix while the session information requires a little more work on our part.</p>
+            
+            <h3>Sending the Authentication_Token</h3>
+            
+            <p>Let&#39;s start by sending the authenticity token along with the request. In previous versions of Rails we would have had to found a way to get the authenticity token to send but as part of Rails 3 usage of Unobtrusive JavaScript, it now includes a new helper method called <code>csrf_meta_tag</code>. This helper method will provide us with 2 meta tags, <strong>csrf-param</strong> and <strong>csrf-token</strong></p>
+            
+            <pre><code class="html">&lt;meta name=&quot;csrf-param&quot; content=&quot;authenticity_token&quot;/&gt;&#x000A;&lt;meta name=&quot;csrf-token&quot; content=&quot;s2yuw7u24N9fni1m+Wynr595kTphEeMrNSWPAnMroLM=&quot;/&gt;&#x000A;</code></pre>
+            
+            <p>Once we have the CSRF meta tags in place, we can move forward and add the authenticity to the parameters which are sent with Uploadify&#39;s request.  The JavaScript snippet below is an example of pulling the CSRF token information and passing it along with our Uploadify requests using the scriptData configuration parameter.</p>
+            
+            <pre><code class="javascript">&lt;script type=&quot;text/javascript&quot;&gt;&#x000A;$(function () {&#x000A;  // Create an empty object to store our custom script data&#x000A;  var uploadify_script_data = {};&#x000A;&#x000A;  // Fetch the CSRF meta tag data&#x000A;  var csrf_token = $(&#39;meta[name=csrf-token]&#39;).attr(&#39;content&#39;);&#x000A;  var csrf_param = $(&#39;meta[name=csrf-param]&#39;).attr(&#39;content&#39;);&#x000A;&#x000A;  // Now associate the data in the config, encoding the data safely&#x000A;  uploadify_script_data[csrf_token] = encodeURI(csrf_param);&#x000A;&#x000A;   // Configure Uploadify&#x000A;  $(&#39;#photo-upload&#39;).uploadify({&#x000A;    &#39;uploader&#39; : &#39;/assets/uploadify.swf&#39;,&#x000A;    &#39;script&#39; : &#39;/photos/&#39;,&#x000A;    &#39;scriptData&#39; : uploadify_script_data&#x000A;  });&#x000A;});&#x000A;&lt;/script&gt;&#x000A;</code></pre>
+            
+            <p>Uploadify allows you to pass extra data along with it&#39;s request using the scriptData parameter which accepts an object of properties to send with the request.  In our case we are fetching the CSRF and creating a new property in the scriptData object with the name of the CSRF token and setting it&#39;s value to the CSRF param.  Using this, we can pass along the authenticity token with the request.  It&#39;s important to note that we are encoding the authentication token value using encodeURI to escape any special characters so the data gets sent along to the server correctly.</p>
+            
+            <p>I actually ran into an issue where even using encodeURI once was not enough and I needed to double encode because + signs were being converted into spaces.
+            So if you are continuing to run into InvalidAuthenticityToken error, check your log to see that the authenticity token is being correctly sent along. While trying to debug the problem a quick look into the log showed that I was receiving</p>
+            
+            <pre><code class="ruby">authenticity_token&quot;=&gt;&quot;3WB Cj0h7y4St5ZyvlYU xIEVT7yIIr6IRAhOOLCb5w=&#x000A;</code></pre>
+            
+            <p>The spaces in the above authenticity token should have been + signs instead.  In order to resolve this issue I ended up having to double encode the authenticity token before sending it along like so:</p>
+            
+            <pre><code class="javascript">uploadify_script_data[csrf_token] = encodeURI(encodeURI(csrf_param));&#x000A;</code></pre>
+            
+            <p>Now that we have the authenticity token being sent by Uploadify, let&#39;s move forward and get our session information passed along as well.</p>
+            
+            <h3>Passing the Session Cookie</h3>
+            
+            <p>One of the first steps to passing the session cookie along with our Uploadify requests is to add it to the scriptData like we did with the authentication_token. Unfortunately there is no quick way to handle this through JavaScript alone, we need to include it using some ERB to apply it.</p>
+            
+            <p>In earlier versions of Rails the session cookie key could be accessed via: <code>ActionController::Base.session_options[:key]</code></p>
+            
+            <p>As of Rails 3 though we can access the session cookie key using: <code>Rails.application.config.session_options[:key]</code></p>
+            
+            <p>Below is a simple example of how to send the session cookie information in the scriptData.</p>
+            
+            <pre><code class="javascript">&lt;script type=&quot;text/javascript&quot;&gt;&#x000A;&lt;%- session_key = Rails.application.config.session_options[:key] -%&gt;&#x000A;$(function () {&#x000A;&#x000A;  var uploadify_script_data = {};&#x000A;&#x000A;  // Fetch the CSRF meta tag data&#x000A;  var csrf_token = $(&#39;meta[name=csrf-token]&#39;).attr(&#39;content&#39;);&#x000A;  var csrf_param = $(&#39;meta[name=csrf-param]&#39;).attr(&#39;content&#39;);&#x000A;&#x000A;  // Now associate the data in the config, encoding the data safely&#x000A;  uploadify_script_data[csrf_token] = encodeURI(csrf_param)&#x000A;&#x000A;  // Associate the session information&#x000A;  uploadify_script_data[&#39;&lt;%= session_key %&gt;&#39;] = &#39;&lt;%= cookies[session_key] %&gt;&#39;;&#x000A;&#x000A;  $(&#39;#upload-photo&#39;).uploadify({&#x000A;    script : &#39;/photos/&#39;,&#x000A;    scriptData : uploadify_script_data&#x000A;  });&#x000A;});&#x000A;&lt;/script&gt;&#x000A;</code></pre>
+            
+            <p>Now that we have the session cookie data being passed with the request we&#39;ll need to move forward and have that information set with the headers of the Flash request, enter Middleware.</p>
+            
+            <h3>Rack Middleware</h3>
+            
+            <p>In order to get the session information to be associated with the request correctly we&#39;ll need to create some custom middleware which will intercept the requests from Flash and inject the cookie information into the header.</p>
+            
+            <p>Some middleware has been around for accomplishing this but most are not compatible with Rails 3.  I&#39;ve posted a Gist on Github which has a working middleware for Rails 3 which I found on <a href="http://metautonomo.us/2010/07/09/uploadify-and-rails-3/">metautonomo.us</a> which we can use to accomplish our task.</p>
+            
+            <p>Create a file in app/middleware/flash<em>session</em>cookie_middleware.rb creating the middleware directory if it doesn&#39;t already exist and add the following code in it:</p>
+            
+            <pre><code class="ruby">require &#39;rack/utils&#39;&#x000A;&#x000A;class FlashSessionCookieMiddleware&#x000A;  def initialize(app, session_key = &#39;_session_id&#39;)&#x000A;    @app = app&#x000A;    @session_key = session_key&#x000A;  end&#x000A;&#x000A;  def call(env)&#x000A;    if env[&#39;HTTP_USER_AGENT&#39;] =~ /^(Adobe|Shockwave) Flash/&#x000A;      req = Rack::Request.new(env)&#x000A;      env[&#39;HTTP_COOKIE&#39;] = [ @session_key,&#x000A;                             req.params[@session_key] ].join(&#39;=&#39;).freeze unless req.params[@session_key].nil?&#x000A;      env[&#39;HTTP_ACCEPT&#39;] = &quot;#{req.params[&#39;_http_accept&#39;]}&quot;.freeze unless req.params[&#39;_http_accept&#39;].nil?&#x000A;    end&#x000A;&#x000A;    @app.call(env)&#x000A;  end&#x000A;end&#x000A;</code></pre>
+            
+            <p>Once you&#39;ve created that file we&#39;ll need to add the middleware directory to our autoload&#39;s path if it isn&#39;t already. You can do this by modifying you&#39;re config/application.rb file and add the following in  the autoload section:</p>
+            
+            <pre><code class="ruby"># Custom directories with classes and modules you want to be autoloadable.&#x000A;# config.autoload_paths += %W(#{config.root}/&#x000A;config.autoload_paths += %W(#{config.root}/app/middleware/)&#x000A;</code></pre>
+            
+            <p>Once that&#39;s done we have one more step to do, inserting the middleware so that it will go to work when we need it.</p>
+            
+            <p>Place the following code in config/initializers/session_store.rb</p>
+            
+            <pre><code class="ruby">Rails.application.config.middleware.insert_before(&#x000A;  ActionDispatch::Session::CookieStore,&#x000A;  FlashSessionCookieMiddleware,&#x000A;  Rails.application.config.session_options[:key]&#x000A;)&#x000A;</code></pre>
+            
+            <h4>Update</h4>
+            
+            <p>If you are using ActiveRecord based session storage instead of cookie based session storage you will need the following intializer instead:</p>
+            
+            <pre><code class="ruby">SampleApp::Application.config.session_store :active_record_store, :key =&gt; &#39;_uploader_session&#39;&#x000A;&#x000A;Rails.application.config.middleware.insert_before(&#x000A;  Rails.application.config.session_store,&#x000A;  FlashSessionCookieMiddleware,&#x000A;  Rails.application.config.session_options[:key]&#x000A;)&#x000A;</code></pre>
+            
+            <p>Thanks to reader <a href="http:/www.twitter.com/fromthought2web" target="_blank">@fromthought2web</a> for sharing his findings!</p>
+            
+            <p>With all this in place you should now be ready to successfully upload files via Flash with your Rails project.</p>
+            
+            <p>Good luck!</p>
+            
+            <h3>Updates</h3>
+            
+            <dl>
+                <dt>2012-04-03</dt>
+                <dd>Included sample middleware when using ActiveRecord for session store, thanks to <a href="http://www.twitter.com/fromthought2web" target="_blank">@fromthought2web</a> for sharing his finds.</dd>
+            
+                <dt>2010-08-26</dt>
+                <dd>Resolved issue in code sample where session_key_name was being reference instead of session_key. Original sample updated</dd>
+                <dd>`uploadify_script_data['<%= session_key %>'] = '<%= cookies[session_key] %>';`</dd>
+            </dl>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>

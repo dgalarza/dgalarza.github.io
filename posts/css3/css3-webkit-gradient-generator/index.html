@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html en='en' ng-app='dgalarza'>
+  <head>
+    <meta charset='UTF-8'>
+    <meta content='width=device-width' name='viewport'>
+    <title>
+      CSS3 Webkit Gradient Generator |
+      Damian Galarza
+    </title>
+    <link href="/stylesheets/application-00234ca8.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="http://yandex.st/highlightjs/7.3/styles/github.min.css">
+    <script type="text/javascript" src="http://use.typekit.com/hyh0moi.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+  </head>
+  <body class='posts posts_css3 posts_css3_css3-webkit-gradient-generator posts_css3_css3-webkit-gradient-generator_index'>
+    <div id='page'>
+      <header id='site-header'>
+        <div class='main-head wrapper'>
+          <h1><a href="/">Damian Galarza</a></h1>
+          <ul class='hide-phone social' role='menu'>
+            <li><a class="social-twitter" target="_blank" href="http://www.twitter.com/dgalarza">Twitter</a></li>
+            <li><a class="social-github" target="_blank" href="http://www.github.com/dgalarza">Github</a></li>
+          </ul>
+        </div>
+        <nav class='wrapper' id='site-nav'>
+          <ul role='wrapper'>
+            <li><a id="blog" href="/posts">Blog</a></li>
+            <li><a id="about" href="/about">About</a></li>
+          </ul>
+        </nav>
+      </header>
+      <div class='wrapper' id='page-wrapper'>
+        <section class='site-content'>
+          <article id='post'>
+            <div class='article-share-tools hide-phone'>
+              <div class='share-tool'>
+                <div class='share-option' id='facebook-article-share'></div>
+                <div class='share-container'>
+                  <div class='fb-like' data-href='/posts/css3/css3-webkit-gradient-generator/' data-layout='button_count' data-width='90'></div>
+                </div>
+              </div>
+              <div class='share-tool'>
+                <div class='share-option' id='twitter-article-share'></div>
+                <div class='share-container'>
+                  <a href="https://twitter.com/share" class="twitter-share-button" data-via="dgalarza">Tweet</a>
+                  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                </div>
+              </div>
+            </div>
+            <header>
+              <div class='publish-meta'>
+                <time pubdate='2009-09-14 00:22:32 UTC'>September 14, 2009</time>
+                <p class='post-category'>
+                  &ndash;
+                  <a class="alt-anchor" href="/posts/categories/css3/">CSS3</a>
+                </p>
+              </div>
+              <h2><a href="/posts/css3/css3-webkit-gradient-generator/">CSS3 Webkit Gradient Generator</a></h2>
+              <p class='post-tags'>
+              </p>
+            </header>
+            <p><a href="http://gradients.glrzad.com" title="Visit the generator">Visit the CSS3 Webkit Gradient Generator</a></p>
+            
+            <p>CSS gradients are quite powerful and very useful, but when taking a first look at the markup for writing a code based gradient it can appear daunting.  This is why I&#39;ve decided to create the CSS3 Webkit Gradient Generator.   Please note that the generator is intended to be viewed in a webkit browser. Live sampling of the gradient will not be available without a webkit browser.</p>
+            
+            <p>The gradient generator has 2 goals. The first is to provide a showcase for the power of CSS gradients. The second, is to provide a graphical user interface in which a user can visually create gradient code to use in their CSS where they see fit.  In order to do this, I tried to create a UI that appears familiar, such as that of a graphic editing tool like Adobe Photoshop.  Providing color swatches to make up the gradient and a slider for each to determine the color&#39;s position in the gradient.</p>
+            
+            <p><img title="Color Swatch Control" alt="Color Swatch Control" src="/posts/css3/css3-webkit-gradient-generator/color-swatch-ss.png" /></p>
+            
+            <h3>Color Swatch Control</h3>
+            
+            <p>Once a color swatch is selected the user can use the color picker found on the right to adjust the swatch&#39;s color. The color picker is provided by the ColorPicker jQuery plugin from <a href="http://www.eyecon.ro/colorpicker/" title="jQuery ColorPicker">eyecon.ro</a>.</p>
+            
+            <p><img title="jQuery ColorPicker Plugin" alt="jQuery ColorPicker Plugin" src="/posts/css3/css3-webkit-gradient-generator/color-picker-ss.png" /></p>
+            
+            <h3>Gradient Direction Control</h3>
+            
+            <p>Along with this control, I have added the ability to set the direction of the gradient, allowing the user to take advantage of the keywords that are available (left, right, bottom, top) or use custom point locations.</p>
+            
+            <p><img title="Gradient Direction Control" alt="Gradient Direction Control" src="/posts/css3/css3-webkit-gradient-generator/gradient-direction-ss.png" /></p>
+            
+            <h3>Live Sampling</h3>
+            
+            <p>The generator provides live sampling, meaning any changes that are made to the controls on the page will immediately update the color sample and the CSS code output.
+            <p class="disclaimer"><strong>Note:</strong> Live sampling of the gradient colors requires a webkit browser.</p></p>
+            
+            <p><img title="Live Sampling" alt="Live Sampling" src="/posts/css3/css3-webkit-gradient-generator/gradient-live-sample-ss.png" /></p>
+            
+            <h3>Coming Soon</h3>
+            
+            <p>There are still more features to be implemented.  Currently, the gradient generator only supports linear gradients.  I&#39;m working to provide radial gradient support in the near future. Also, currently the generator will only accept hex color values, I am planning on adding RGB support soon as well.</p>
+            
+            <p>Let me know what you think of the generator so far as well as any features you may like to see.</p>
+            
+            <h3>Links</h3>
+            
+            <ul>
+            <li><a href="http://www.github.com/dgalarza/css3-gradient-generator/" title="GitHub">Check out the code on GitHub</a></li>
+            <li><a href="http://webkit.org/blog/175/introducing-css-gradients/" title="Learn more about CSS3 Webkit Gradients">Learn more about CSS3 Gradients in Webkit</a></li>
+            <li><a href="http://gradients.glrzad.com/" title="CSS3 Gradient Generator">Visit the CSS3 Webkit Gradient Generator</a></li>
+            </ul>
+          </article>
+        </section>
+      </div>
+      <footer>
+        <div class='wrapper'>
+          <ul>
+            <li class='first'><a class="alt-anchor" href="http://www.damiangalarza.com">Damian Galarza</a></li>
+            <li>damian[at]damiangalarza.com</li>
+            <li class='last'>
+              Follow me on:
+              <a target="_blank" class="alt-anchor" href="http://www.facebook.com/dgalarza">Facebook</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.twitter.com/dgalarza">Twitter</a>
+              ,
+              <a target="_blank" class="alt-anchor" href="http://www.github.com/dgalarza">Github</a>
+            </li>
+          </ul>
+          <p class='hide-phone design-label'>Design by: <a class="alt-anchor" href="http://www.eringalarza.com" target="_blank">Erin Galarza</a></p>
+        </div>
+      </footer>
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js' type='text/javascript'></script>
+      <script src="/javascripts/application-7738846d.js" type="text/javascript"></script>
+      
+    </div>
+    <script>$('.fb-like').attr('data-href', window.location.href)</script>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=527200053984565";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    
+    <script type="text/javascript">
+    
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-28839416-1']);
+      _gaq.push(['_trackPageview']);
+    
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    
+    </script>
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
