@@ -20,11 +20,6 @@ theme = 'maverick'
 
 [menu]
   [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about/"
-    weight = "-110"
-  [[menu.main]]
     identifier = "posts"
     name = "Post"
     url = "/posts/"
@@ -46,7 +41,7 @@ theme = 'maverick'
     noClasses = true
     noHl = false
     style = 'monokailight'
-    tabWidth = 4
+    tabWidth = 2
 
 [taxonomies]
   tag = "tags"

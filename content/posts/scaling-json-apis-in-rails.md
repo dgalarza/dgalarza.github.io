@@ -6,8 +6,6 @@ tags: ["active-model-serializers", "rack"]
 summary: "A guide on building high-scale JSON APIs in Rails using ActiveModel::Serializers, Key-Based Caching, and Rack::Cache. This post covers organizing APIs, leveraging HTTP caching, and ensuring high scalability."
 ---
 
-# High scale JSON APIs in Rails using ActiveModel::Serialzers, Key-Based Caching, and Rack::Cache
-
 This summer at Canvas I worked on a project which was a very dynamic and front-end heavy. In order to build this we architected it such a manner that the front-end would communicate with our servers through a JSON API. The API was responsbile for feeding the data used by the Javascript application. With this in mind we wanted the API to respond as fast as possible and be able to handle scale.
 
 # Organizing our API
