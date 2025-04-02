@@ -1,7 +1,7 @@
 baseURL = 'https://damiangalarza.com'
 languageCode = 'en-us'
 title = 'Damian Galarza'
-paginate = 3
+#paginate = 3
 theme = 'maverick'
 
 [permalinks]
