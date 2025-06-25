@@ -1,0 +1,38 @@
+{{ define "main" }}
+<section class="py-20 px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ .Title }}</h1>
+        {{ if .Description }}
+        <p class="text-xl text-gray-400 mb-12">{{ .Description }}</p>
+        {{ end }}
+        
+        <div class="space-y-8">
+            {{ range .Paginator.Pages }}
+            <article class="card hover:border-accent-teal/50 transition-all duration-200">
+                <time class="text-sm text-gray-500">{{ .Date.Format "January 2, 2006" }}</time>
+                <h2 class="text-2xl font-bold mt-2 mb-3">
+                    <a href="{{ .Permalink }}" class="hover:text-[var(--color-accent-teal)] transition-colors">
+                        {{ .Title }}
+                    </a>
+                </h2>
+                <p class="text-gray-400 mb-4">{{ .Summary | truncate 200 }}</p>
+                <div class="flex items-center justify-between">
+                    <a href="{{ .Permalink }}" class="text-[var(--color-accent-teal)] font-medium hover:underline">
+                        Read more →
+                    </a>
+                    {{ if .Params.tags }}
+                    <div class="flex gap-2">
+                        {{ range .Params.tags }}
+                        <span class="text-xs px-2 py-1 bg-gray-800 rounded-full text-gray-400">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </article>
+            {{ end }}
+        </div>
+        
+        {{ template "_internal/pagination.html" . }}
+    </div>
+</section>
+{{ end }}

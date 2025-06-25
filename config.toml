@@ -2,15 +2,20 @@ baseURL = 'https://damiangalarza.com'
 languageCode = 'en-us'
 title = 'Damian Galarza'
 #paginate = 3
-theme = 'maverick'
+# theme = 'maverick' # Removed theme to use custom layouts
 
 [permalinks]
   pages = "/:slug"
 
 [params]
   logo = '/assets/favicon.ico'
-  description = "A minimal hugo theme focus on content"
-  author = 'Calvin Tran'
+  description = "Technical partner helping early-stage founders build the right thing, faster"
+  author = 'Damian Galarza'
+  
+  [params.social]
+    linkedin = "https://linkedin.com/in/damiangalarza"
+    github = "https://github.com/dgalarza"
+    twitter = "https://twitter.com/dgalarza"
 
   [params.comments]
     enabled = false

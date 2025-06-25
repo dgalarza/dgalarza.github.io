@@ -1,0 +1,167 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0a0e1a;
+  --color-dark-surface: #1a1f2e;
+  --color-accent-teal: #20D0BC;
+  --color-accent-purple: #9333ea;
+  --color-accent-blue: #3b82f6;
+}
+
+.section-alt {
+  background-color: #11182780;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-dark-bg);
+  color: #d1d5db;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, var(--color-accent-teal), var(--color-accent-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-accent-teal);
+  color: var(--color-dark-bg);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-accent-teal);
+  color: var(--color-accent-teal);
+  font-weight: 600;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-accent-teal);
+  color: var(--color-dark-bg);
+}
+
+.card {
+  background-color: var(--color-dark-surface);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #1f2937;
+  transition: border-color 0.2s;
+}
+
+.card:hover {
+  border-color: #374151;
+}
+
+/* Prose styles for blog content */
+.prose {
+  color: #d1d5db;
+  max-width: 65ch;
+  font-size: 1.125rem;
+  line-height: 1.75;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  color: #f3f4f6;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose h1 { font-size: 2.25rem; }
+.prose h2 { font-size: 1.875rem; }
+.prose h3 { font-size: 1.5rem; }
+.prose h4 { font-size: 1.25rem; }
+
+.prose p {
+  margin-bottom: 1.25rem;
+}
+
+.prose a {
+  color: var(--color-accent-teal);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: #5eead4;
+}
+
+.prose code {
+  background-color: #1f2937;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose pre {
+  background-color: #1f2937;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-accent-teal);
+  padding-left: 1rem;
+  font-style: italic;
+  color: #9ca3af;
+  margin: 1.5rem 0;
+}
+
+.prose ul,
+.prose ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+.prose img {
+  border-radius: 0.5rem;
+  margin: 2rem 0;
+}
+
+.bullet-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.bullet-item::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-accent-teal);
+  border-radius: 50%;
+  margin-top: 0.375rem;
+  flex-shrink: 0;
+}
