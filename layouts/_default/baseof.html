@@ -14,11 +14,11 @@
     
     {{ partial "head.html" . }}
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen grid grid-rows-[auto_1fr_auto]">
     {{ partial "header.html" . }}
     <div class="h-20"></div>
     
-    <main class="flex-1">
+    <main>
         {{ block "main" . }}{{ end }}
     </main>
     
