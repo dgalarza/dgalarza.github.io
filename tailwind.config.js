@@ -13,7 +13,7 @@ export default {
           surface: '#1a1f2e',
         },
         accent: {
-          teal: '#4fb3b1',
+          teal: '#20D0BC',
           purple: '#9333ea',
           blue: '#3b82f6',
         }
