@@ -9,7 +9,7 @@ title = 'Technical Partner for Startups | Damian Galarza, Fractional CTO'
 
 [params]
   logo = '/assets/favicon.ico'
-  description = "Technical partner helping early-stage founders build the right thing, faster"
+  description = "I help early-stage startup founders build better software, faster — from MVPs and architecture reviews to AI integration and fractional CTO support"
   author = 'Damian Galarza'
   
   [params.social]
