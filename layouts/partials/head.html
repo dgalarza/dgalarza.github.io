@@ -9,7 +9,31 @@
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+<meta property="og:image" content="{{ .Site.BaseURL }}images/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Damian Galarza - Technical Partner & Fractional CTO">
+
+<!-- Enhanced Twitter Cards -->
+<meta name="twitter:card" content="{{ if eq .Type "posts" }}summary_large_image{{ else }}summary{{ end }}">
+<meta name="twitter:site" content="@dgalarza">
+<meta name="twitter:creator" content="@dgalarza">
+<meta name="twitter:image" content="{{ .Site.BaseURL }}images/og-image.png">
+<meta name="twitter:image:alt" content="Damian Galarza - Technical Partner & Fractional CTO">
+
+{{ if eq .Type "posts" }}
+<!-- Article-specific Open Graph -->
+<meta property="article:author" content="{{ .Site.Params.author }}">
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ range .Params.tags }}
+<meta property="article:tag" content="{{ . }}">
+{{ end }}
+{{ if .Params.category }}
+<meta property="article:section" content="{{ .Params.category }}">
+{{ end }}
+{{ end }}
 
 <!-- Author and Article Meta Tags -->
 <meta name="author" content="{{ .Site.Params.author }}">
