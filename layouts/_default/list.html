@@ -1,6 +1,7 @@
 {{ define "main" }}
 <section class="py-12 px-6 lg:px-8">
     <div class="max-w-4xl mx-auto">
+        {{ partial "breadcrumb.html" . }}
         <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ .Title }}</h1>
         {{ if .Description }}
         <p class="text-xl text-gray-400 mb-12">{{ .Description }}</p>
