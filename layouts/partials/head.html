@@ -1,12 +1,144 @@
 {{ $favicon := "favicon.ico" | relURL }}
 <link rel="icon" href="{{ $favicon }}">
 
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ .Permalink }}">
+
 <!-- Open Graph / Twitter -->
 <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
 <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }}{{ end }}">
 <meta property="og:description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta name="twitter:card" content="summary">
+
+<!-- Author and Article Meta Tags -->
+<meta name="author" content="{{ .Site.Params.author }}">
+{{ if eq .Type "posts" }}
+<meta name="article:author" content="{{ .Site.Params.author }}">
+<meta name="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+<meta name="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ range .Params.tags }}
+<meta name="article:tag" content="{{ . }}">
+{{ end }}
+<meta name="robots" content="index, follow">
+{{ end }}
+
+{{ if .IsHome }}
+<!-- Structured Data - Person & Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Damian Galarza",
+  "url": "https://damiangalarza.com",
+  "image": "https://damiangalarza.com/images/profile.jpg",
+  "jobTitle": "Technical Advisor & Fractional CTO",
+  "description": "A technical partner helping early-stage founders ship high-quality software—whether that means building the first version, reviewing architecture, managing consultants, or using AI to move faster.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Damian Galarza Consulting",
+    "url": "https://damiangalarza.com"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/in/dgalarza/",
+    "https://github.com/dgalarza",
+    "https://twitter.com/dgalarza"
+  ],
+  "alumniOf": [
+    {
+      "@type": "Organization",
+      "name": "Thoughtbot"
+    },
+    {
+      "@type": "Organization", 
+      "name": "Buoy Software"
+    },
+    {
+      "@type": "Organization",
+      "name": "Shopify"
+    }
+  ],
+  "knowsAbout": [
+    "AI workflows",
+    "Software as a Medical Device",
+    "Technical leadership",
+    "Engineering management",
+    "Rails architecture",
+    "Startup consulting"
+  ],
+  "email": "mailto:info@damiangalarza.com",
+  "makesOffer": [
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Fractional CTO Services",
+        "description": "Technical leadership for early-stage startups without a technical co-founder or those who need interim leadership",
+        "serviceType": "Technical Consulting",
+        "provider": {
+          "@type": "Person",
+          "name": "Damian Galarza"
+        }
+      }
+    },
+    {
+      "@type": "Offer", 
+      "itemOffered": {
+        "@type": "Service",
+        "name": "Hands-On Engineering",
+        "description": "Build prototypes, write tests, pair with your team to level up quality and velocity",
+        "serviceType": "Software Development",
+        "provider": {
+          "@type": "Person",
+          "name": "Damian Galarza"
+        }
+      }
+    },
+    {
+      "@type": "Offer",
+      "itemOffered": {
+        "@type": "Service", 
+        "name": "Coaching and Mentorship",
+        "description": "Guiding engineers and technical leaders to grow with confidence through hands-on pairing and practical strategy",
+        "serviceType": "Technical Mentoring",
+        "provider": {
+          "@type": "Person",
+          "name": "Damian Galarza"
+        }
+      }
+    }
+  ]
+}
+</script>
+{{ else if eq .Type "posts" }}
+<!-- Structured Data - BlogPosting Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "url": "{{ .Site.BaseURL }}"
+  },
+  "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+  "url": "{{ .Permalink }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink }}"
+  }{{ if .Params.tags }},
+  "keywords": {{ .Params.tags | jsonify }}{{ end }}
+}
+</script>
+{{ end }}
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
