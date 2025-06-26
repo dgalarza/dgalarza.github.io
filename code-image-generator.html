@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Image Generator - Damian Galarza Brand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #030712;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            margin: 0;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .control-group h3 {
+            margin: 0 0 15px 0;
+            color: #030712;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        textarea {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.4;
+            resize: vertical;
+            min-height: 200px;
+        }
+        
+        .preview-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .background-wrapper {
+            padding: 60px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        
+        /* Background options */
+        .bg-gradient-teal {
+            background: linear-gradient(135deg, #20D0BC 0%, #16a085 100%);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+        }
+        
+        .bg-gradient-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+        
+        .bg-gradient-sunset {
+            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+        }
+        
+        .bg-gradient-ocean {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0f766e 100%);
+        }
+        
+        .bg-gradient-dark {
+            background: linear-gradient(135deg, #374151 0%, #111827 100%);
+        }
+        
+        .bg-mesh-1 {
+            background: radial-gradient(circle at 25% 25%, #20D0BC 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, #9333ea 0%, transparent 50%),
+                        linear-gradient(135deg, #030712 0%, #1a1f2e 100%);
+        }
+        
+        .bg-mesh-2 {
+            background: radial-gradient(circle at 20% 80%, #f59e0b 0%, transparent 50%), 
+                        radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+                        linear-gradient(45deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .bg-brand-dark {
+            background: #030712;
+            background: radial-gradient(circle at 25% 25%, rgba(32, 208, 188, 0.08) 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+                        #030712;
+        }
+        
+        .bg-none {
+            background: transparent;
+        }
+        
+        .code-preview {
+            width: 1200px;
+            height: 630px;
+            background: #030712;
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 0 auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        .window-header {
+            background: #1a1f2e;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid #374151;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .window-control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .control-close { background: #ef4444; }
+        .control-minimize { background: #f59e0b; }
+        .control-maximize { background: #10b981; }
+        
+        .window-title {
+            flex: 1;
+            text-align: center;
+            color: #9ca3af;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .code-content {
+            padding: 0;
+            height: calc(630px - 40px);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .line-numbers {
+            position: absolute;
+            left: 30px;
+            top: 30px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #6b7280;
+            user-select: none;
+            text-align: right;
+            padding-right: 20px;
+            border-right: 1px solid #374151;
+            white-space: pre;
+            width: 40px;
+        }
+        
+        .code-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cdd6f4;
+            white-space: pre-wrap;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            overflow: hidden;
+            position: absolute;
+            text-align: left;
+            vertical-align: top;
+        }
+        
+        .brand-footer {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .brand-accent {
+            color: #20D0BC;
+            font-weight: 600;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        button {
+            background: #20D0BC;
+            color: #030712;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        button.secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .syntax-colors {
+            display: none;
+        }
+        
+        /* Catppuccin Mocha Syntax Colors */
+        .syntax-keyword { color: #cba6f7; } /* mauve */
+        .syntax-string { color: #a6e3a1; } /* green */
+        .syntax-comment { color: #6c7086; font-style: italic; } /* overlay1 */
+        .syntax-function { color: #89b4fa; } /* blue */
+        .syntax-number { color: #fab387; } /* peach */
+        .syntax-variable { color: #cdd6f4; } /* text */
+        .syntax-operator { color: #89dceb; } /* sky */
+        .syntax-type { color: #f9e2af; } /* yellow */
+        .syntax-property { color: #f5c2e7; } /* pink */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Code Image Generator</h1>
+            <p>Create branded code images for blog posts • Damian Galarza</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3>Code Settings</h3>
+                <div class="form-group">
+                    <label for="filename">Filename</label>
+                    <input type="text" id="filename" value="README.md" placeholder="example.rb">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="language">Language</label>
+                        <select id="language">
+                            <option value="markdown" selected>Markdown</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="python">Python</option>
+                            <option value="go">Go</option>
+                            <option value="rust">Rust</option>
+                            <option value="css">CSS</option>
+                            <option value="html">HTML</option>
+                            <option value="json">JSON</option>
+                            <option value="yaml">YAML</option>
+                            <option value="bash">Bash</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="fontSize">Font Size</label>
+                        <input type="number" id="fontSize" value="14" min="10" max="24">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="codeInput">Code</label>
+                    <textarea id="codeInput" placeholder="Enter your code here..."># Rails API Performance Optimization
+
+## Key Strategies
+
+### 1. Database Optimization
+- **Eager loading** with `includes()` to avoid N+1 queries
+- **Database indexing** on frequently queried columns
+- Use `find_each` for large datasets
+
+### 2. Caching Layers
+```ruby
+Rails.cache.fetch("user_#{user.id}", expires_in: 1.hour) do
+  expensive_calculation(user)
+end
+```
+
+### 3. API Response Optimization
+- Implement **pagination** for large datasets
+- Use `only` and `except` in serializers
+- Consider GraphQL for flexible data fetching
+
+> **Pro tip**: Always benchmark before and after optimizations
+
+| Strategy | Impact | Difficulty |
+|----------|--------|------------|
+| Eager Loading | High | Low |
+| Caching | High | Medium |
+| Database Indexes | Medium | Low |
+
+---
+
+*Ready to scale your Rails API? Let's talk!*</textarea>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>Image Settings</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="width">Width</label>
+                        <input type="number" id="width" value="1200" min="800" max="1920">
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height</label>
+                        <input type="number" id="height" value="630" min="400" max="1080">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="padding">Padding</label>
+                    <input type="number" id="padding" value="30" min="20" max="60">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showLineNumbers" checked> Show line numbers
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showWindowHeader" checked> Show window header
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showBranding" checked> Show branding
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="background">Background</label>
+                    <select id="background">
+                        <option value="bg-brand-dark" selected>Brand Dark (Recommended)</option>
+                        <option value="bg-gradient-teal">Teal Gradient</option>
+                        <option value="bg-gradient-purple">Purple Gradient</option>
+                        <option value="bg-gradient-blue">Blue Gradient</option>
+                        <option value="bg-gradient-sunset">Sunset Gradient</option>
+                        <option value="bg-gradient-ocean">Ocean Gradient</option>
+                        <option value="bg-gradient-dark">Dark Gradient</option>
+                        <option value="bg-mesh-1">Mesh (Brand Colors)</option>
+                        <option value="bg-mesh-2">Mesh (Warm)</option>
+                        <option value="bg-none">None</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-container">
+            <div class="background-wrapper bg-brand-dark" id="backgroundWrapper">
+                <div class="code-preview" id="preview">
+                    <div class="window-header" id="windowHeader">
+                        <div class="window-controls">
+                            <div class="window-control control-close"></div>
+                            <div class="window-control control-minimize"></div>
+                            <div class="window-control control-maximize"></div>
+                        </div>
+                        <div class="window-title" id="windowTitle">README.md</div>
+                    </div>
+                    <div class="code-content">
+                        <div class="line-numbers" id="lineNumbers"></div>
+                        <div class="code-text" id="codeText"></div>
+                        <div class="brand-footer" id="brandFooter">
+                            <span>by</span>
+                            <span class="brand-accent">Damian Galarza</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button onclick="generateImage()">Download Image</button>
+            <button onclick="copyToClipboard()" class="secondary">Copy as Data URL</button>
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <script>
+        // Simple syntax highlighting for common languages
+        const syntaxPatterns = {
+            ruby: [
+                { pattern: /\b(class|def|end|if|else|elsif|unless|case|when|while|until|for|do|break|next|return|yield|super|self|true|false|nil|and|or|not|in|begin|rescue|ensure|retry|raise|module|include|extend|alias|undef|defined|require|load|private|protected|public|attr_reader|attr_writer|attr_accessor)\b/g, className: 'syntax-keyword' },
+                { pattern: /(["'])(?:(?!\1)[^\\]|\\.)*?\1/g, className: 'syntax-string' },
+                { pattern: /#[^\n]*/g, className: 'syntax-comment' },
+                { pattern: /\b\d+\.?\d*/g, className: 'syntax-number' },
+                { pattern: /[A-Z][a-zA-Z0-9_]*(?=\s*[<(])/g, className: 'syntax-type' },
+                { pattern: /:\w+/g, className: 'syntax-property' },
+                { pattern: /[+\-*\/=<>!&|^~%]+/g, className: 'syntax-operator' }
+            ],
+            javascript: [
+                { pattern: /\b(var|let|const|function|class|if|else|for|while|do|break|continue|return|try|catch|finally|throw|new|this|super|import|export|from|default|async|await|true|false|null|undefined)\b/g, className: 'syntax-keyword' },
+                { pattern: /(["'`])(?:(?!\1)[^\\]|\\.)*?\1/g, className: 'syntax-string' },
+                { pattern: /\/\/[^\n]*|\/\*[\s\S]*?\*\//g, className: 'syntax-comment' },
+                { pattern: /\b\d+\.?\d*/g, className: 'syntax-number' },
+                { pattern: /[A-Z][a-zA-Z0-9_]*(?=\s*[<(])/g, className: 'syntax-type' },
+                { pattern: /[+\-*\/=<>!&|^~%]+/g, className: 'syntax-operator' }
+            ],
+            markdown: [
+                { pattern: /^#{1,6}\s+.+$/gm, className: 'syntax-keyword' }, // headers
+                { pattern: /\*\*([^*]+)\*\*/g, className: 'syntax-keyword' }, // bold
+                { pattern: /\*([^*]+)\*/g, className: 'syntax-property' }, // italic
+                { pattern: /`([^`]+)`/g, className: 'syntax-string' }, // inline code
+                { pattern: /```[\s\S]*?```/g, className: 'syntax-comment' }, // code blocks
+                { pattern: /\[([^\]]+)\]\(([^)]+)\)/g, className: 'syntax-function' }, // links
+                { pattern: /^[-*+]\s+/gm, className: 'syntax-operator' }, // list items
+                { pattern: /^\d+\.\s+/gm, className: 'syntax-number' }, // numbered lists
+                { pattern: /^>\s+.+$/gm, className: 'syntax-comment' }, // blockquotes
+                { pattern: /^\|.+\|$/gm, className: 'syntax-type' }, // tables
+                { pattern: /^---+$/gm, className: 'syntax-operator' } // horizontal rules
+            ]
+        };
+
+        function applySyntaxHighlighting(code, language) {
+            const patterns = syntaxPatterns[language] || syntaxPatterns.javascript;
+            let highlighted = code;
+            
+            // Apply each pattern
+            patterns.forEach(({ pattern, className }) => {
+                highlighted = highlighted.replace(pattern, `<span class="${className}">$&</span>`);
+            });
+            
+            return highlighted;
+        }
+
+        // Color mapping for canvas rendering
+        const syntaxColors = {
+            'syntax-keyword': '#cba6f7', // mauve
+            'syntax-string': '#a6e3a1',  // green
+            'syntax-comment': '#6c7086', // overlay1
+            'syntax-function': '#89b4fa', // blue
+            'syntax-number': '#fab387',  // peach
+            'syntax-variable': '#cdd6f4', // text (default)
+            'syntax-operator': '#89dceb', // sky
+            'syntax-type': '#f9e2af',    // yellow
+            'syntax-property': '#f5c2e7', // pink
+        };
+
+        function drawHighlightedLine(ctx, line, language, x, y, fontSize) {
+            const patterns = syntaxPatterns[language] || syntaxPatterns.javascript;
+            let segments = [{ text: line, color: '#cdd6f4' }]; // default color
+            
+            // Apply each pattern to create colored segments
+            patterns.forEach(({ pattern, className }) => {
+                const newSegments = [];
+                segments.forEach(segment => {
+                    if (segment.color !== '#cdd6f4') {
+                        // Already colored, don't modify
+                        newSegments.push(segment);
+                        return;
+                    }
+                    
+                    const text = segment.text;
+                    let lastIndex = 0;
+                    let match;
+                    
+                    // Reset regex lastIndex
+                    pattern.lastIndex = 0;
+                    
+                    while ((match = pattern.exec(text)) !== null) {
+                        // Add text before match
+                        if (match.index > lastIndex) {
+                            newSegments.push({
+                                text: text.substring(lastIndex, match.index),
+                                color: '#cdd6f4'
+                            });
+                        }
+                        
+                        // Add matched text with color
+                        newSegments.push({
+                            text: match[0],
+                            color: syntaxColors[className] || '#cdd6f4'
+                        });
+                        
+                        lastIndex = match.index + match[0].length;
+                        
+                        // Prevent infinite loop
+                        if (!pattern.global) break;
+                    }
+                    
+                    // Add remaining text
+                    if (lastIndex < text.length) {
+                        newSegments.push({
+                            text: text.substring(lastIndex),
+                            color: '#cdd6f4'
+                        });
+                    }
+                });
+                
+                segments = newSegments;
+            });
+            
+            // Draw each segment
+            let currentX = x;
+            ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+            
+            segments.forEach(segment => {
+                if (segment.text) {
+                    ctx.fillStyle = segment.color;
+                    ctx.fillText(segment.text, currentX, y);
+                    currentX += ctx.measureText(segment.text).width;
+                }
+            });
+        }
+
+        function updatePreview() {
+            const code = document.getElementById('codeInput').value;
+            const filename = document.getElementById('filename').value || 'untitled';
+            const language = document.getElementById('language').value;
+            const fontSize = document.getElementById('fontSize').value;
+            const showLineNumbers = document.getElementById('showLineNumbers').checked;
+            const showWindowHeader = document.getElementById('showWindowHeader').checked;
+            const showBranding = document.getElementById('showBranding').checked;
+            const background = document.getElementById('background').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const padding = document.getElementById('padding').value;
+
+            // Update background
+            const backgroundWrapper = document.getElementById('backgroundWrapper');
+            backgroundWrapper.className = 'background-wrapper ' + background;
+
+            // Update preview dimensions
+            const preview = document.getElementById('preview');
+            preview.style.width = width + 'px';
+            preview.style.height = height + 'px';
+
+            // Update window title
+            document.getElementById('windowTitle').textContent = filename;
+
+            // Show/hide elements
+            document.getElementById('windowHeader').style.display = showWindowHeader ? 'flex' : 'none';
+            document.getElementById('lineNumbers').style.display = showLineNumbers ? 'block' : 'none';
+            document.getElementById('brandFooter').style.display = showBranding ? 'flex' : 'none';
+
+            // Update positioning based on padding
+            const windowHeaderHeight = showWindowHeader ? 40 : 0;
+
+            // Generate line numbers
+            const lines = code.split('\n');
+            const lineNumbers = lines.map((_, i) => i + 1).join('\n');
+            document.getElementById('lineNumbers').textContent = lineNumbers;
+
+            // Apply syntax highlighting
+            const highlightedCode = applySyntaxHighlighting(code, language);
+            const codeText = document.getElementById('codeText');
+            codeText.innerHTML = highlightedCode;
+            codeText.style.fontSize = fontSize + 'px';
+            codeText.style.marginLeft = showLineNumbers ? '80px' : '0';
+
+            // Update line numbers positioning and fix alignment
+            if (showLineNumbers) {
+                const lineNumbersEl = document.getElementById('lineNumbers');
+                lineNumbersEl.style.fontSize = fontSize + 'px';
+                lineNumbersEl.style.left = padding + 'px';
+                lineNumbersEl.style.top = (windowHeaderHeight + parseInt(padding)) + 'px';
+                lineNumbersEl.style.paddingRight = '20px';
+                lineNumbersEl.style.lineHeight = '1.6';
+            }
+            
+            // Update code text positioning and wrapping
+            const codeTextEl = document.getElementById('codeText');
+            codeTextEl.style.fontSize = fontSize + 'px';
+            codeTextEl.style.lineHeight = '1.6';
+            codeTextEl.style.top = (windowHeaderHeight + parseInt(padding)) + 'px';
+            const leftPosition = parseInt(padding) + (showLineNumbers ? 80 : 0);
+            codeTextEl.style.left = leftPosition + 'px';
+            codeTextEl.style.marginLeft = '0';
+            codeTextEl.style.width = 'auto';
+            codeTextEl.style.textAlign = 'left';
+        }
+
+        function generateImage() {
+            const backgroundWrapper = document.getElementById('backgroundWrapper');
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+            const padding = 60; // Background wrapper padding
+            const background = document.getElementById('background').value;
+            
+            // Set canvas size to include background padding
+            canvas.width = width + (padding * 2);
+            canvas.height = height + (padding * 2);
+
+            // Draw background
+            if (background === 'bg-brand-dark') {
+                // Brand dark background with subtle accents
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                // Add subtle radial gradients
+                const gradient1 = ctx.createRadialGradient(canvas.width * 0.25, canvas.height * 0.25, 0, canvas.width * 0.25, canvas.height * 0.25, canvas.width * 0.5);
+                gradient1.addColorStop(0, 'rgba(32, 208, 188, 0.08)');
+                gradient1.addColorStop(1, 'rgba(32, 208, 188, 0)');
+                ctx.fillStyle = gradient1;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                
+                const gradient2 = ctx.createRadialGradient(canvas.width * 0.75, canvas.height * 0.75, 0, canvas.width * 0.75, canvas.height * 0.75, canvas.width * 0.5);
+                gradient2.addColorStop(0, 'rgba(147, 51, 234, 0.08)');
+                gradient2.addColorStop(1, 'rgba(147, 51, 234, 0)');
+                ctx.fillStyle = gradient2;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (background === 'bg-gradient-teal') {
+                const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+                gradient.addColorStop(0, '#20D0BC');
+                gradient.addColorStop(1, '#16a085');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            } else if (background !== 'bg-none') {
+                // Default to brand dark for other backgrounds
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            // Draw terminal window background
+            ctx.fillStyle = '#030712';
+            ctx.fillRect(padding, padding, width, height);
+            
+            // Add window header if enabled
+            let yOffset = padding;
+            if (document.getElementById('showWindowHeader').checked) {
+                ctx.fillStyle = '#1a1f2e';
+                ctx.fillRect(padding, padding, width, 40);
+                
+                // Window controls
+                ctx.fillStyle = '#ef4444';
+                ctx.beginPath();
+                ctx.arc(padding + 25, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                ctx.fillStyle = '#f59e0b';
+                ctx.beginPath();
+                ctx.arc(padding + 45, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                ctx.fillStyle = '#10b981';
+                ctx.beginPath();
+                ctx.arc(padding + 65, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Window title
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '12px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(document.getElementById('filename').value, padding + width / 2, padding + 25);
+                
+                yOffset += 40;
+            }
+            
+            // Add code text with proper line wrapping
+            const code = document.getElementById('codeInput').value;
+            const fontSize = parseInt(document.getElementById('fontSize').value);
+            const codePadding = parseInt(document.getElementById('padding').value);
+            
+            ctx.fillStyle = '#cdd6f4';
+            ctx.font = `${fontSize}px JetBrains Mono, monospace`;
+            ctx.textAlign = 'left';
+            
+            const lines = code.split('\n');
+            const lineHeight = fontSize * 1.6;
+            const showLineNumbers = document.getElementById('showLineNumbers').checked;
+            const lineNumberOffset = showLineNumbers ? 80 : 0;
+            
+            // Draw line numbers if enabled
+            if (showLineNumbers) {
+                ctx.fillStyle = '#6b7280';
+                ctx.textAlign = 'right';
+                lines.forEach((line, i) => {
+                    const y = yOffset + codePadding + (i + 1) * lineHeight;
+                    if (y < padding + height - codePadding) {
+                        ctx.fillText((i + 1).toString(), padding + codePadding + 60, y);
+                    }
+                });
+                
+                // Draw line number separator
+                ctx.strokeStyle = '#374151';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(padding + codePadding + 70, yOffset + codePadding);
+                ctx.lineTo(padding + codePadding + 70, padding + height - codePadding);
+                ctx.stroke();
+            }
+            
+            // Draw code lines with syntax highlighting
+            ctx.textAlign = 'left';
+            const language = document.getElementById('language').value;
+            
+            lines.forEach((line, i) => {
+                const y = yOffset + codePadding + (i + 1) * lineHeight;
+                if (y < padding + height - codePadding) {
+                    drawHighlightedLine(ctx, line, language, padding + codePadding + lineNumberOffset, y, fontSize);
+                }
+            });
+            
+            // Add branding if enabled
+            if (document.getElementById('showBranding').checked) {
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '12px Inter, sans-serif';
+                ctx.textAlign = 'right';
+                ctx.fillText('by', padding + width - 70, padding + height - 25);
+                
+                ctx.fillStyle = '#20D0BC';
+                ctx.font = 'bold 12px Inter, sans-serif';
+                ctx.fillText('Damian Galarza', padding + width - 30, padding + height - 25);
+            }
+
+            // Download the image
+            const link = document.createElement('a');
+            link.download = `code-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function copyToClipboard() {
+            const canvas = document.getElementById('canvas');
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    alert('Image copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy image: ', err);
+                    // Fallback to data URL
+                    navigator.clipboard.writeText(canvas.toDataURL());
+                    alert('Image data URL copied to clipboard!');
+                });
+            });
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['codeInput', 'filename', 'language', 'fontSize', 'width', 'height', 'padding', 'showLineNumbers', 'showWindowHeader', 'showBranding', 'background'];
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', updatePreview);
+                    element.addEventListener('change', updatePreview);
+                }
+            });
+            
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
