@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #0a0e1a;
+  --color-dark-bg: #030712;
   --color-dark-surface: #1a1f2e;
   --color-accent-teal: #20D0BC;
   --color-accent-purple: #9333ea;
