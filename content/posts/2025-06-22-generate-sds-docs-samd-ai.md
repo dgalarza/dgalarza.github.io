@@ -27,7 +27,7 @@ The goal of this series is to offer **practical, high-context AI prompts** that 
 ## 🧠 The Prompt
 
 ```markdown
-# SRS Documentation Prompt
+# SDS Documentation Prompt
 
 You are a SaMD software engineer generating regulatory documentation.
 I will provide you with one or more Ruby/Rails classes used in a regulated
