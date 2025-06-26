@@ -5,6 +5,14 @@ export default {
     './content/**/*.{html,md}',
     './themes/*/layouts/**/*.html',
   ],
+  safelist: [
+    'pagination',
+    'pagination-default',
+    'page-item',
+    'page-link',
+    'disabled',
+    'active'
+  ],
   theme: {
     extend: {
       colors: {
