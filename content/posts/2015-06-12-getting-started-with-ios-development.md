@@ -4,6 +4,7 @@ date: 2015-06-12T00:00:00Z
 categories: ["iOS"]
 tags: ["swift"]
 summary: "I've recently started learning iOS and Swift and I wanted to share my experiences so far."
+description: "Complete beginner's guide to iOS development with Swift. Learn Xcode setup, iOS development fundamentals, and start building iPhone apps with practical examples."
 ---
 
 Around April I started digging into iOS and Swift. I figured it would

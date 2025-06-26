@@ -1,0 +1,37 @@
+<header class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-dark-bg)]/95 backdrop-blur-sm">
+    <nav class="max-w-7xl mx-auto px-6 lg:px-12 py-5">
+        <div class="flex items-center justify-between">
+            <a href="{{ .Site.BaseURL }}" class="text-xl font-bold">
+                Damian Galarza
+            </a>
+            
+            <button id="menu-toggle" class="md:hidden text-gray-400 hover:text-white" aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
+            <div id="menu" class="hidden md:flex items-center gap-8">
+                <a href="{{ .Site.BaseURL }}#contact" class="btn-primary text-sm">Contact me</a>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-4 pt-4 border-t border-gray-800">
+            <div class="flex flex-col gap-4">
+                <a href="{{ .Site.BaseURL }}" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                <a href="/posts/" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+                <a href="{{ .Site.BaseURL }}#contact" class="text-gray-300 hover:text-white transition-colors">Contact me</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+    const menuToggle = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    menuToggle.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+</script>

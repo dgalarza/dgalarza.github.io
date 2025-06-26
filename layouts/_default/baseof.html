@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+    <meta name="description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else if eq .Type "tags" }}{{ $tagName := .Title | lower }}{{ if eq $tagName "rails" }}Practical insights and tutorials about Ruby on Rails development, scaling, and best practices from real-world applications.{{ else if eq $tagName "swift" }}iOS development guides and Swift programming tutorials for building modern iPhone and iPad applications.{{ else if eq $tagName "rack" }}Technical articles about Rack middleware, performance optimization, and HTTP layer development in Ruby applications.{{ else }}{{ len .Pages }} {{ if eq (len .Pages) 1 }}article{{ else }}articles{{ end }} about {{ $tagName }} - practical insights and tutorials from Damian Galarza's development experience.{{ end }}{{ else }}{{ .Description | default .Summary | default .Site.Params.description | plainify | truncate 155 }}{{ end }}">
+    
+    {{ with .OutputFormats.Get "rss" -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+    
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    
+    {{ partial "head.html" . }}
+</head>
+<body class="min-h-screen flex flex-col">
+    {{ partial "header.html" . }}
+    <div class="h-20"></div>
+    
+    <main class="flex-1">
+        {{ block "main" . }}{{ end }}
+    </main>
+    
+    {{ partial "footer.html" . }}
+</body>
+</html>

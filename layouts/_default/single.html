@@ -1,0 +1,46 @@
+{{ define "main" }}
+<article class="py-20 px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        {{ partial "breadcrumb.html" . }}
+        <header class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">{{ .Title }}</h1>
+            <div class="flex items-center gap-4 text-gray-400">
+                <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+                <span>•</span>
+                <span>{{ .ReadingTime }} min read</span>
+            </div>
+            {{ if .Params.tags }}
+            <div class="flex gap-2 mt-4">
+                {{ range .Params.tags }}
+                <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">
+                    {{ . }}
+                </a>
+                {{ end }}
+            </div>
+            {{ end }}
+        </header>
+        
+        <div class="prose prose-invert prose-lg max-w-none">
+            {{ .Content }}
+        </div>
+        
+        <footer class="mt-16 pt-8 border-t border-gray-800">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                {{ with .PrevInSection }}
+                <a href="{{ .Permalink }}" class="group">
+                    <span class="text-sm text-gray-500 group-hover:text-gray-400">← Previous</span>
+                    <h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">{{ .Title }}</h3>
+                </a>
+                {{ end }}
+                
+                {{ with .NextInSection }}
+                <a href="{{ .Permalink }}" class="group text-right">
+                    <span class="text-sm text-gray-500 group-hover:text-gray-400">Next →</span>
+                    <h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">{{ .Title }}</h3>
+                </a>
+                {{ end }}
+            </div>
+        </footer>
+    </div>
+</article>
+{{ end }}
