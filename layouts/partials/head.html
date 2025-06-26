@@ -20,17 +20,27 @@
 <meta property="og:description" content="{{ if .IsHome }}{{ .Site.Params.description }}{{ else }}{{ .Description }}{{ end }}">
 <meta property="og:url" content="{{ .Permalink }}">
 <meta property="og:site_name" content="{{ .Site.Title }}">
-<meta property="og:image" content="{{ .Site.BaseURL }}images/og-image.png">
+{{ $ogImage := "images/og-image.png" }}
+{{ $ogAlt := "Damian Galarza - Technical Partner & Fractional CTO" }}
+{{ if .Params.og_image }}
+  {{ $ogImage = .Params.og_image }}
+  {{ if .Params.og_image_alt }}
+    {{ $ogAlt = .Params.og_image_alt }}
+  {{ else }}
+    {{ $ogAlt = .Title }}
+  {{ end }}
+{{ end }}
+<meta property="og:image" content="{{ .Site.BaseURL }}{{ $ogImage }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Damian Galarza - Technical Partner & Fractional CTO">
+<meta property="og:image:alt" content="{{ $ogAlt }}">
 
 <!-- Enhanced Twitter Cards -->
 <meta name="twitter:card" content="{{ if eq .Type "posts" }}summary_large_image{{ else }}summary{{ end }}">
 <meta name="twitter:site" content="@dgalarza">
 <meta name="twitter:creator" content="@dgalarza">
-<meta name="twitter:image" content="{{ .Site.BaseURL }}images/og-image.png">
-<meta name="twitter:image:alt" content="Damian Galarza - Technical Partner & Fractional CTO">
+<meta name="twitter:image" content="{{ .Site.BaseURL }}{{ $ogImage }}">
+<meta name="twitter:image:alt" content="{{ $ogAlt }}">
 
 {{ if eq .Type "posts" }}
 <!-- Article-specific Open Graph -->

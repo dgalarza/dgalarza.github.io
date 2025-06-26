@@ -4,6 +4,7 @@ title: "The AI Prompt I Wish I Had While Documenting SaMD Systems in Rails"
 description: "How AI could have helped me generate FDA audit-ready SDS documentation faster while building regulated software."
 date: 2025-06-21
 author: Damian Galarza
+og_image: "images/posts/sds-prompt-og.png"
 keywords:
   - SaMD
   - SDS
