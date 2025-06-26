@@ -308,6 +308,10 @@
             <div class="control-group">
                 <h3>Code Settings</h3>
                 <div class="form-group">
+                    <label for="headline">Headline (optional)</label>
+                    <input type="text" id="headline" value="" placeholder="The AI Prompt I Wish I Had">
+                </div>
+                <div class="form-group">
                     <label for="filename">Filename</label>
                     <input type="text" id="filename" value="README.md" placeholder="example.rb">
                 </div>
@@ -422,6 +426,7 @@ end
         
         <div class="preview-container">
             <div class="background-wrapper bg-brand-dark" id="backgroundWrapper">
+                <div class="headline-text" id="headlineText" style="font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500; color: #9ca3af; text-align: center; margin-bottom: 25px; display: none;"></div>
                 <div class="code-preview" id="preview">
                     <div class="window-header" id="windowHeader">
                         <div class="window-controls">
@@ -435,8 +440,15 @@ end
                         <div class="line-numbers" id="lineNumbers"></div>
                         <div class="code-text" id="codeText"></div>
                         <div class="brand-footer" id="brandFooter">
-                            <span>by</span>
-                            <span class="brand-accent">Damian Galarza</span>
+                            <div style="text-align: right; line-height: 1.2;">
+                                <div style="margin-bottom: 2px;">
+                                    <span>by</span>
+                                    <span class="brand-accent">Damian Galarza</span>
+                                </div>
+                                <div style="font-size: 10px; color: #6b7280;">
+                                    damiangalarza.com
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -580,6 +592,7 @@ end
 
         function updatePreview() {
             const code = document.getElementById('codeInput').value;
+            const headline = document.getElementById('headline').value;
             const filename = document.getElementById('filename').value || 'untitled';
             const language = document.getElementById('language').value;
             const fontSize = document.getElementById('fontSize').value;
@@ -594,6 +607,15 @@ end
             // Update background
             const backgroundWrapper = document.getElementById('backgroundWrapper');
             backgroundWrapper.className = 'background-wrapper ' + background;
+
+            // Update headline
+            const headlineElement = document.getElementById('headlineText');
+            if (headline.trim()) {
+                headlineElement.textContent = headline;
+                headlineElement.style.display = 'block';
+            } else {
+                headlineElement.style.display = 'none';
+            }
 
             // Update preview dimensions
             const preview = document.getElementById('preview');
@@ -652,12 +674,16 @@ end
             
             const width = parseInt(document.getElementById('width').value);
             const height = parseInt(document.getElementById('height').value);
+            const headline = document.getElementById('headline').value;
             const padding = 60; // Background wrapper padding
             const background = document.getElementById('background').value;
             
-            // Set canvas size to include background padding
+            // Calculate additional height for headline if present
+            const headlineHeight = headline.trim() ? 50 : 0;
+            
+            // Set canvas size to include background padding and headline
             canvas.width = width + (padding * 2);
-            canvas.height = height + (padding * 2);
+            canvas.height = height + (padding * 2) + headlineHeight;
 
             // Draw background
             if (background === 'bg-brand-dark') {
@@ -689,37 +715,45 @@ end
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
             
-            // Draw terminal window background
+            // Draw headline if present
+            if (headline.trim()) {
+                ctx.fillStyle = '#9ca3af';
+                ctx.font = '500 18px Inter, sans-serif';
+                ctx.textAlign = 'center';
+                ctx.fillText(headline, canvas.width / 2, padding + 30);
+            }
+            
+            // Draw terminal window background (offset by headline height)
             ctx.fillStyle = '#030712';
-            ctx.fillRect(padding, padding, width, height);
+            ctx.fillRect(padding, padding + headlineHeight, width, height);
             
             // Add window header if enabled
-            let yOffset = padding;
+            let yOffset = padding + headlineHeight;
             if (document.getElementById('showWindowHeader').checked) {
                 ctx.fillStyle = '#1a1f2e';
-                ctx.fillRect(padding, padding, width, 40);
+                ctx.fillRect(padding, padding + headlineHeight, width, 40);
                 
                 // Window controls
                 ctx.fillStyle = '#ef4444';
                 ctx.beginPath();
-                ctx.arc(padding + 25, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.arc(padding + 25, padding + headlineHeight + 20, 6, 0, 2 * Math.PI);
                 ctx.fill();
                 
                 ctx.fillStyle = '#f59e0b';
                 ctx.beginPath();
-                ctx.arc(padding + 45, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.arc(padding + 45, padding + headlineHeight + 20, 6, 0, 2 * Math.PI);
                 ctx.fill();
                 
                 ctx.fillStyle = '#10b981';
                 ctx.beginPath();
-                ctx.arc(padding + 65, padding + 20, 6, 0, 2 * Math.PI);
+                ctx.arc(padding + 65, padding + headlineHeight + 20, 6, 0, 2 * Math.PI);
                 ctx.fill();
                 
                 // Window title
                 ctx.fillStyle = '#9ca3af';
                 ctx.font = '12px Inter, sans-serif';
                 ctx.textAlign = 'center';
-                ctx.fillText(document.getElementById('filename').value, padding + width / 2, padding + 25);
+                ctx.fillText(document.getElementById('filename').value, padding + width / 2, padding + headlineHeight + 25);
                 
                 yOffset += 40;
             }
@@ -744,7 +778,7 @@ end
                 ctx.textAlign = 'right';
                 lines.forEach((line, i) => {
                     const y = yOffset + codePadding + (i + 1) * lineHeight;
-                    if (y < padding + height - codePadding) {
+                    if (y < padding + headlineHeight + height - codePadding) {
                         ctx.fillText((i + 1).toString(), padding + codePadding + 60, y);
                     }
                 });
@@ -754,7 +788,7 @@ end
                 ctx.lineWidth = 1;
                 ctx.beginPath();
                 ctx.moveTo(padding + codePadding + 70, yOffset + codePadding);
-                ctx.lineTo(padding + codePadding + 70, padding + height - codePadding);
+                ctx.lineTo(padding + codePadding + 70, padding + headlineHeight + height - codePadding);
                 ctx.stroke();
             }
             
@@ -764,21 +798,27 @@ end
             
             lines.forEach((line, i) => {
                 const y = yOffset + codePadding + (i + 1) * lineHeight;
-                if (y < padding + height - codePadding) {
+                if (y < padding + headlineHeight + height - codePadding) {
                     drawHighlightedLine(ctx, line, language, padding + codePadding + lineNumberOffset, y, fontSize);
                 }
             });
             
             // Add branding if enabled
             if (document.getElementById('showBranding').checked) {
+                // First line: "by Damian Galarza"
                 ctx.fillStyle = '#6b7280';
                 ctx.font = '12px Inter, sans-serif';
                 ctx.textAlign = 'right';
-                ctx.fillText('by', padding + width - 70, padding + height - 25);
+                ctx.fillText('by', padding + width - 70, padding + headlineHeight + height - 35);
                 
                 ctx.fillStyle = '#20D0BC';
                 ctx.font = 'bold 12px Inter, sans-serif';
-                ctx.fillText('Damian Galarza', padding + width - 30, padding + height - 25);
+                ctx.fillText('Damian Galarza', padding + width - 30, padding + headlineHeight + height - 35);
+                
+                // Second line: website
+                ctx.fillStyle = '#6b7280';
+                ctx.font = '10px Inter, sans-serif';
+                ctx.fillText('damiangalarza.com', padding + width - 30, padding + headlineHeight + height - 20);
             }
 
             // Download the image
@@ -806,7 +846,7 @@ end
 
         // Add event listeners
         document.addEventListener('DOMContentLoaded', function() {
-            const inputs = ['codeInput', 'filename', 'language', 'fontSize', 'width', 'height', 'padding', 'showLineNumbers', 'showWindowHeader', 'showBranding', 'background'];
+            const inputs = ['codeInput', 'headline', 'filename', 'language', 'fontSize', 'width', 'height', 'padding', 'showLineNumbers', 'showWindowHeader', 'showBranding', 'background'];
             inputs.forEach(id => {
                 const element = document.getElementById(id);
                 if (element) {
