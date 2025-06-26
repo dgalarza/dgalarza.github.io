@@ -5,7 +5,9 @@
       "Bash(npm run build:css:*)",
       "Bash(git commit:*)",
       "Bash(git add:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
     ],
     "deny": []
   }
