@@ -45,7 +45,7 @@ title = 'Technical Partner for Startups | Damian Galarza, Fractional CTO'
     lineNumbersInTable = true
     noClasses = true
     noHl = false
-    style = 'monokailight'
+    style = 'catppuccin-mocha'
     tabWidth = 2
 
 [taxonomies]
