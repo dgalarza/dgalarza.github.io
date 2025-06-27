@@ -35,7 +35,7 @@
 {{ end }}
 
 <nav aria-label="Breadcrumb" class="mb-12">
-  <ol class="flex items-center gap-3 text-sm text-gray-400">
+  <ol class="flex items-center gap-3 text-sm text-gray-400 min-w-0">
     <li>
       <a href="{{ .Site.BaseURL }}" class="hover:text-white transition-colors">Home</a>
     </li>
@@ -50,14 +50,14 @@
     <li class="text-gray-600">
       <span>/</span>
     </li>
-    <li class="text-gray-500" aria-current="page">
+    <li class="text-gray-500 truncate" aria-current="page">
       {{ .Title }}
     </li>
     {{ else if not .IsHome }}
     <li class="text-gray-600">
       <span>/</span>
     </li>
-    <li class="text-gray-500" aria-current="page">
+    <li class="text-gray-500 truncate" aria-current="page">
       {{ .Title }}
     </li>
     {{ end }}
