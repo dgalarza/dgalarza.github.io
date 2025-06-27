@@ -1,3 +1,4 @@
+{{ if hugo.IsProduction }}
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Y6WCB7SKQ"></script>
 <script>
@@ -7,6 +8,7 @@
 
   gtag('config', 'G-5Y6WCB7SKQ');
 </script>
+{{ end }}
 
 {{ $favicon := "favicon.ico" | relURL }}
 <link rel="icon" href="{{ $favicon }}">
