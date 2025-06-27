@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OG Image Generator - Damian Galarza Brand</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Inter', sans-serif;
+            background: #f3f4f6;
+            color: #1f2937;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #030712;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #6b7280;
+            margin: 0;
+        }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .control-group {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .control-group h3 {
+            margin: 0 0 15px 0;
+            color: #030712;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            flex: 1;
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #374151;
+            font-size: 14px;
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+            line-height: 1.4;
+        }
+        
+        .preview-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .preview-canvas {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .og-preview {
+            width: 1200px;
+            height: 630px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px;
+            box-sizing: border-box;
+        }
+        
+        /* Background options */
+        .bg-gradient-teal {
+            background: linear-gradient(135deg, #20D0BC 0%, #16a085 100%);
+        }
+        
+        .bg-gradient-purple {
+            background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
+        }
+        
+        .bg-gradient-blue {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        }
+        
+        .bg-gradient-sunset {
+            background: linear-gradient(135deg, #f59e0b 0%, #dc2626 100%);
+        }
+        
+        .bg-gradient-ocean {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0f766e 100%);
+        }
+        
+        .bg-gradient-dark {
+            background: linear-gradient(135deg, #374151 0%, #111827 100%);
+        }
+        
+        .bg-mesh-1 {
+            background: radial-gradient(circle at 25% 25%, #20D0BC 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, #9333ea 0%, transparent 50%),
+                        linear-gradient(135deg, #030712 0%, #1a1f2e 100%);
+        }
+        
+        .bg-mesh-2 {
+            background: radial-gradient(circle at 20% 80%, #f59e0b 0%, transparent 50%), 
+                        radial-gradient(circle at 80% 20%, #3b82f6 0%, transparent 50%),
+                        linear-gradient(45deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .bg-brand-dark {
+            background: #030712;
+            background: radial-gradient(circle at 25% 25%, rgba(32, 208, 188, 0.08) 0%, transparent 50%), 
+                        radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.08) 0%, transparent 50%),
+                        #030712;
+        }
+        
+        .logo-container {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .logo-wordmark {
+            height: 16px;
+            width: auto;
+        }
+        
+        .headline {
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: white;
+            max-width: 1000px;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #20D0BC 0%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.3;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 800px;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        button {
+            background: #20D0BC;
+            color: #030712;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        button:hover {
+            opacity: 0.9;
+        }
+        
+        button.secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .sample-text {
+            color: #6b7280;
+            font-size: 12px;
+            margin-top: 5px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OG Image Generator</h1>
+            <p>Create branded Open Graph images for blog posts • Damian Galarza</p>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <h3>Content</h3>
+                <div class="form-group">
+                    <label for="headline">Headline</label>
+                    <textarea id="headline" placeholder="The Complete Guide to Technical Debt for Startups">The Complete Guide to [Technical Debt] for Startups</textarea>
+                    <div class="sample-text">Use [brackets] around words for gradient effect</div>
+                </div>
+                <div class="form-group">
+                    <label for="subtitle">Subtitle (optional)</label>
+                    <textarea id="subtitle" placeholder="How to balance speed and quality when building your product">How to balance speed and quality when building your product</textarea>
+                    <div class="sample-text">Additional context or description</div>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h3>Design Settings</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="width">Width</label>
+                        <input type="number" id="width" value="1200" min="800" max="1920">
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height</label>
+                        <input type="number" id="height" value="630" min="400" max="1080">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="headlineSize">Headline Font Size</label>
+                    <input type="number" id="headlineSize" value="64" min="32" max="96">
+                </div>
+                <div class="form-group">
+                    <label for="subtitleSize">Subtitle Font Size</label>
+                    <input type="number" id="subtitleSize" value="24" min="16" max="36">
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="showLogo" checked> Show logo
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="background">Background</label>
+                    <select id="background">
+                        <option value="bg-brand-dark" selected>Brand Dark (Recommended)</option>
+                        <option value="bg-gradient-teal">Teal Gradient</option>
+                        <option value="bg-gradient-purple">Purple Gradient</option>
+                        <option value="bg-gradient-blue">Blue Gradient</option>
+                        <option value="bg-gradient-sunset">Sunset Gradient</option>
+                        <option value="bg-gradient-ocean">Ocean Gradient</option>
+                        <option value="bg-gradient-dark">Dark Gradient</option>
+                        <option value="bg-mesh-1">Mesh (Brand Colors)</option>
+                        <option value="bg-mesh-2">Mesh (Warm)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="preview-container">
+            <div class="og-preview bg-brand-dark" id="preview">
+                <div class="logo-container" id="logoContainer">
+                    <svg class="logo-icon" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.0182939 7.39441C0.0190475 7.09741 0.362232 6.9075 0.647338 7.04631L5.77168 9.54131C5.91213 9.6097 6 9.74402 6 9.89033V12.3635C6 12.5161 5.90448 12.6551 5.75468 12.7204L0.61205 14.9616C0.32726 15.0857 -0.000734999 14.894 1.23719e-06 14.6038L0.0182939 7.39441Z" fill="#20D0BC"/>
+                        <path d="M4.87982 0.0345364C4.97188 -0.0119787 5.08127 -0.0114811 5.17289 0.0358698L20.8305 8.12796C20.9347 8.18184 21 8.28797 21 8.40361V13.7969V15.5278C21 15.6446 20.9335 15.7515 20.8277 15.8049L10.5952 20.9656C10.503 21.0121 10.3935 21.0114 10.3019 20.9639L3.61032 17.4919C3.37804 17.3714 3.38703 17.0418 3.62555 16.9337L8.78308 14.5953C8.88129 14.5508 8.99558 14.5583 9.08809 14.6134C9.36808 14.78 9.97029 15.1209 10.2101 15.1209C10.5274 15.1209 14.9439 12.8883 15.0497 12.6807C15.2034 12.3788 15.1819 11.0452 15.0497 10.8116C14.9175 10.5779 13.8332 10.0704 13.8332 10.0704L0.168802 2.96536C-0.0577709 2.84755 -0.0558538 2.52827 0.172118 2.41309L4.87982 0.0345364Z" fill="#20D0BC"/>
+                    </svg>
+                    <svg class="logo-wordmark" viewBox="0 0 208 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M193 18L198.597 0H202.403L208 18H204.798L203.261 12.9391H197.311L195.773 18H193ZM198.017 10.5956H202.529L200.286 3.19114L198.017 10.5956Z" fill="#20D0BC"/>
+                        <path d="M191 15.5069V18H178V16.2548L186.88 2.49308H178.247V0H190.852V1.77008L181.947 15.5069H191Z" fill="#20D0BC"/>
+                        <path d="M165.311 9.99723V18H162V0H169.378C173.028 0 175.791 1.57064 175.791 4.96122C175.791 7.42936 173.862 9.02493 172.037 9.54848L176 18H172.402L168.804 9.99723H165.311ZM168.987 2.46814H165.311V7.65374H168.987C171.229 7.65374 172.428 6.75623 172.428 5.03601C172.428 3.34072 171.229 2.46814 168.987 2.46814Z" fill="#20D0BC"/>
+                        <path d="M145 18L150.224 0H153.776L159 18H156.012L154.576 12.9391H149.024L147.588 18H145ZM149.682 10.5956H153.894L151.8 3.19114L149.682 10.5956Z" fill="#20D0BC"/>
+                        <path d="M132 0H134.854V15.5069H142V18H132V0Z" fill="#20D0BC"/>
+                        <path d="M115 18L120.224 0H123.776L129 18H126.012L124.576 12.9391H119.024L117.588 18H115ZM119.682 10.5956H123.894L121.8 3.19114L119.682 10.5956Z" fill="#20D0BC"/>
+                        <path d="M105.473 15.6113C107.516 15.6113 109.011 14.2118 109.011 11.6783V11.2681H105.349V9.07239H112V17.7105H110.181L109.609 15.2976C108.886 16.8901 107.217 18 105.174 18C100.915 18 98 14.4772 98 9.04826C98 3.57105 101.039 0 105.448 0C108.986 0 111.228 2.12332 111.925 5.52547L108.811 6.00804C108.338 3.83646 107.317 2.38874 105.423 2.38874C102.982 2.38874 101.463 4.51206 101.463 8.30027V9.72386C101.463 13.5121 102.982 15.6113 105.473 15.6113Z" fill="#20D0BC"/>
+                        <path d="M86.8126 18L78.6348 4.03878V18H76V0H79.4551L86.3403 11.867V0H89V18H86.8126Z" fill="#20D0BC"/>
+                        <path d="M58 18L63.5966 0H67.4034L73 18H69.7983L68.2605 12.9391H62.3109L60.7731 18H58ZM63.0168 10.5956H67.5294L65.2857 3.19114L63.0168 10.5956Z" fill="#20D0BC"/>
+                        <path d="M52 18V0H55V18H52Z" fill="#20D0BC"/>
+                        <path d="M40.0822 18H38.4612L34.4201 2.81718V18H32V0H36.3836L39.5342 12.3407L42.6621 0H47V18H44.1233V2.81718L40.0822 18Z" fill="#20D0BC"/>
+                        <path d="M14 18L19.5966 0H23.4034L29 18H25.7983L24.2605 12.9391H18.3109L16.7731 18H14ZM19.0168 10.5956H23.5294L21.2857 3.19114L19.0168 10.5956Z" fill="#20D0BC"/>
+                        <path d="M12 8.95014C12 14.8587 8.80292 18 4.92701 18H0V0H4.90511C8.80292 0 12 3.11634 12 8.95014ZM2.78102 15.5319H4.53285C7.40146 15.5319 9.06569 13.338 9.06569 9.54848V8.50139C9.06569 4.66205 7.40146 2.46814 4.51095 2.46814H2.78102V15.5319Z" fill="#20D0BC"/>
+                    </svg>
+                </div>
+                <div class="headline" id="headlineText">The Complete Guide to <span class="gradient-text">Technical Debt</span> for Startups</div>
+                <div class="subtitle" id="subtitleText">How to balance speed and quality when building your product</div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <button onclick="generateImage()">Download Image</button>
+            <button onclick="copyToClipboard()" class="secondary">Copy as Data URL</button>
+        </div>
+    </div>
+
+    <canvas id="canvas" style="display: none;"></canvas>
+
+    <script>
+        function updatePreview() {
+            const headline = document.getElementById('headline').value;
+            const subtitle = document.getElementById('subtitle').value;
+            const width = document.getElementById('width').value;
+            const height = document.getElementById('height').value;
+            const headlineSize = document.getElementById('headlineSize').value;
+            const subtitleSize = document.getElementById('subtitleSize').value;
+            const showLogo = document.getElementById('showLogo').checked;
+            const background = document.getElementById('background').value;
+
+            // Update preview dimensions
+            const preview = document.getElementById('preview');
+            preview.style.width = width + 'px';
+            preview.style.height = height + 'px';
+            preview.className = 'og-preview ' + background;
+
+            // Update content with gradient parsing
+            const headlineElement = document.getElementById('headlineText');
+            headlineElement.innerHTML = headline.replace(/\[([^\]]+)\]/g, '<span class="gradient-text">$1</span>');
+            headlineElement.style.fontSize = headlineSize + 'px';
+            
+            const subtitleElement = document.getElementById('subtitleText');
+            if (subtitle.trim()) {
+                subtitleElement.textContent = subtitle;
+                subtitleElement.style.display = 'block';
+            } else {
+                subtitleElement.style.display = 'none';
+            }
+            subtitleElement.style.fontSize = subtitleSize + 'px';
+
+            // Show/hide logo
+            document.getElementById('logoContainer').style.display = showLogo ? 'flex' : 'none';
+        }
+
+        function parseGradientText(text) {
+            const parts = [];
+            let currentIndex = 0;
+            
+            // Find all [text] patterns
+            const regex = /\[([^\]]+)\]/g;
+            let match;
+            
+            while ((match = regex.exec(text)) !== null) {
+                // Add text before the match
+                if (match.index > currentIndex) {
+                    parts.push({
+                        text: text.substring(currentIndex, match.index),
+                        isGradient: false
+                    });
+                }
+                
+                // Add the gradient text
+                parts.push({
+                    text: match[1],
+                    isGradient: true
+                });
+                
+                currentIndex = match.index + match[0].length;
+            }
+            
+            // Add remaining text
+            if (currentIndex < text.length) {
+                parts.push({
+                    text: text.substring(currentIndex),
+                    isGradient: false
+                });
+            }
+            
+            return parts;
+        }
+
+        function drawGradientOverlay(ctx, text, gradientWords, x, y, maxWidth, lineHeight, fontSize) {
+            // Ensure font properties match the main text
+            ctx.font = `800 ${fontSize}px Inter, sans-serif`;
+            ctx.textAlign = 'center';
+            
+            // Break text into lines using EXACT same logic as wrapText
+            const words = text.split(' ');
+            let lines = [];
+            let line = '';
+            
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > maxWidth && n > 0) {
+                    lines.push(line.trim());
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+            
+            // For each line, find and redraw gradient words using center alignment like wrapText
+            lines.forEach((lineText, lineIndex) => {
+                const lineY = y + (lineIndex * lineHeight);
+                const lineWords = lineText.split(' ');
+                
+                lineWords.forEach((word, wordIndex) => {
+                    if (gradientWords.includes(word)) {
+                        // Calculate this word's position within the line
+                        const wordsBeforeThis = lineWords.slice(0, wordIndex);
+                        const wordsBefore = wordsBeforeThis.join(' ') + (wordsBeforeThis.length > 0 ? ' ' : '');
+                        const wordBeforeWidth = ctx.measureText(wordsBefore).width;
+                        const lineWidth = ctx.measureText(lineText).width;
+                        
+                        // Position relative to center
+                        const wordX = x - (lineWidth / 2) + wordBeforeWidth;
+                        
+                        // Draw gradient version of this word
+                        const wordWidth = ctx.measureText(word).width;
+                        const gradient = ctx.createLinearGradient(wordX, lineY - fontSize, wordX + wordWidth, lineY);
+                        gradient.addColorStop(0, '#20D0BC');
+                        gradient.addColorStop(1, '#9333ea');
+                        ctx.fillStyle = gradient;
+                        ctx.fillText(word, wordX, lineY);
+                    }
+                });
+            });
+        }
+
+        function wrapText(ctx, text, x, y, maxWidth, lineHeight, gradientWords = [], gradientPhrases = []) {
+            const words = text.split(' ');
+            let line = '';
+            let lines = [];
+            
+            for (let n = 0; n < words.length; n++) {
+                const testLine = line + words[n] + ' ';
+                const metrics = ctx.measureText(testLine);
+                const testWidth = metrics.width;
+                
+                if (testWidth > maxWidth && n > 0) {
+                    lines.push(line.trim());
+                    line = words[n] + ' ';
+                } else {
+                    line = testLine;
+                }
+            }
+            lines.push(line.trim());
+            
+            // Draw each line
+            lines.forEach((lineText, index) => {
+                const lineY = y + (index * lineHeight);
+                
+                if (gradientWords.length > 0) {
+                    // Draw with gradient support - need to use left alignment for precise positioning
+                    ctx.textAlign = 'left';
+                    const lineWords = lineText.split(' ');
+                    const lineWidth = ctx.measureText(lineText).width;
+                    let currentX = x - (lineWidth / 2);
+                    
+                    // Find continuous gradient phrases in this line
+                    gradientPhrases.forEach(phrase => {
+                        const phraseWords = phrase.split(' ');
+                        const phraseInLine = phraseWords.every(word => lineWords.includes(word));
+                        
+                        if (phraseInLine) {
+                            // Calculate the start and end positions of the phrase
+                            const firstWordIndex = lineWords.indexOf(phraseWords[0]);
+                            const lastWordIndex = lineWords.indexOf(phraseWords[phraseWords.length - 1]);
+                            
+                            // Calculate phrase width including spaces
+                            let phraseWidth = 0;
+                            for (let i = firstWordIndex; i <= lastWordIndex; i++) {
+                                phraseWidth += ctx.measureText(lineWords[i]).width;
+                                if (i < lastWordIndex) {
+                                    phraseWidth += ctx.measureText(' ').width;
+                                }
+                            }
+                            
+                            // Calculate phrase start position
+                            let phraseStartX = x - (lineWidth / 2);
+                            for (let i = 0; i < firstWordIndex; i++) {
+                                phraseStartX += ctx.measureText(lineWords[i]).width;
+                                phraseStartX += ctx.measureText(' ').width;
+                            }
+                            
+                            // Create continuous gradient for the entire phrase
+                            const phraseGradient = ctx.createLinearGradient(phraseStartX, lineY - 40, phraseStartX + phraseWidth, lineY);
+                            phraseGradient.addColorStop(0, '#20D0BC');
+                            phraseGradient.addColorStop(1, '#9333ea');
+                            
+                            // Draw each word in the phrase with the same gradient
+                            let wordX = phraseStartX;
+                            for (let i = firstWordIndex; i <= lastWordIndex; i++) {
+                                ctx.fillStyle = phraseGradient;
+                                ctx.fillText(lineWords[i], wordX, lineY);
+                                wordX += ctx.measureText(lineWords[i]).width;
+                                if (i < lastWordIndex) {
+                                    wordX += ctx.measureText(' ').width;
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Draw non-gradient words
+                    lineWords.forEach((word, wordIndex) => {
+                        if (!gradientWords.includes(word)) {
+                            // Calculate this word's position
+                            let wordX = x - (lineWidth / 2);
+                            for (let i = 0; i < wordIndex; i++) {
+                                wordX += ctx.measureText(lineWords[i]).width;
+                                wordX += ctx.measureText(' ').width;
+                            }
+                            
+                            ctx.fillStyle = 'white';
+                            ctx.fillText(word, wordX, lineY);
+                        }
+                    });
+                    
+                    // Reset text align back to center
+                    ctx.textAlign = 'center';
+                } else {
+                    // Simple text drawing (uses center alignment)
+                    ctx.fillText(lineText, x, lineY);
+                }
+            });
+            
+            return lines.length * lineHeight;
+        }
+
+        function renderOGImage(ctx, headline, subtitle, width, height, headlineSize, subtitleSize, showLogo, background) {
+
+            // Draw background
+            if (background === 'bg-brand-dark') {
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, width, height);
+                
+                // Add subtle radial gradients
+                const gradient1 = ctx.createRadialGradient(width * 0.25, height * 0.25, 0, width * 0.25, height * 0.25, width * 0.5);
+                gradient1.addColorStop(0, 'rgba(32, 208, 188, 0.08)');
+                gradient1.addColorStop(1, 'rgba(32, 208, 188, 0)');
+                ctx.fillStyle = gradient1;
+                ctx.fillRect(0, 0, width, height);
+                
+                const gradient2 = ctx.createRadialGradient(width * 0.75, height * 0.75, 0, width * 0.75, height * 0.75, width * 0.5);
+                gradient2.addColorStop(0, 'rgba(147, 51, 234, 0.08)');
+                gradient2.addColorStop(1, 'rgba(147, 51, 234, 0)');
+                ctx.fillStyle = gradient2;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-teal') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#20D0BC');
+                gradient.addColorStop(1, '#16a085');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-purple') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#9333ea');
+                gradient.addColorStop(1, '#6b21a8');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-blue') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#3b82f6');
+                gradient.addColorStop(1, '#1e40af');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-sunset') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#f59e0b');
+                gradient.addColorStop(1, '#dc2626');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-ocean') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#0ea5e9');
+                gradient.addColorStop(1, '#0f766e');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-dark') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#374151');
+                gradient.addColorStop(1, '#111827');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else {
+                // Default to brand dark
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, width, height);
+            }
+            
+            // Calculate vertical positioning (center the text content)
+            let currentY = height / 2;
+            const totalTextHeight = headlineSize * 1.1 + (subtitle.trim() ? subtitleSize * 1.3 + 20 : 0);
+            
+            currentY = (height - totalTextHeight) / 2;
+            
+            // Draw headline with gradient support
+            ctx.font = `800 ${headlineSize}px Inter, sans-serif`;
+            ctx.textAlign = 'center';
+            
+            // Draw headline with simple gradient overlay approach
+            const cleanHeadline = headline.replace(/\[([^\]]+)\]/g, '$1');
+            const gradientPhrases = [];
+            let match;
+            const regex = /\[([^\]]+)\]/g;
+            while ((match = regex.exec(headline)) !== null) {
+                // Keep phrases intact for continuous gradients
+                gradientPhrases.push(match[1]);
+            }
+            
+            // Also create individual word list for lookup
+            const gradientWords = [];
+            gradientPhrases.forEach(phrase => {
+                const words = phrase.split(' ');
+                gradientWords.push(...words);
+            });
+            
+            // Draw text with gradient support in one pass
+            const headlineHeight = wrapText(ctx, cleanHeadline, width / 2, currentY + headlineSize, width - 160, headlineSize * 1.1, gradientWords, gradientPhrases);
+            currentY += headlineHeight + 20;
+            
+            // Draw subtitle if present
+            if (subtitle.trim()) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.font = `500 ${subtitleSize}px Inter, sans-serif`;
+                
+                wrapText(ctx, subtitle, width / 2, currentY + subtitleSize, width - 200, subtitleSize * 1.3);
+            }
+            
+            // Draw logo at bottom right if enabled
+            if (showLogo) {
+                // Draw logo icon and wordmark
+                ctx.fillStyle = '#20D0BC';
+                ctx.save();
+                
+                // Calculate positioning for the wordmark (increased size)
+                const logoScale = 2.4; // 2x increased scale factor for the wordmark
+                const wordmarkWidth = 208 * logoScale;
+                const wordmarkHeight = 18 * logoScale;
+                const iconSize = 24; // Size for the logo icon
+                const spacing = 8; // Space between icon and wordmark
+                
+                const totalWidth = iconSize + spacing + wordmarkWidth;
+                const brandLogoX = width - 40 - totalWidth;
+                const brandLogoY = height - 20;
+                
+                // Draw logo icon first
+                const iconX = brandLogoX;
+                const iconY = brandLogoY - iconSize/2;
+                
+                // Logo icon paths (from logo-icon.svg, scaled to iconSize)
+                const iconScale = iconSize / 21; // Original viewBox is 21x21
+                ctx.save();
+                ctx.translate(iconX, iconY);
+                ctx.scale(iconScale, iconScale);
+                
+                // Draw icon paths
+                ctx.beginPath();
+                // First path
+                ctx.moveTo(0.0182939, 7.39441);
+                ctx.bezierCurveTo(0.0190475, 7.09741, 0.362232, 6.9075, 0.647338, 7.04631);
+                ctx.lineTo(5.77168, 9.54131);
+                ctx.bezierCurveTo(5.91213, 9.6097, 6, 9.74402, 6, 9.89033);
+                ctx.lineTo(6, 12.3635);
+                ctx.bezierCurveTo(6, 12.5161, 5.90448, 12.6551, 5.75468, 12.7204);
+                ctx.lineTo(0.61205, 14.9616);
+                ctx.bezierCurveTo(0.32726, 15.0857, -0.000734999, 14.894, 1.23719e-06, 14.6038);
+                ctx.lineTo(0.0182939, 7.39441);
+                ctx.closePath();
+                
+                // Second path
+                ctx.moveTo(4.87982, 0.0345364);
+                ctx.bezierCurveTo(4.97188, -0.0119787, 5.08127, -0.0114811, 5.17289, 0.0358698);
+                ctx.lineTo(20.8305, 8.12796);
+                ctx.bezierCurveTo(20.9347, 8.18184, 21, 8.28797, 21, 8.40361);
+                ctx.lineTo(21, 13.7969);
+                ctx.lineTo(21, 15.5278);
+                ctx.bezierCurveTo(21, 15.6446, 20.9335, 15.7515, 20.8277, 15.8049);
+                ctx.lineTo(10.5952, 20.9656);
+                ctx.bezierCurveTo(10.503, 21.0121, 10.3935, 21.0114, 10.3019, 20.9639);
+                ctx.lineTo(3.61032, 17.4919);
+                ctx.bezierCurveTo(3.37804, 17.3714, 3.38703, 17.0418, 3.62555, 16.9337);
+                ctx.lineTo(8.78308, 14.5953);
+                ctx.bezierCurveTo(8.88129, 14.5508, 8.99558, 14.5583, 9.08809, 14.6134);
+                ctx.bezierCurveTo(9.36808, 14.78, 9.97029, 15.1209, 10.2101, 15.1209);
+                ctx.bezierCurveTo(10.5274, 15.1209, 14.9439, 12.8883, 15.0497, 12.6807);
+                ctx.bezierCurveTo(15.2034, 12.3788, 15.1819, 11.0452, 15.0497, 10.8116);
+                ctx.bezierCurveTo(14.9175, 10.5779, 13.8332, 10.0704, 13.8332, 10.0704);
+                ctx.lineTo(0.168802, 2.96536);
+                ctx.bezierCurveTo(-0.0577709, 2.84755, -0.0558538, 2.52827, 0.172118, 2.41309);
+                ctx.lineTo(4.87982, 0.0345364);
+                ctx.closePath();
+                
+                ctx.fill();
+                ctx.restore();
+                
+                // Now draw the wordmark next to the icon
+                const wordmarkX = brandLogoX + iconSize + spacing;
+                const wordmarkY = brandLogoY - wordmarkHeight/2;
+                
+                // Apply transform for positioning and scaling
+                ctx.translate(wordmarkX, wordmarkY);
+                ctx.scale(logoScale, logoScale);
+                
+                // Draw each letter of "DAMIAN GALARZA" using SVG paths
+                ctx.beginPath();
+                
+                // D
+                ctx.moveTo(12, 8.95014);
+                ctx.bezierCurveTo(12, 14.8587, 8.80292, 18, 4.92701, 18);
+                ctx.lineTo(0, 18);
+                ctx.lineTo(0, 0);
+                ctx.lineTo(4.90511, 0);
+                ctx.bezierCurveTo(8.80292, 0, 12, 3.11634, 12, 8.95014);
+                ctx.closePath();
+                ctx.moveTo(2.78102, 15.5319);
+                ctx.lineTo(4.53285, 15.5319);
+                ctx.bezierCurveTo(7.40146, 15.5319, 9.06569, 13.338, 9.06569, 9.54848);
+                ctx.lineTo(9.06569, 8.50139);
+                ctx.bezierCurveTo(9.06569, 4.66205, 7.40146, 2.46814, 4.51095, 2.46814);
+                ctx.lineTo(2.78102, 2.46814);
+                ctx.lineTo(2.78102, 15.5319);
+                ctx.closePath();
+                
+                // A
+                ctx.moveTo(14, 18);
+                ctx.lineTo(19.5966, 0);
+                ctx.lineTo(23.4034, 0);
+                ctx.lineTo(29, 18);
+                ctx.lineTo(25.7983, 18);
+                ctx.lineTo(24.2605, 12.9391);
+                ctx.lineTo(18.3109, 12.9391);
+                ctx.lineTo(16.7731, 18);
+                ctx.lineTo(14, 18);
+                ctx.closePath();
+                ctx.moveTo(19.0168, 10.5956);
+                ctx.lineTo(23.5294, 10.5956);
+                ctx.lineTo(21.2857, 3.19114);
+                ctx.lineTo(19.0168, 10.5956);
+                ctx.closePath();
+                
+                // M
+                ctx.moveTo(40.0822, 18);
+                ctx.lineTo(38.4612, 18);
+                ctx.lineTo(34.4201, 2.81718);
+                ctx.lineTo(34.4201, 18);
+                ctx.lineTo(32, 18);
+                ctx.lineTo(32, 0);
+                ctx.lineTo(36.3836, 0);
+                ctx.lineTo(39.5342, 12.3407);
+                ctx.lineTo(42.6621, 0);
+                ctx.lineTo(47, 0);
+                ctx.lineTo(47, 18);
+                ctx.lineTo(44.1233, 18);
+                ctx.lineTo(44.1233, 2.81718);
+                ctx.lineTo(40.0822, 18);
+                ctx.closePath();
+                
+                // I
+                ctx.moveTo(52, 18);
+                ctx.lineTo(52, 0);
+                ctx.lineTo(55, 0);
+                ctx.lineTo(55, 18);
+                ctx.lineTo(52, 18);
+                ctx.closePath();
+                
+                // A (second)
+                ctx.moveTo(58, 18);
+                ctx.lineTo(63.5966, 0);
+                ctx.lineTo(67.4034, 0);
+                ctx.lineTo(73, 18);
+                ctx.lineTo(69.7983, 18);
+                ctx.lineTo(68.2605, 12.9391);
+                ctx.lineTo(62.3109, 12.9391);
+                ctx.lineTo(60.7731, 18);
+                ctx.lineTo(58, 18);
+                ctx.closePath();
+                ctx.moveTo(63.0168, 10.5956);
+                ctx.lineTo(67.5294, 10.5956);
+                ctx.lineTo(65.2857, 3.19114);
+                ctx.lineTo(63.0168, 10.5956);
+                ctx.closePath();
+                
+                // N
+                ctx.moveTo(86.8126, 18);
+                ctx.lineTo(78.6348, 4.03878);
+                ctx.lineTo(78.6348, 18);
+                ctx.lineTo(76, 18);
+                ctx.lineTo(76, 0);
+                ctx.lineTo(79.4551, 0);
+                ctx.lineTo(86.3403, 11.867);
+                ctx.lineTo(86.3403, 0);
+                ctx.lineTo(89, 0);
+                ctx.lineTo(89, 18);
+                ctx.lineTo(86.8126, 18);
+                ctx.closePath();
+                
+                // Space, then G
+                ctx.moveTo(105.473, 15.6113);
+                ctx.bezierCurveTo(107.516, 15.6113, 109.011, 14.2118, 109.011, 11.6783);
+                ctx.lineTo(109.011, 11.2681);
+                ctx.lineTo(105.349, 11.2681);
+                ctx.lineTo(105.349, 9.07239);
+                ctx.lineTo(112, 9.07239);
+                ctx.lineTo(112, 17.7105);
+                ctx.lineTo(110.181, 17.7105);
+                ctx.lineTo(109.609, 15.2976);
+                ctx.bezierCurveTo(108.886, 16.8901, 107.217, 18, 105.174, 18);
+                ctx.bezierCurveTo(100.915, 18, 98, 14.4772, 98, 9.04826);
+                ctx.bezierCurveTo(98, 3.57105, 101.039, 0, 105.448, 0);
+                ctx.bezierCurveTo(108.986, 0, 111.228, 2.12332, 111.925, 5.52547);
+                ctx.lineTo(108.811, 6.00804);
+                ctx.bezierCurveTo(108.338, 3.83646, 107.317, 2.38874, 105.423, 2.38874);
+                ctx.bezierCurveTo(102.982, 2.38874, 101.463, 4.51206, 101.463, 8.30027);
+                ctx.lineTo(101.463, 9.72386);
+                ctx.bezierCurveTo(101.463, 13.5121, 102.982, 15.6113, 105.473, 15.6113);
+                ctx.closePath();
+                
+                // A (third)
+                ctx.moveTo(115, 18);
+                ctx.lineTo(120.224, 0);
+                ctx.lineTo(123.776, 0);
+                ctx.lineTo(129, 18);
+                ctx.lineTo(126.012, 18);
+                ctx.lineTo(124.576, 12.9391);
+                ctx.lineTo(119.024, 12.9391);
+                ctx.lineTo(117.588, 18);
+                ctx.lineTo(115, 18);
+                ctx.closePath();
+                ctx.moveTo(119.682, 10.5956);
+                ctx.lineTo(123.894, 10.5956);
+                ctx.lineTo(121.8, 3.19114);
+                ctx.lineTo(119.682, 10.5956);
+                ctx.closePath();
+                
+                // L
+                ctx.moveTo(132, 0);
+                ctx.lineTo(134.854, 0);
+                ctx.lineTo(134.854, 15.5069);
+                ctx.lineTo(142, 15.5069);
+                ctx.lineTo(142, 18);
+                ctx.lineTo(132, 18);
+                ctx.lineTo(132, 0);
+                ctx.closePath();
+                
+                // A (fourth)
+                ctx.moveTo(145, 18);
+                ctx.lineTo(150.224, 0);
+                ctx.lineTo(153.776, 0);
+                ctx.lineTo(159, 18);
+                ctx.lineTo(156.012, 18);
+                ctx.lineTo(154.576, 12.9391);
+                ctx.lineTo(149.024, 12.9391);
+                ctx.lineTo(147.588, 18);
+                ctx.lineTo(145, 18);
+                ctx.closePath();
+                ctx.moveTo(149.682, 10.5956);
+                ctx.lineTo(153.894, 10.5956);
+                ctx.lineTo(151.8, 3.19114);
+                ctx.lineTo(149.682, 10.5956);
+                ctx.closePath();
+                
+                // R
+                ctx.moveTo(165.311, 9.99723);
+                ctx.lineTo(165.311, 18);
+                ctx.lineTo(162, 18);
+                ctx.lineTo(162, 0);
+                ctx.lineTo(169.378, 0);
+                ctx.bezierCurveTo(173.028, 0, 175.791, 1.57064, 175.791, 4.96122);
+                ctx.bezierCurveTo(175.791, 7.42936, 173.862, 9.02493, 172.037, 9.54848);
+                ctx.lineTo(176, 18);
+                ctx.lineTo(172.402, 18);
+                ctx.lineTo(168.804, 9.99723);
+                ctx.lineTo(165.311, 9.99723);
+                ctx.closePath();
+                ctx.moveTo(168.987, 2.46814);
+                ctx.lineTo(165.311, 2.46814);
+                ctx.lineTo(165.311, 7.65374);
+                ctx.lineTo(168.987, 7.65374);
+                ctx.bezierCurveTo(171.229, 7.65374, 172.428, 6.75623, 172.428, 5.03601);
+                ctx.bezierCurveTo(172.428, 3.34072, 171.229, 2.46814, 168.987, 2.46814);
+                ctx.closePath();
+                
+                // Z
+                ctx.moveTo(191, 15.5069);
+                ctx.lineTo(191, 18);
+                ctx.lineTo(178, 18);
+                ctx.lineTo(178, 16.2548);
+                ctx.lineTo(186.88, 2.49308);
+                ctx.lineTo(178.247, 2.49308);
+                ctx.lineTo(178.247, 0);
+                ctx.lineTo(190.852, 0);
+                ctx.lineTo(190.852, 1.77008);
+                ctx.lineTo(181.947, 15.5069);
+                ctx.lineTo(191, 15.5069);
+                ctx.closePath();
+                
+                // A (fifth)
+                ctx.moveTo(193, 18);
+                ctx.lineTo(198.597, 0);
+                ctx.lineTo(202.403, 0);
+                ctx.lineTo(208, 18);
+                ctx.lineTo(204.798, 18);
+                ctx.lineTo(203.261, 12.9391);
+                ctx.lineTo(197.311, 12.9391);
+                ctx.lineTo(195.773, 18);
+                ctx.lineTo(193, 18);
+                ctx.closePath();
+                ctx.moveTo(198.017, 10.5956);
+                ctx.lineTo(202.529, 10.5956);
+                ctx.lineTo(200.286, 3.19114);
+                ctx.lineTo(198.017, 10.5956);
+                ctx.closePath();
+                
+                ctx.fill();
+                ctx.restore();
+            }
+
+        }
+
+        function generateImage() {
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+            const headline = document.getElementById('headline').value;
+            const subtitle = document.getElementById('subtitle').value;
+            const headlineSize = parseInt(document.getElementById('headlineSize').value);
+            const subtitleSize = parseInt(document.getElementById('subtitleSize').value);
+            const showLogo = document.getElementById('showLogo').checked;
+            const background = document.getElementById('background').value;
+            
+            canvas.width = width;
+            canvas.height = height;
+
+            // Draw background
+            if (background === 'bg-brand-dark') {
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, width, height);
+                
+                // Add subtle radial gradients
+                const gradient1 = ctx.createRadialGradient(width * 0.25, height * 0.25, 0, width * 0.25, height * 0.25, width * 0.5);
+                gradient1.addColorStop(0, 'rgba(32, 208, 188, 0.08)');
+                gradient1.addColorStop(1, 'rgba(32, 208, 188, 0)');
+                ctx.fillStyle = gradient1;
+                ctx.fillRect(0, 0, width, height);
+                
+                const gradient2 = ctx.createRadialGradient(width * 0.75, height * 0.75, 0, width * 0.75, height * 0.75, width * 0.5);
+                gradient2.addColorStop(0, 'rgba(147, 51, 234, 0.08)');
+                gradient2.addColorStop(1, 'rgba(147, 51, 234, 0)');
+                ctx.fillStyle = gradient2;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-teal') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#20D0BC');
+                gradient.addColorStop(1, '#16a085');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-purple') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#9333ea');
+                gradient.addColorStop(1, '#6b21a8');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-blue') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#3b82f6');
+                gradient.addColorStop(1, '#1e40af');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-sunset') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#f59e0b');
+                gradient.addColorStop(1, '#dc2626');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-ocean') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#0ea5e9');
+                gradient.addColorStop(1, '#0f766e');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else if (background === 'bg-gradient-dark') {
+                const gradient = ctx.createLinearGradient(0, 0, width, height);
+                gradient.addColorStop(0, '#374151');
+                gradient.addColorStop(1, '#111827');
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, width, height);
+            } else {
+                // Default to brand dark
+                ctx.fillStyle = '#030712';
+                ctx.fillRect(0, 0, width, height);
+            }
+            
+            // Calculate vertical positioning (center the text content)
+            let currentY = height / 2;
+            const totalTextHeight = headlineSize * 1.1 + (subtitle.trim() ? subtitleSize * 1.3 + 20 : 0);
+            
+            currentY = (height - totalTextHeight) / 2;
+            
+            // Draw headline with gradient support
+            ctx.font = `800 ${headlineSize}px Inter, sans-serif`;
+            ctx.textAlign = 'center';
+            
+            // Draw headline with simple gradient overlay approach
+            const cleanHeadline = headline.replace(/\[([^\]]+)\]/g, '$1');
+            const gradientPhrases = [];
+            let match;
+            const regex = /\[([^\]]+)\]/g;
+            while ((match = regex.exec(headline)) !== null) {
+                // Keep phrases intact for continuous gradients
+                gradientPhrases.push(match[1]);
+            }
+            
+            // Also create individual word list for lookup
+            const gradientWords = [];
+            gradientPhrases.forEach(phrase => {
+                const words = phrase.split(' ');
+                gradientWords.push(...words);
+            });
+            
+            // Draw text with gradient support in one pass
+            const headlineHeight = wrapText(ctx, cleanHeadline, width / 2, currentY + headlineSize, width - 160, headlineSize * 1.1, gradientWords, gradientPhrases);
+            currentY += headlineHeight + 20;
+            
+            // Draw subtitle if present
+            if (subtitle.trim()) {
+                ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                ctx.font = `500 ${subtitleSize}px Inter, sans-serif`;
+                
+                wrapText(ctx, subtitle, width / 2, currentY + subtitleSize, width - 200, subtitleSize * 1.3);
+            }
+            
+            // Draw logo at bottom right if enabled
+            if (showLogo) {
+                // Calculate logo text width first to position icon correctly
+                ctx.font = '500 16px Inter, sans-serif';
+                const logoTextWidth = ctx.measureText('DAMIAN GALARZA').width;
+                
+                // Draw actual logo icon using SVG paths
+                const logoSize = 24; // 1.5x larger (16 * 1.5 = 24)
+                const logoX = width - 40 - logoTextWidth - logoSize - 10 - 75 + 5; // Moved right by 5px
+                const logoY = height - 46 - 5 - 2; // Moved up by 2px more
+                
+                // Scale factor from SVG (21x21) to our desired size
+                const scale = logoSize / 21;
+                
+                ctx.fillStyle = '#20D0BC';
+                ctx.save();
+                ctx.translate(logoX, logoY);
+                ctx.scale(scale, scale);
+                
+                // First path from logo-icon.svg
+                ctx.beginPath();
+                ctx.moveTo(0.0182939, 7.39441);
+                ctx.bezierCurveTo(0.0190475, 7.09741, 0.362232, 6.9075, 0.647338, 7.04631);
+                ctx.lineTo(5.77168, 9.54131);
+                ctx.bezierCurveTo(5.91213, 9.6097, 6, 9.74402, 6, 9.89033);
+                ctx.lineTo(6, 12.3635);
+                ctx.bezierCurveTo(6, 12.5161, 5.90448, 12.6551, 5.75468, 12.7204);
+                ctx.lineTo(0.61205, 14.9616);
+                ctx.bezierCurveTo(0.32726, 15.0857, -0.000734999, 14.894, 1.23719e-06, 14.6038);
+                ctx.lineTo(0.0182939, 7.39441);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Second path from logo-icon.svg  
+                ctx.beginPath();
+                ctx.moveTo(4.87982, 0.0345364);
+                ctx.bezierCurveTo(4.97188, -0.0119787, 5.08127, -0.0114811, 5.17289, 0.0358698);
+                ctx.lineTo(20.8305, 8.12796);
+                ctx.bezierCurveTo(20.9347, 8.18184, 21, 8.28797, 21, 8.40361);
+                ctx.lineTo(21, 13.7969);
+                ctx.lineTo(21, 15.5278);
+                ctx.bezierCurveTo(21, 15.6446, 20.9335, 15.7515, 20.8277, 15.8049);
+                ctx.lineTo(10.5952, 20.9656);
+                ctx.bezierCurveTo(10.503, 21.0121, 10.3935, 21.0114, 10.3019, 20.9639);
+                ctx.lineTo(3.61032, 17.4919);
+                ctx.bezierCurveTo(3.37804, 17.3714, 3.38703, 17.0418, 3.62555, 16.9337);
+                ctx.lineTo(8.78308, 14.5953);
+                ctx.bezierCurveTo(8.88129, 14.5508, 8.99558, 14.5583, 9.08809, 14.6134);
+                ctx.bezierCurveTo(9.36808, 14.78, 9.97029, 15.1209, 10.2101, 15.1209);
+                ctx.bezierCurveTo(10.5274, 15.1209, 14.9439, 12.8883, 15.0497, 12.6807);
+                ctx.bezierCurveTo(15.2034, 12.3788, 15.1819, 11.0452, 15.0497, 10.8116);
+                ctx.bezierCurveTo(14.9175, 10.5779, 13.8332, 10.0704, 13.8332, 10.0704);
+                ctx.lineTo(0.168802, 2.96536);
+                ctx.bezierCurveTo(-0.0577709, 2.84755, -0.0558538, 2.52827, 0.172118, 2.41309);
+                ctx.lineTo(4.87982, 0.0345364);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.restore();
+                
+                // Draw logo wordmark using actual SVG paths
+                ctx.fillStyle = '#20D0BC';
+                
+                // Calculate wordmark dimensions and position
+                const wordmarkWidth = 208; // 2x larger - use full original size
+                const wordmarkHeight = 18; // 2x larger - use full original size
+                const wordmarkX = width - 40 - wordmarkWidth;
+                const wordmarkY = height - 50;
+                
+                // Scale factor from SVG (208x18) to our desired size
+                const wordmarkScale = wordmarkWidth / 208;
+                
+                ctx.save();
+                ctx.translate(wordmarkX, wordmarkY);
+                ctx.scale(wordmarkScale, wordmarkScale);
+                
+                // All the letter paths from logo.svg
+                // Letter A (end)
+                ctx.beginPath();
+                ctx.moveTo(193, 18);
+                ctx.lineTo(198.597, 0);
+                ctx.lineTo(202.403, 0);
+                ctx.lineTo(208, 18);
+                ctx.lineTo(204.798, 18);
+                ctx.lineTo(203.261, 12.9391);
+                ctx.lineTo(197.311, 12.9391);
+                ctx.lineTo(195.773, 18);
+                ctx.lineTo(193, 18);
+                ctx.moveTo(198.017, 10.5956);
+                ctx.lineTo(202.529, 10.5956);
+                ctx.lineTo(200.286, 3.19114);
+                ctx.lineTo(198.017, 10.5956);
+                ctx.fill();
+                
+                // Letter Z
+                ctx.beginPath();
+                ctx.moveTo(191, 15.5069);
+                ctx.lineTo(191, 18);
+                ctx.lineTo(178, 18);
+                ctx.lineTo(178, 16.2548);
+                ctx.lineTo(186.88, 2.49308);
+                ctx.lineTo(178.247, 2.49308);
+                ctx.lineTo(178.247, 0);
+                ctx.lineTo(190.852, 0);
+                ctx.lineTo(190.852, 1.77008);
+                ctx.lineTo(181.947, 15.5069);
+                ctx.lineTo(191, 15.5069);
+                ctx.fill();
+                
+                // Letter R
+                ctx.beginPath();
+                ctx.moveTo(165.311, 9.99723);
+                ctx.lineTo(165.311, 18);
+                ctx.lineTo(162, 18);
+                ctx.lineTo(162, 0);
+                ctx.lineTo(169.378, 0);
+                ctx.bezierCurveTo(173.028, 0, 175.791, 1.57064, 175.791, 4.96122);
+                ctx.bezierCurveTo(175.791, 7.42936, 173.862, 9.02493, 172.037, 9.54848);
+                ctx.lineTo(176, 18);
+                ctx.lineTo(172.402, 18);
+                ctx.lineTo(168.804, 9.99723);
+                ctx.lineTo(165.311, 9.99723);
+                ctx.moveTo(168.987, 2.46814);
+                ctx.lineTo(165.311, 2.46814);
+                ctx.lineTo(165.311, 7.65374);
+                ctx.lineTo(168.987, 7.65374);
+                ctx.bezierCurveTo(171.229, 7.65374, 172.428, 6.75623, 172.428, 5.03601);
+                ctx.bezierCurveTo(172.428, 3.34072, 171.229, 2.46814, 168.987, 2.46814);
+                ctx.fill();
+                
+                // Letter A (middle)
+                ctx.beginPath();
+                ctx.moveTo(145, 18);
+                ctx.lineTo(150.224, 0);
+                ctx.lineTo(153.776, 0);
+                ctx.lineTo(159, 18);
+                ctx.lineTo(156.012, 18);
+                ctx.lineTo(154.576, 12.9391);
+                ctx.lineTo(149.024, 12.9391);
+                ctx.lineTo(147.588, 18);
+                ctx.lineTo(145, 18);
+                ctx.moveTo(149.682, 10.5956);
+                ctx.lineTo(153.894, 10.5956);
+                ctx.lineTo(151.8, 3.19114);
+                ctx.lineTo(149.682, 10.5956);
+                ctx.fill();
+                
+                // Letter L
+                ctx.beginPath();
+                ctx.moveTo(132, 0);
+                ctx.lineTo(134.854, 0);
+                ctx.lineTo(134.854, 15.5069);
+                ctx.lineTo(142, 15.5069);
+                ctx.lineTo(142, 18);
+                ctx.lineTo(132, 18);
+                ctx.lineTo(132, 0);
+                ctx.fill();
+                
+                // Letter A (second)
+                ctx.beginPath();
+                ctx.moveTo(115, 18);
+                ctx.lineTo(120.224, 0);
+                ctx.lineTo(123.776, 0);
+                ctx.lineTo(129, 18);
+                ctx.lineTo(126.012, 18);
+                ctx.lineTo(124.576, 12.9391);
+                ctx.lineTo(119.024, 12.9391);
+                ctx.lineTo(117.588, 18);
+                ctx.lineTo(115, 18);
+                ctx.moveTo(119.682, 10.5956);
+                ctx.lineTo(123.894, 10.5956);
+                ctx.lineTo(121.8, 3.19114);
+                ctx.lineTo(119.682, 10.5956);
+                ctx.fill();
+                
+                // Letter G
+                ctx.beginPath();
+                ctx.moveTo(105.473, 15.6113);
+                ctx.bezierCurveTo(107.516, 15.6113, 109.011, 14.2118, 109.011, 11.6783);
+                ctx.lineTo(109.011, 11.2681);
+                ctx.lineTo(105.349, 11.2681);
+                ctx.lineTo(105.349, 9.07239);
+                ctx.lineTo(112, 9.07239);
+                ctx.lineTo(112, 17.7105);
+                ctx.lineTo(110.181, 17.7105);
+                ctx.lineTo(109.609, 15.2976);
+                ctx.bezierCurveTo(108.886, 16.8901, 107.217, 18, 105.174, 18);
+                ctx.bezierCurveTo(100.915, 18, 98, 14.4772, 98, 9.04826);
+                ctx.bezierCurveTo(98, 3.57105, 101.039, 0, 105.448, 0);
+                ctx.bezierCurveTo(108.986, 0, 111.228, 2.12332, 111.925, 5.52547);
+                ctx.lineTo(108.811, 6.00804);
+                ctx.bezierCurveTo(108.338, 3.83646, 107.317, 2.38874, 105.423, 2.38874);
+                ctx.bezierCurveTo(102.982, 2.38874, 101.463, 4.51206, 101.463, 8.30027);
+                ctx.lineTo(101.463, 9.72386);
+                ctx.bezierCurveTo(101.463, 13.5121, 102.982, 15.6113, 105.473, 15.6113);
+                ctx.fill();
+                
+                // Letter N
+                ctx.beginPath();
+                ctx.moveTo(86.8126, 18);
+                ctx.lineTo(78.6348, 4.03878);
+                ctx.lineTo(78.6348, 18);
+                ctx.lineTo(76, 18);
+                ctx.lineTo(76, 0);
+                ctx.lineTo(79.4551, 0);
+                ctx.lineTo(86.3403, 11.867);
+                ctx.lineTo(86.3403, 0);
+                ctx.lineTo(89, 0);
+                ctx.lineTo(89, 18);
+                ctx.lineTo(86.8126, 18);
+                ctx.fill();
+                
+                // Letter A (first)
+                ctx.beginPath();
+                ctx.moveTo(58, 18);
+                ctx.lineTo(63.5966, 0);
+                ctx.lineTo(67.4034, 0);
+                ctx.lineTo(73, 18);
+                ctx.lineTo(69.7983, 18);
+                ctx.lineTo(68.2605, 12.9391);
+                ctx.lineTo(62.3109, 12.9391);
+                ctx.lineTo(60.7731, 18);
+                ctx.lineTo(58, 18);
+                ctx.moveTo(63.0168, 10.5956);
+                ctx.lineTo(67.5294, 10.5956);
+                ctx.lineTo(65.2857, 3.19114);
+                ctx.lineTo(63.0168, 10.5956);
+                ctx.fill();
+                
+                // Letter I
+                ctx.beginPath();
+                ctx.moveTo(52, 18);
+                ctx.lineTo(52, 0);
+                ctx.lineTo(55, 0);
+                ctx.lineTo(55, 18);
+                ctx.lineTo(52, 18);
+                ctx.fill();
+                
+                // Letter M
+                ctx.beginPath();
+                ctx.moveTo(40.0822, 18);
+                ctx.lineTo(38.4612, 18);
+                ctx.lineTo(34.4201, 2.81718);
+                ctx.lineTo(34.4201, 18);
+                ctx.lineTo(32, 18);
+                ctx.lineTo(32, 0);
+                ctx.lineTo(36.3836, 0);
+                ctx.lineTo(39.5342, 12.3407);
+                ctx.lineTo(42.6621, 0);
+                ctx.lineTo(47, 0);
+                ctx.lineTo(47, 18);
+                ctx.lineTo(44.1233, 18);
+                ctx.lineTo(44.1233, 2.81718);
+                ctx.lineTo(40.0822, 18);
+                ctx.fill();
+                
+                // Letter A (beginning)
+                ctx.beginPath();
+                ctx.moveTo(14, 18);
+                ctx.lineTo(19.5966, 0);
+                ctx.lineTo(23.4034, 0);
+                ctx.lineTo(29, 18);
+                ctx.lineTo(25.7983, 18);
+                ctx.lineTo(24.2605, 12.9391);
+                ctx.lineTo(18.3109, 12.9391);
+                ctx.lineTo(16.7731, 18);
+                ctx.lineTo(14, 18);
+                ctx.moveTo(19.0168, 10.5956);
+                ctx.lineTo(23.5294, 10.5956);
+                ctx.lineTo(21.2857, 3.19114);
+                ctx.lineTo(19.0168, 10.5956);
+                ctx.fill();
+                
+                // Letter D
+                ctx.beginPath();
+                ctx.moveTo(12, 8.95014);
+                ctx.bezierCurveTo(12, 14.8587, 8.80292, 18, 4.92701, 18);
+                ctx.lineTo(0, 18);
+                ctx.lineTo(0, 0);
+                ctx.lineTo(4.90511, 0);
+                ctx.bezierCurveTo(8.80292, 0, 12, 3.11634, 12, 8.95014);
+                ctx.moveTo(2.78102, 15.5319);
+                ctx.lineTo(4.53285, 15.5319);
+                ctx.bezierCurveTo(7.40146, 15.5319, 9.06569, 13.338, 9.06569, 9.54848);
+                ctx.lineTo(9.06569, 8.50139);
+                ctx.bezierCurveTo(9.06569, 4.66205, 7.40146, 2.46814, 4.51095, 2.46814);
+                ctx.lineTo(2.78102, 2.46814);
+                ctx.lineTo(2.78102, 15.5319);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+
+            // Download the image
+            const link = document.createElement('a');
+            link.download = `og-image-${Date.now()}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        function copyToClipboard() {
+            const canvas = document.getElementById('canvas');
+            canvas.toBlob(blob => {
+                navigator.clipboard.write([
+                    new ClipboardItem({ 'image/png': blob })
+                ]).then(() => {
+                    alert('Image copied to clipboard!');
+                }).catch(err => {
+                    console.error('Failed to copy image: ', err);
+                    // Fallback to data URL
+                    navigator.clipboard.writeText(canvas.toDataURL());
+                    alert('Image data URL copied to clipboard!');
+                });
+            });
+        }
+
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = ['headline', 'subtitle', 'width', 'height', 'headlineSize', 'subtitleSize', 'showLogo', 'background'];
+            inputs.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('input', updatePreview);
+                    element.addEventListener('change', updatePreview);
+                }
+            });
+            
+            updatePreview();
+        });
+    </script>
+</body>
+</html>
