@@ -10,7 +10,7 @@
                 <span>{{ .ReadingTime }} min read</span>
             </div>
             {{ if .Params.tags }}
-            <div class="flex gap-2 mt-4">
+            <div class="flex gap-2 mt-4 flex-wrap">
                 {{ range .Params.tags }}
                 <a href="{{ "tags/" | relURL }}{{ . | urlize }}" class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">
                     {{ . }}
