@@ -2,7 +2,7 @@
 title: "Site Relaunch"
 date: 2012-04-02T02:46:16Z
 categories: ["News"]
-tags: []
+tags: [site-updates, announcements, content-migration, cms]
 summary: "Glrzad.com has moved to DamianGalarza.com! Find out more."
 ---
 

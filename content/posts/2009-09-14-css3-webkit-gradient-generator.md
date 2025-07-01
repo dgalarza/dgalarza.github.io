@@ -2,7 +2,7 @@
 title: "CSS3 Webkit Gradient Generator"
 date: 2009-09-14T00:22:32Z
 categories: ["CSS3"]
-tags: []
+tags: [web-development, css, tools-and-utilities, tool-review]
 summary: "<a href=\"http://gradients.glrzad.com\" title=\"Visit the generator\">Visit the CSS3 Webkit Gradient Generator</a>"
 ---
 

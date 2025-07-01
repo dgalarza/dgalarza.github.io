@@ -2,7 +2,7 @@
 title: "FB.ui Dialog Position bug in Webkit"
 date: 2012-06-02T21:14:30Z
 categories: ["JavaScript"]
-tags: ["facebook"]
+tags: [facebook, javascript, bug-fixes, webkit, browser-compatibility]
 summary: "Fix a centering issue of FB.Dialog's within scrolled pages in Webkit."
 ---
 

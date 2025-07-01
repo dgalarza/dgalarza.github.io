@@ -4,6 +4,7 @@ title: "My Journey into 3D Printing with the Bambu Labs P1S"
 description: "Discover my journey from 3D printing novice to creator with the Bambu Labs P1S. Learn about open-source designs, home organization projects, and designing your first custom print."
 date: 2025-04-01
 author: Damian Galarza
+tags: [tools-and-utilities, case-study]
 keywords:
   - 3d printing for beginners
   - bambu labs p1s review

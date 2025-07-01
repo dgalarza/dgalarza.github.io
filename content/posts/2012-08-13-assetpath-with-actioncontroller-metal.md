@@ -2,7 +2,7 @@
 title: "AssetPath with ActionController::Metal"
 date: 2012-08-13T02:26:53
 categories: ["Ruby on Rails"]
-tags: ["rails3", "asset-pipeline"]
+tags: [rails-architecture, asset-pipeline, actioncontroller-metal, api-development, performance-optimization]
 summary: "Getting proper asset paths with the asset pipeline while working with a controller which doesn't inherit from ActionController::Base can be a bit confusing. Learn how to get it working here."
 ---
 

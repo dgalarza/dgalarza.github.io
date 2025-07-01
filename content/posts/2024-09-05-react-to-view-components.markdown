@@ -4,6 +4,7 @@ title: "How Buoy Software is Redefining Rails Development with ViewComponents"
 description: "Discover how Buoy Software improved their Rails app by transitioning from React and GraphQL to ViewComponents. Learn about performance gains and simplified development."
 date: 2024-09-05
 author: Damian Galarza
+tags: [web-development, rails, ruby, architecture, case-study]
 keywords:
     - ViewComponents
     - Rails Views

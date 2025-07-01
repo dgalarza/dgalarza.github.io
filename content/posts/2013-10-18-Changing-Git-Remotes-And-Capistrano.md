@@ -2,7 +2,7 @@
 title: "Changing Git Remotes and Capistrano"
 date: 2013-10-18
 categories: ["Ruby"]
-tags: ["capistrano", "git"]
+tags: [capistrano, git, deployment, troubleshooting, devops]
 summary: "A quick look at some recent issues I had when trying to move git remotes and then deploying with Capistrano and how I resolved the issue."
 ---
 

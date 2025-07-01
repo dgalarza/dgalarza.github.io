@@ -2,7 +2,7 @@
 title: "Using Uploadify with Rails 3"
 date: 2010-08-25T02:29:53Z
 categories: ["Ruby on Rails"]
-tags: ["rails3", "uploadify"]
+tags: [web-development, rails, ruby, javascript, tutorial]
 ---
 
 I recently worked on a couple of Rails projects which both implemented the ability to upload photos to the server.  One of these projects required the ability to upload multiple files at once and since HTML5 multi-file uploads aren't ready yet I needed another solution. So I decided to move forward using a Flash based uploader, specifically <a href="http://www.uploadify.com/">Uploadify</a>. Uploadify is a jQuery plugin which allows you to upload multiple files through a Flash based interface which provides helpful functionality like progress bars and multi-upload queuing, along with this, it's super easy to use.

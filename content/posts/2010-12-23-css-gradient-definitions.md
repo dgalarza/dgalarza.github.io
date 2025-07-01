@@ -2,7 +2,7 @@
 title: "CSS Gradient Definitions"
 date: 2010-12-23T03:26:19Z
 categories: ["CSS3"]
-tags: []
+tags: [web-development, css, tutorial]
 summary: "An update to the CSS3 Gradient Generator that changes how the code sample is generated, moving from the 'background' property to 'background-image' to resolve issues with default values for other background properties."
 ---
 

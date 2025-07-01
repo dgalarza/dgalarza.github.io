@@ -2,7 +2,7 @@
 title: "Bringing back the image map"
 date: 2010-12-27T18:34:59Z
 categories: ["JavaScript"]
-tags: []
+tags: [web-development, css, javascript, tutorial]
 summary: "A look at using image maps in modern web development, including a case study on creating clickable triangular areas, handling multiple instances of the same image map, and using JavaScript to determine which image was clicked."
 ---
 

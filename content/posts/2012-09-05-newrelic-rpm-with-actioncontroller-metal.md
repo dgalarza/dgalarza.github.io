@@ -2,7 +2,7 @@
 title: "NewRelic RPM with ActionController::Metal"
 date: 2012-09-05T00:00:00Z
 categories: ["Ruby on Rails"]
-tags: ["ruby", "new-relic"]
+tags: [rails-architecture, performance-monitoring, actioncontroller-metal, newrelic, api-development, instrumentation]
 summary: "Get NewRelic RPM request instrumentation while using ActionController::Metal"
 ---
 

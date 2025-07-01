@@ -2,7 +2,7 @@
 title: "Scaling JSON APIs in Rails using ActiveModel::Serializers, Key-Based Caching, and Rack::Cache"
 date: 2013-11-03T00:00:00Z
 categories: ["Ruby on Rails"]
-tags: ["active-model-serializers", "rack"]
+tags: [web-development, rails, ruby, performance, api-development, caching, tutorial]
 summary: "A guide on building high-scale JSON APIs in Rails using ActiveModel::Serializers, Key-Based Caching, and Rack::Cache. This post covers organizing APIs, leveraging HTTP caching, and ensuring high scalability."
 description: "Learn proven strategies for scaling JSON APIs in Rails applications. Performance optimization techniques using ActiveModel::Serializers, key-based caching, and Rack::Cache with real-world examples."
 ---

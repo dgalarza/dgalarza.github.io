@@ -2,7 +2,7 @@
 title: "Getting Started with iOS Development"
 date: 2015-06-12T00:00:00Z
 categories: ["iOS"]
-tags: ["swift"]
+tags: [ios-development, swift, xcode, mobile-development, tutorial]
 summary: "I've recently started learning iOS and Swift and I wanted to share my experiences so far."
 description: "Complete beginner's guide to iOS development with Swift. Learn Xcode setup, iOS development fundamentals, and start building iPhone apps with practical examples."
 ---

@@ -4,6 +4,7 @@ title: "Take Control of Your HTTP Caching in Rails"
 description: "Get more control over HTTP caching in Rails."
 date: 2015-01-26
 author: Damian Galarza
+tags: [web-development, rails, ruby, performance, caching, api-development, tutorial]
 keywords:
     - Rails
     - HTTP Caching

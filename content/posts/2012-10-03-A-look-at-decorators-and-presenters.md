@@ -3,7 +3,7 @@ title: "A look at Decorators and Presenters"
 category: Ruby on Rails
 summary: A look at how decorators and presenters can give flexibility to your application.
 date: 2012-10-03T16:38:27Z
-tags: ["rails3", "decorators"]
+tags: [rails-architecture, design-patterns, decorators, presenters, code-organization, mvc]
 ---
 
 #Posts: Decorators and Presenters

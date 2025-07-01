@@ -2,7 +2,7 @@
 title: "Using Uploadify with Rails 3 - Part 2 - Controller Example"
 date: 2010-10-27T02:08:08Z
 categories: ["Ruby on Rails"]
-tags: ["rails3", "uploadify"]
+tags: [web-development, rails, ruby, tutorial]
 summary: "A follow-up post on using Uploadify with Rails 3, focusing on setting up the controller to work with file uploads. This part covers handling content types and provides a full code sample for a Paperclip-based model and controller method."
 ---
 

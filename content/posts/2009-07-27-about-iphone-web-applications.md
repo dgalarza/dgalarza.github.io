@@ -2,7 +2,7 @@
 title: "About iPhone Web Applications"
 date: 2009-07-27T13:53:37Z
 categories: ["Mobile"]
-tags: []
+tags: [web-development, javascript, css, tutorial]
 ---
 
 <p>Let me start by this post by specifying that it actually originated from another post that I’m working on right now, but while writing it I went off on quite a tangent that I decided it was time to make it into a completely separate post, and start off with it. So this is part one of an iPhone web application piece that I am working on. While I am it, let me point out what the scope of this article is. This article is not about how to write an iPhone web application. It does not go into details on the syntax or use of technologies for the iPhone. It does explain some of the misconceptions between iPhone applications, iPhone targeted websites, and finally, iPhone Web Applications. I do plan to write more about the iPhone web application technologies and provide some examples and working code, but that is all currently beyond the scope of this article.</p>

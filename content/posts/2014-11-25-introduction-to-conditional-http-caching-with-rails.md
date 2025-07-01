@@ -4,6 +4,7 @@ title: "Introduction to Conditional HTTP Caching with Rails"
 description: "Learn how to implement HTTP conditional caching in Rails using fresh_when."
 date: 2014-11-25
 author: Damian Galarza
+tags: [web-development, rails, ruby, performance, caching, tutorial]
 keywords:
     - Rails
     - HTTP Caching

@@ -2,7 +2,7 @@
 title: "Simple Sinatra Service Proxy"
 date: 2012-04-02T00:00:00Z
 categories: ["Ruby"]
-tags: ["sinatra", "ruby"]
+tags: [sinatra, api-development, cors, proxy-patterns, microservices, ruby]
 summary: "Use Sinatra to rapidly build a proxy for a service when you can't make cross-origin AJAX requests in development."
 ---
 

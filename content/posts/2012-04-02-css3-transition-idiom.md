@@ -2,7 +2,7 @@
 title: "CSS3 Transition Idiom"
 date: 2012-04-02T02:58:25Z
 categories: ["CSS3"]
-tags: ["css3-transitions", "css3"]
+tags: [web-development, css, javascript, tutorial]
 summary: "Exploring the use of CSS3 transitions, including browser feature detection, graceful degradation, and a simple idiom for applying transitions with fallbacks to JavaScript animations. Discusses the benefits of CSS transitions and methods for detecting browser support."
 ---
 

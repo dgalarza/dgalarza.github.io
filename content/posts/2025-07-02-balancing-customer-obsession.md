@@ -7,11 +7,7 @@ home_summary: "Customer obsession is a powerful value—but when taken too far, 
 og_image: "images/posts/customer-obsession-og.png"
 date: 2025-07-02
 author: Damian Galarza
-tags:
-  - founder-advice
-  - product-development
-  - startup-strategy
-  - startup-leadership
+tags: [leadership, product-strategy, startup-advice, customer-focus, team-management, opinion]
 keywords:
   - customer obsession
   - product leadership

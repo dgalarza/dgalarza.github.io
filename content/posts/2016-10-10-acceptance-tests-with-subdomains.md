@@ -4,6 +4,7 @@ title: "Acceptance Tests with Subdomains"
 description: "How to use subdomains in your feature specs."
 date: 2016-10-10
 author: Damian Galarza
+tags: [web-development, rails, ruby, testing, tutorial]
 keywords:
     - Ruby
     - Testing

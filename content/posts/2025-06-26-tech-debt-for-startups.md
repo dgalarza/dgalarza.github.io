@@ -7,12 +7,7 @@ summary: "Technical debt isn’t just messy code — it’s a trade-off. In this
 home_summary: "Tech debt isn’t always bad — sometimes it’s the right trade-off. This post breaks down when to take it on, how to manage it, and why startups shouldn’t fear it."
 author: Damian Galarza
 og_image: "images/posts/tech-debt-og.png"
-tags:
-  - agile-development
-  - technical-debt
-  - startup-strategy
-  - product-development
-  - tech-leadership
+tags: [leadership, technical-debt, startup-advice, decision-making, opinion]
 keywords:
   - what is technical debt
   - technical debt in software engineering

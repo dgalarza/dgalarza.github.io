@@ -5,6 +5,7 @@ description: "How AI could have helped me generate FDA audit-ready SDS documenta
 date: 2025-06-21
 author: Damian Galarza
 og_image: "images/posts/sds-prompt-og.png"
+tags: [product-strategy, samd, regulatory-compliance, tools-and-utilities, tutorial, ai-prompts]
 keywords:
   - SaMD
   - SDS

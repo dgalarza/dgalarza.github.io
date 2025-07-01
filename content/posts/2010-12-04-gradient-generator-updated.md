@@ -2,7 +2,7 @@
 title: "Gradient Generator Updated"
 date: 2010-12-04
 categories: ["Updates"]
-tags: ["CSS3", "Gradient Generator"]
+tags: [web-development, css, tools-and-utilities, tool-review]
 summary: "Updates to the CSS3 Gradient Generator, including color format selection and UI improvements."
 ---
 
