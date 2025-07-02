@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Testing on Technical Partner for Startups | Damian Galarza, Fractional CTO</title><link>https://damiangalarza.com/tags/testing/</link><description>Recent content in Testing on Technical Partner for Startups | Damian Galarza, Fractional CTO</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Mon, 10 Oct 2016 00:00:00 +0000</lastBuildDate><atom:link href="https://damiangalarza.com/tags/testing/atom.xml" rel="self" type="application/rss+xml"/><item><title>Acceptance Tests with Subdomains</title><link>https://damiangalarza.com/posts/2016-10-10-acceptance-tests-with-subdomains/</link><pubDate>Mon, 10 Oct 2016 00:00:00 +0000</pubDate><guid>https://damiangalarza.com/posts/2016-10-10-acceptance-tests-with-subdomains/</guid><description>&lt;p>This post was originally published on the &lt;a href="https://thoughtbot.com/blog/acceptance-tests-with-subdomains">thoughtbot blog&lt;/a>.&lt;/p>
+&lt;p>You&amp;rsquo;re excited about building a new application which allows users to sign up and host their own blog. You decide that each blog will have their own space by providing a subdomain.&lt;/p>
+&lt;p>Let&amp;rsquo;s start off with a feature spec.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-ruby" data-lang="ruby">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#89dceb">require&lt;/span> &lt;span style="color:#a6e3a1">&amp;#34;rails_helper&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>feature &lt;span style="color:#a6e3a1">&amp;#34;user views a blog&amp;#34;&lt;/span> &lt;span style="color:#cba6f7">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> scenario &lt;span style="color:#a6e3a1">&amp;#34;homepage&amp;#34;&lt;/span> &lt;span style="color:#cba6f7">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> blog &lt;span style="color:#89dceb;font-weight:bold">=&lt;/span> create(
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e3a1">:blog&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e3a1">subdomain&lt;/span>: &lt;span style="color:#a6e3a1">&amp;#34;bobloblaw&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e3a1">title&lt;/span>: &lt;span style="color:#a6e3a1">&amp;#34;Bob Loblaw&amp;#39;s Law Blog&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e3a1">description&lt;/span>: &lt;span style="color:#a6e3a1">&amp;#34;Welcome to my new blog.&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> )
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> visit root_path
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expect(page)&lt;span style="color:#89dceb;font-weight:bold">.&lt;/span>to have_content blog&lt;span style="color:#89dceb;font-weight:bold">.&lt;/span>title
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> expect(page)&lt;span style="color:#89dceb;font-weight:bold">.&lt;/span>to have_content blog&lt;span style="color:#89dceb;font-weight:bold">.&lt;/span>description
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#cba6f7">end&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#cba6f7">end&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>In our app we render the blog homepage using the following:&lt;/p></description></item></channel></rss>

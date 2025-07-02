@@ -1,0 +1,204 @@
+<!doctype html><html lang=en-us><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><title>How Buoy Software is Redefining Rails Development with ViewComponents - Technical Partner for Startups | Damian Galarza, Fractional CTO</title><meta name=description content="Discover how Buoy Software improved their Rails app by transitioning from React and GraphQL to ViewComponents. Learn about performance gains and simplified …"><link rel=stylesheet href=/css/style.css><script async src="https://www.googletagmanager.com/gtag/js?id=G-5Y6WCB7SKQ"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","G-5Y6WCB7SKQ")</script><link rel=icon href=/favicon.ico><link rel=canonical href=https://damiangalarza.com/posts/2024-09-05-react-to-view-components/><meta property="og:type" content="article"><meta property="og:title" content="How Buoy Software is Redefining Rails Development with ViewComponents"><meta property="og:description" content="Discover how Buoy Software improved their Rails app by transitioning from React and GraphQL to ViewComponents. Learn about performance gains and simplified development."><meta property="og:url" content="https://damiangalarza.com/posts/2024-09-05-react-to-view-components/"><meta property="og:site_name" content="Technical Partner for Startups | Damian Galarza, Fractional CTO"><meta property="og:image" content="https://damiangalarza.com/images/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Damian Galarza - Technical Partner & Fractional CTO"><meta name=twitter:card content="summary_large_image"><meta name=twitter:site content="@dgalarza"><meta name=twitter:creator content="@dgalarza"><meta name=twitter:image content="https://damiangalarza.com/images/og-image.png"><meta name=twitter:image:alt content="Damian Galarza - Technical Partner & Fractional CTO"><meta property="article:author" content="Damian Galarza"><meta property="article:published_time" content="2024-09-05T00:00:00Z"><meta property="article:modified_time" content="2024-09-05T00:00:00Z"><meta property="article:tag" content="web-development"><meta property="article:tag" content="rails"><meta property="article:tag" content="ruby"><meta property="article:tag" content="architecture"><meta property="article:tag" content="case-study"><meta name=author content="Damian Galarza"><meta name=article:author content="Damian Galarza"><meta name=article:published_time content="2024-09-05T00:00:00Z"><meta name=article:modified_time content="2024-09-05T00:00:00Z"><meta name=article:tag content="web-development"><meta name=article:tag content="rails"><meta name=article:tag content="ruby"><meta name=article:tag content="architecture"><meta name=article:tag content="case-study"><meta name=robots content="index, follow"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"How Buoy Software is Redefining Rails Development with ViewComponents","description":"Discover how Buoy Software improved their Rails app by transitioning from React and GraphQL to ViewComponents. Learn about performance gains and simplified development.","author":{"@type":"Person","name":"Damian Galarza","url":"https:\/\/damiangalarza.com\/"},"publisher":{"@type":"Person","name":"Damian Galarza","url":"https:\/\/damiangalarza.com\/"},"datePublished":"2024-09-05T00:00:00Z","dateModified":"2024-09-05T00:00:00Z","url":"https:\/\/damiangalarza.com\/posts\/2024-09-05-react-to-view-components\/","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/damiangalarza.com\/posts\/2024-09-05-react-to-view-components\/"},"keywords":"[\"web-development\",\"rails\",\"ruby\",\"architecture\",\"case-study\"]"}</script><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel=stylesheet></head><body class="min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-[var(--color-dark-bg)]/95 backdrop-blur-sm"><nav class="max-w-7xl mx-auto px-6 lg:px-12 py-5"><div class="flex items-center justify-between"><a href=https://damiangalarza.com/ class="flex items-center gap-3"><img src=/images/logo-icon.svg alt class="h-6 w-6">
+<img src=/images/logo.svg alt="Damian Galarza" class="h-4 w-auto">
+</a><button id=menu-toggle class="md:hidden text-gray-400 hover:text-white" aria-label="Toggle mobile menu">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button><div id=menu class="hidden md:flex items-center gap-8"><a href=https://damiangalarza.com/#contact class="btn-primary text-sm">Contact me</a></div></div><div id=mobile-menu class="hidden md:hidden mt-4 pt-4 border-t border-gray-800"><div class="flex flex-col gap-4"><a href=https://damiangalarza.com/ class="text-gray-300 hover:text-white transition-colors">Home</a>
+<a href=/posts/ class="text-gray-300 hover:text-white transition-colors">Blog</a>
+<a href=https://damiangalarza.com/#contact class="text-gray-300 hover:text-white transition-colors">Contact me</a></div></div></nav></header><script>const menuToggle=document.getElementById("menu-toggle"),mobileMenu=document.getElementById("mobile-menu");menuToggle.addEventListener("click",()=>{mobileMenu.classList.toggle("hidden")})</script><div class=h-20></div><main class=flex-1><article class="py-20 px-6 lg:px-8"><div class="max-w-4xl mx-auto"><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https:\/\/damiangalarza.com\/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https:\/\/damiangalarza.com\/posts/"},{"@type":"ListItem","position":3,"name":"How Buoy Software is Redefining Rails Development with ViewComponents","item":"https:\/\/damiangalarza.com\/posts\/2024-09-05-react-to-view-components\/"}]}</script><nav aria-label=Breadcrumb class=mb-12><ol class="flex items-center gap-3 text-sm text-gray-400 min-w-0"><li><a href=https://damiangalarza.com/ class="hover:text-white transition-colors">Home</a></li><li class=text-gray-600><span>/</span></li><li><a href=/posts/ class="hover:text-white transition-colors">Blog</a></li><li class=text-gray-600><span>/</span></li><li class="text-gray-500 truncate" aria-current=page>How Buoy Software is Redefining Rails Development with ViewComponents</li></ol></nav><header class=mb-12><h1 class="text-4xl md:text-5xl font-bold mb-4">How Buoy Software is Redefining Rails Development with ViewComponents</h1><div class="flex items-center gap-4 text-gray-400"><time datetime=2024-09-05>September 5, 2024</time>
+<span>•</span>
+<span>8 min read</span></div><div class="flex gap-2 mt-4 flex-wrap"><a href=/tags/web-development class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">web-development
+</a><a href=/tags/rails class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">rails
+</a><a href=/tags/ruby class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">ruby
+</a><a href=/tags/architecture class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">architecture
+</a><a href=/tags/case-study class="text-sm px-3 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-300 transition-colors">case-study</a></div></header><div class="prose prose-invert prose-lg max-w-none"><p>This post was originally posted on the <a href=https://buoy.blog/2024/09/05/react-to-view-components.html>Buoy Software blog</a>.</p><p>In the ever-evolving world of web development, choosing the right technology
+stack is crucial for building efficient and maintainable applications. We moved away
+from React and GraphQL, opting instead for traditional REST APIs and Rails-based
+views, leveraging the power of the <a href=https://viewcomponent.org/>ViewComponents gem</a>.</p><h2 id=the-initial-tech-stack-react-and-graphql>The initial tech stack: React and GraphQL</h2><p>Buoy Software&rsquo;s journey began with a mobile application built using React Native
+and powered by a GraphQL API in a Ruby on Rails application. The success of this
+project led us to adopt similar technologies for our web application, resulting
+in a React based front-end using webpacker. This approach allowed for code reuse
+and consistency across platforms, which seemed like an ideal solution at the time.
+For our small team, it was easier to maintain a shared pattern when moving
+between the React Native application and our web application.</p><h2 id=buoy-hackathon-2023>Buoy Hackathon 2023</h2><p>Buoy is a fully remote company and we have an annual hackathon where we get the
+entire company together to spend time together in person. This is typically 2-3
+days where we work on various hackathon projects pitched by the team. One team
+pitched an idea to move our stack away from React and GraphQL to Rails views.
+One of the things we enjoyed about React though, was the component system for
+building UIs.</p><h2 id=challenges-faced-with-react-and-graphql-in-rails>Challenges faced with React and GraphQL in Rails</h2><p>While starting off with GraphQL and React worked very well for our small team to
+bootstrap our web application, over time we were presented with challenges that
+made us rethink our approach.</p><h3 id=inherent-complexity-within-the-application>Inherent complexity within the application</h3><p>Simple tasks which could easily be accomplished in a traditional Ruby on Rails
+application started to become more and more complex. A simple feature which might
+only need a REST controller and some views in a traditional Ruby on Rails application
+would instead need GraphQL types, fields, mutations and resolvers. We leveraged
+Typescript on the front-end which meant we needed to generate types for all of
+our queries. Then we needed to create complex React components to bring the
+whole thing together.</p><p>This complexity also appears when attempting to debug any issues that might
+arise. With so many places to look across the stack, finding the root cause of a
+problem is not straightforward.</p><h3 id=the-illusion-of-sharing-an-api>The illusion of sharing an API</h3><p>When kicking things off, we had grand visions of a single source of truth
+GraphQL API that powered our donor&rsquo;s mobile app as well as our donor management
+system in one single API. Time would prove otherwise. As it turned out APIs that
+the mobile application relied on were fairly different from those that the donor
+management system required. The ones that were similar required vastly different
+permission scopes. We ended up spending more time trying to build a shared API
+rather than building dedicated APIs as needed.</p><h3 id=complexity-in-onboarding-new-team-members>Complexity in onboarding new team members</h3><p>At Buoy we believe in hiring full-stack software engineers. This proved more
+difficult with our complex framework for building out front-ends. While this
+wasn&rsquo;t an impossible task to get engineers up and running, it has proven to be
+a learning curve for sure.</p><h2 id=understanding-viewcomponents-in-ruby-on-rails>Understanding ViewComponents in Ruby on Rails</h2><h3 id=what-are-viewcomponents>What are ViewComponents?</h3><p>ViewComponents is a framework for building reusable, testable, and encapsulated
+view components in Ruby on Rails. Inspired by similar concepts in modern JavaScript
+frameworks such as React, ViewComponents allows developers to create modular,
+object-oriented views that can be easily composed and reused across an application.
+Think React components written in Ruby and used in Rails views.</p><p>To get started install the gem via <code>gem install view_components</code> or add it to
+your Bundle file. Now, take the following React component:</p><div class=highlight><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-js data-lang=js><span style=display:flex><span><span style=color:#cba6f7>import</span> React from <span style=color:#a6e3a1>&#39;react&#39;</span>;
+</span></span><span style=display:flex><span><span style=color:#cba6f7>import</span> PropTypes from <span style=color:#a6e3a1>&#39;prop-types&#39;</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>const</span> VARIANT_STYLES <span style=color:#89dceb;font-weight:700>=</span> {
+</span></span><span style=display:flex><span>  info<span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;bg-blue-100 text-blue-800 border-blue-500&#39;</span>,
+</span></span><span style=display:flex><span>  success<span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;bg-green-100 text-green-800 border-green-500&#39;</span>,
+</span></span><span style=display:flex><span>  warning<span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;bg-yellow-100 text-yellow-800 border-yellow-500&#39;</span>,
+</span></span><span style=display:flex><span>  error<span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;bg-red-100 text-red-800 border-red-500&#39;</span>,
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>const</span> Banner <span style=color:#89dceb;font-weight:700>=</span> ({ variant <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#a6e3a1>&#39;info&#39;</span>, message, onClose }) =&gt; {
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>return</span> (
+</span></span><span style=display:flex><span>    <span style=color:#89dceb;font-weight:700>&lt;</span>div className<span style=color:#89dceb;font-weight:700>=</span>{<span style=color:#a6e3a1>`p-4 border-l-4 </span><span style=color:#a6e3a1>${</span>VARIANT_STYLES[variant]<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1>`</span>}<span style=color:#89dceb;font-weight:700>&gt;</span>
+</span></span><span style=display:flex><span>      <span style=color:#89dceb;font-weight:700>&lt;</span>div className<span style=color:#89dceb;font-weight:700>=</span><span style=color:#a6e3a1>&#34;flex justify-between items-center&#34;</span><span style=color:#89dceb;font-weight:700>&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#89dceb;font-weight:700>&lt;</span>p<span style=color:#89dceb;font-weight:700>&gt;</span>{message}<span style=color:#89dceb;font-weight:700>&lt;</span><span style=color:#f38ba8>/p&gt;</span>
+</span></span><span style=display:flex><span>        {onClose <span style=color:#89dceb;font-weight:700>&amp;&amp;</span> (
+</span></span><span style=display:flex><span>          <span style=color:#89dceb;font-weight:700>&lt;</span>button
+</span></span><span style=display:flex><span>            onClick<span style=color:#89dceb;font-weight:700>=</span>{onClose}
+</span></span><span style=display:flex><span>            className<span style=color:#89dceb;font-weight:700>=</span><span style=color:#a6e3a1>&#34;text-gray-500 hover:text-gray-700&#34;</span>
+</span></span><span style=display:flex><span>            aria<span style=color:#89dceb;font-weight:700>-</span>label<span style=color:#89dceb;font-weight:700>=</span><span style=color:#a6e3a1>&#34;Close&#34;</span>
+</span></span><span style=display:flex><span>          <span style=color:#89dceb;font-weight:700>&gt;</span>
+</span></span><span style=display:flex><span>            <span style=color:#89dceb;font-weight:700>&amp;</span>times;
+</span></span><span style=display:flex><span>          <span style=color:#89dceb;font-weight:700>&lt;</span><span style=color:#f38ba8>/button&gt;</span>
+</span></span><span style=display:flex><span>        )}
+</span></span><span style=display:flex><span>      <span style=color:#89dceb;font-weight:700>&lt;</span><span style=color:#f38ba8>/div&gt;</span>
+</span></span><span style=display:flex><span>    <span style=color:#89dceb;font-weight:700>&lt;</span><span style=color:#f38ba8>/div&gt;</span>
+</span></span><span style=display:flex><span>  );
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Banner.propTypes <span style=color:#89dceb;font-weight:700>=</span> {
+</span></span><span style=display:flex><span>  variant<span style=color:#89dceb;font-weight:700>:</span> PropTypes.oneOf([<span style=color:#a6e3a1>&#39;info&#39;</span>, <span style=color:#a6e3a1>&#39;success&#39;</span>, <span style=color:#a6e3a1>&#39;warning&#39;</span>, <span style=color:#a6e3a1>&#39;error&#39;</span>]),
+</span></span><span style=display:flex><span>  message<span style=color:#89dceb;font-weight:700>:</span> PropTypes.string.isRequired,
+</span></span><span style=display:flex><span>  onClose<span style=color:#89dceb;font-weight:700>:</span> PropTypes.func,
+</span></span><span style=display:flex><span>};
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>export</span> <span style=color:#cba6f7>default</span> Banner;
+</span></span></code></pre></div><p>To replicate this with ViewComponents we&rsquo;ll want the following. First we&rsquo;ll want
+to create a new directory within our <code>app</code> folder called <code>app/components</code>. The
+common way to build components is to have 2 files, one is the class to hold any
+logic behind our component and the other is the erb template. For the example
+above we&rsquo;ll have 2 new files.</p><div class=highlight><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-ruby data-lang=ruby><span style=display:flex><span><span style=color:#6c7086;font-style:italic># app/components/banner_component.rb</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>class</span> <span style=color:#f9e2af>BannerComponent</span> <span style=color:#89dceb;font-weight:700>&lt;</span> <span style=color:#f9e2af>ViewComponent</span><span style=color:#89dceb;font-weight:700>::</span><span style=color:#f9e2af>Base</span>
+</span></span><span style=display:flex><span>  <span style=color:#f9e2af>VARIANT_STYLES</span> <span style=color:#89dceb;font-weight:700>=</span> {
+</span></span><span style=display:flex><span>    <span style=color:#a6e3a1>info</span>: <span style=color:#a6e3a1>&#34;bg-blue-100 text-blue-800 border-blue-500&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e3a1>success</span>: <span style=color:#a6e3a1>&#34;bg-green-100 text-green-800 border-green-500&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e3a1>warning</span>: <span style=color:#a6e3a1>&#34;bg-yellow-100 text-yellow-800 border-yellow-500&#34;</span>,
+</span></span><span style=display:flex><span>    <span style=color:#a6e3a1>error</span>: <span style=color:#a6e3a1>&#34;bg-red-100 text-red-800 border-red-500&#34;</span>
+</span></span><span style=display:flex><span>  }<span style=color:#89dceb;font-weight:700>.</span>freeze
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>initialize</span>(<span style=color:#a6e3a1>variant</span>: <span style=color:#a6e3a1>:info</span>, <span style=color:#a6e3a1>message</span>:, <span style=color:#a6e3a1>closable</span>: <span style=color:#cba6f7>false</span>)
+</span></span><span style=display:flex><span>    <span style=color:#f5e0dc>@variant</span> <span style=color:#89dceb;font-weight:700>=</span> variant
+</span></span><span style=display:flex><span>    <span style=color:#f5e0dc>@message</span> <span style=color:#89dceb;font-weight:700>=</span> message
+</span></span><span style=display:flex><span>    <span style=color:#f5e0dc>@closable</span> <span style=color:#89dceb;font-weight:700>=</span> closable
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>def</span> <span style=color:#89b4fa>variant_class</span>
+</span></span><span style=display:flex><span>    <span style=color:#f9e2af>VARIANT_STYLES</span><span style=color:#89dceb;font-weight:700>[</span><span style=color:#f5e0dc>@variant</span><span style=color:#89dceb;font-weight:700>]</span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>private</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>attr_reader</span> <span style=color:#a6e3a1>:variant</span>, <span style=color:#a6e3a1>:message</span>, <span style=color:#a6e3a1>:closable</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>end</span>
+</span></span></code></pre></div><p>Paired with an erb template in <code>app/components/banner_component.html.erb</code></p><pre tabindex=0><code class=language-erb data-lang=erb>&lt;!-- app/components/banner_component.html.erb --&gt;
+&lt;div class=&#34;p-4 border-l-4 &lt;%= variant_class %&gt;&#34;&gt;
+  &lt;div class=&#34;flex justify-between items-center&#34;&gt;
+    &lt;p&gt;&lt;%= message %&gt;&lt;/p&gt;
+    &lt;% if closable %&gt;
+      &lt;%= button_to &#34;&amp;times;&#34;.html_safe,
+                    nil,
+                    method: :get,
+                    class: &#34;text-gray-500 hover:text-gray-700&#34;,
+                    aria: { label: &#34;Close&#34; },
+                    data: { action: &#34;click-&gt;banner#close&#34; } %&gt;
+    &lt;% end %&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre><p>We can then render our component in a view like so:</p><pre tabindex=0><code>&lt;%= render(BannerComponent.new(variant: :success, message: &#34;Operation completed successfully!&#34;, closable: true)) %&gt;
+</code></pre><h3 id=testing-our-component>Testing our component</h3><p>To test our component we can utilize Spec.</p><div class=highlight><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-ruby data-lang=ruby><span style=display:flex><span><span style=color:#6c7086;font-style:italic># spec/components/banner_component_spec.rb</span>
+</span></span><span style=display:flex><span><span style=color:#89dceb>require</span> <span style=color:#a6e3a1>&#34;rails_helper&#34;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f9e2af>RSpec</span><span style=color:#89dceb;font-weight:700>.</span>describe <span style=color:#f9e2af>BannerComponent</span>, <span style=color:#a6e3a1>type</span>: <span style=color:#a6e3a1>:component</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>  it <span style=color:#a6e3a1>&#34;renders each variant with the appropriate CSS classes&#34;</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>::</span><span style=color:#f9e2af>VARIANT_STYLES</span><span style=color:#89dceb;font-weight:700>.</span>each <span style=color:#cba6f7>do</span> <span style=color:#89dceb;font-weight:700>|</span>variant, expected_class<span style=color:#89dceb;font-weight:700>|</span>
+</span></span><span style=display:flex><span>      component <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>.</span>new(<span style=color:#a6e3a1>variant</span>: variant, <span style=color:#a6e3a1>message</span>: <span style=color:#a6e3a1>&#34;Test message&#34;</span>)
+</span></span><span style=display:flex><span>      render_inline(component)
+</span></span><span style=display:flex><span>      expect(page)<span style=color:#89dceb;font-weight:700>.</span>to have_css(<span style=color:#a6e3a1>&#34;div.border-l-4.</span><span style=color:#a6e3a1>#{</span>expected_class<span style=color:#a6e3a1>}</span><span style=color:#a6e3a1>&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  it <span style=color:#a6e3a1>&#34;renders the message&#34;</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>    message <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#a6e3a1>&#34;This is a test message&#34;</span>
+</span></span><span style=display:flex><span>    component <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>.</span>new(<span style=color:#a6e3a1>variant</span>: <span style=color:#a6e3a1>:info</span>, <span style=color:#a6e3a1>message</span>: message)
+</span></span><span style=display:flex><span>    render_inline(component)
+</span></span><span style=display:flex><span>    expect(page)<span style=color:#89dceb;font-weight:700>.</span>to have_text(message)
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  it <span style=color:#a6e3a1>&#34;renders a close button when closable is true&#34;</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>    component <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>.</span>new(<span style=color:#a6e3a1>variant</span>: <span style=color:#a6e3a1>:info</span>, <span style=color:#a6e3a1>message</span>: <span style=color:#a6e3a1>&#34;Test&#34;</span>, <span style=color:#a6e3a1>closable</span>: <span style=color:#cba6f7>true</span>)
+</span></span><span style=display:flex><span>    render_inline(component)
+</span></span><span style=display:flex><span>    expect(page)<span style=color:#89dceb;font-weight:700>.</span>to have_button(<span style=color:#a6e3a1>class</span>: <span style=color:#a6e3a1>&#34;text-gray-500 hover:text-gray-700&#34;</span>, <span style=color:#a6e3a1>text</span>: <span style=color:#a6e3a1>&#34;×&#34;</span>)
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  it <span style=color:#a6e3a1>&#34;does not render a close button when closable is false&#34;</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>    component <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>.</span>new(<span style=color:#a6e3a1>variant</span>: <span style=color:#a6e3a1>:info</span>, <span style=color:#a6e3a1>message</span>: <span style=color:#a6e3a1>&#34;Test&#34;</span>, <span style=color:#a6e3a1>closable</span>: <span style=color:#cba6f7>false</span>)
+</span></span><span style=display:flex><span>    render_inline(component)
+</span></span><span style=display:flex><span>    expect(page)<span style=color:#89dceb;font-weight:700>.</span>not_to have_button(<span style=color:#a6e3a1>class</span>: <span style=color:#a6e3a1>&#34;text-gray-500 hover:text-gray-700&#34;</span>, <span style=color:#a6e3a1>text</span>: <span style=color:#a6e3a1>&#34;×&#34;</span>)
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  it <span style=color:#a6e3a1>&#34;applies the correct variant class&#34;</span> <span style=color:#cba6f7>do</span>
+</span></span><span style=display:flex><span>    component <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#f9e2af>BannerComponent</span><span style=color:#89dceb;font-weight:700>.</span>new(<span style=color:#a6e3a1>variant</span>: <span style=color:#a6e3a1>:success</span>, <span style=color:#a6e3a1>message</span>: <span style=color:#a6e3a1>&#34;Test&#34;</span>)
+</span></span><span style=display:flex><span>    expect(component<span style=color:#89dceb;font-weight:700>.</span>variant_class)<span style=color:#89dceb;font-weight:700>.</span>to eq(<span style=color:#a6e3a1>&#34;bg-green-100 text-green-800 border-green-500&#34;</span>)
+</span></span><span style=display:flex><span>  <span style=color:#cba6f7>end</span>
+</span></span><span style=display:flex><span><span style=color:#cba6f7>end</span>
+</span></span></code></pre></div><p>Note our use of the <code>type: component</code> here.</p><h3 id=benefits-of-viewcomponents-over-react-components>Benefits of ViewComponents over React components</h3><ol><li><p>Server-side rendering: ViewComponents are rendered on the server, reducing the
+client-side JavaScript payload and improving initial page load times.</p></li><li><p>Seamless integration: As a native Rails solution, ViewComponents integrates
+smoothly with existing Rails patterns and helpers. No more jumping through hoops
+fighting with a JavaScript build tool like webpacker for simple tasks.</p></li><li><p>Testability: ViewComponents can be unit tested in isolation, improving overall
+code quality and maintainability using the tools our team was already comfortable
+in, RSPec.</p></li></ol><h2 id=buoy-softwares-journey-to-adopting-viewcomponents>Buoy Software’s Journey to Adopting ViewComponents</h2><p>Transitioning an existing Rails application to ViewComponents required careful
+planning. Our application had grown quite large by the time we decided to move
+away from React so finding a way to incrementally make this change was of the
+utmost importance.</p><p>Our team began by identifying key areas where React components could be replaced
+with ViewComponents. At Buoy we leverage feature flags which were a great tool for
+this. We began by identifying the lowest risk area to introduce our change and
+began there. The team gradually refactored these components, ensuring that the
+application’s functionality remained intact throughout the process.</p><p>To ensure we did not find ourselves in a migration that stopped feature development
+for months we took an iterative strategy to roll out the changes. As we made
+changes to the codebase to update existing features we took it as an opportunity
+to do a migration to ViewComponents.</p><p>To further ensure value was being provided by this migration we paired it with a
+redesign of our application which moved us to the
+<a href=https://tailwindcss.com/>Tailwind</a> CSS framework. This
+allowed us to get buy in from all stakeholders including leadership.</p><p>We are still not completely done with our migration, but we have found it to be
+quite successful and are excited to finish our transition.</p><h2 id=advantages-of-traditional-rails-architecture>Advantages of Traditional Rails Architecture</h2><p>We&rsquo;ve already seen many advantages as a result of our move away from React to a
+more traditional Rails application.</p><h3 id=simplified-development-workflow>Simplified development workflow</h3><p>Our initial hypothesis for this change was that we could drastically reduce
+software development time for tasks by moving away from React to traditional
+Rails views. We can confidently say that this has been true. Features that might
+have taken weeks now take days. We no longer need to worry about ensuring we
+have experts in both React and Rails.</p><p>With a unified codebase, we no longer need to worry about about context switching
+between Ruby and JavaScript nearly as much. We can leverage the tools we&rsquo;ve all
+grown comfortable with such as testing with RSpec rather than Jest.</p><h3 id=improved-collaboration-and-onboarding>Improved collaboration and onboarding</h3><p>Within our React based application, debugging or simply trying to understand how
+something worked required traversing a maze of code. Do I need to look at the
+GraphQL layer? Is it the React application? Local state management in JavaScript?
+We now have a more traditional application where it&rsquo;s easier to find things.
+New engineers on the team can get up to speed much faster now which means
+providing value quickly.</p><h2 id=conclusion-and-future-outlook>Conclusion and Future Outlook</h2><p>One of Buoy&rsquo;s core values is to prefer simplicity over complexity. We&rsquo;ve found
+that this change embodies this as we now have a much simpler architecture leading
+to better outcomes overall. By embracing server-side rendering and leveraging
+the power of ViewComponents, we were able to create a more performant,
+maintainable, and developer-friendly application.</p><p>As web development continues to evolve, it&rsquo;s crucial to periodically reassess
+your technology choices. What works for one project or team may not be the best
+solution for another. Buoy&rsquo;s experience serves as a reminder that there&rsquo;s no
+one-size-fits-all approach in our industry.</p></div><footer class="mt-16 pt-8 border-t border-gray-800"><div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><a href=https://damiangalarza.com/posts/2016-10-10-acceptance-tests-with-subdomains/ class=group><span class="text-sm text-gray-500 group-hover:text-gray-400">← Previous</span><h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">Acceptance Tests with Subdomains</h3></a><a href=https://damiangalarza.com/posts/2025-04-01-my-journey-into-3d-printing/ class="group text-right"><span class="text-sm text-gray-500 group-hover:text-gray-400">Next →</span><h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">My Journey into 3D Printing with the Bambu Labs P1S</h3></a></div></footer></div></article></main><footer class="border-t border-gray-800 py-8 px-6 lg:px-8 section-alt flex items-center min-h-[120px]"><div class="max-w-6xl mx-auto w-full"><div class="flex flex-col md:flex-row justify-between items-center gap-4"><div class="text-center md:text-left"><div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mb-3 mx-auto md:mx-0"></div><p class="text-sm text-gray-500">Ready to build something great together?</p><p class="text-xs text-gray-500 mt-2">© 2025 Damian Galarza. All rights reserved.</p></div><div class="flex items-center gap-6"><a href=https://www.linkedin.com/in/dgalarza/ target=_blank rel=noopener class="text-gray-400 hover:text-accent-teal transition-colors" aria-label="LinkedIn profile"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0H5C2.239.0.0 2.239.0 5v14c0 2.761 2.239 5 5 5h14c2.762.0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966.0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
+</a><a href=https://github.com/dgalarza target=_blank rel=noopener class="text-gray-400 hover:text-accent-teal transition-colors" aria-label="GitHub profile"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0C5.374.0.0 5.373.0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931.0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176.0.0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221.0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+</a><a href=https://twitter.com/dgalarza target=_blank rel=noopener class="text-gray-400 hover:text-accent-teal transition-colors" aria-label="Twitter profile"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a></div></div></div></footer></body></html>
