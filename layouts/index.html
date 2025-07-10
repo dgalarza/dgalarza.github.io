@@ -264,7 +264,7 @@
                         {{ .Title }}
                     </a>
                 </h3>
-                <p class="text-gray-400 text-sm mb-4 line-clamp-3">{{ with .Params.home_summary }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
+                <p class="text-gray-400 text-sm mb-4{{ if not .Params.home_summary }} line-clamp-3{{ end }}">{{ with .Params.home_summary }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
                 <a href="{{ .Permalink }}" class="text-[var(--color-accent-teal)] text-sm font-medium hover:underline">
                     Read more →
                 </a>
