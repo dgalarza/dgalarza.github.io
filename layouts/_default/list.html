@@ -17,14 +17,14 @@
                     </a>
                 </h2>
                 <p class="text-gray-400 mb-4">{{ .Summary }}</p>
-                <div class="flex items-center justify-between">
+                <div class="flex flex-col gap-3">
                     <a href="{{ .Permalink }}" class="text-[var(--color-accent-teal)] font-medium hover:underline">
                         Read more →
                     </a>
                     {{ if .Params.tags }}
-                    <div class="flex gap-2">
+                    <div class="flex gap-2 flex-wrap overflow-hidden">
                         {{ range .Params.tags }}
-                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-400 hover:text-white transition-colors">{{ . }}</a>
+                        <a href="{{ "/tags/" | relURL }}{{ . | urlize }}" class="text-xs px-2 py-1 bg-gray-800 hover:bg-gray-700 rounded-full text-gray-400 hover:text-white transition-colors whitespace-nowrap">{{ . }}</a>
                         {{ end }}
                     </div>
                     {{ end }}
