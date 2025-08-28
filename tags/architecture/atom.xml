@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Architecture on Damian Galarza | Technical Partner for Startups &amp; Fractional CTO</title><link>https://damiangalarza.com/tags/architecture/</link><description>Recent content in Architecture on Damian Galarza | Technical Partner for Startups &amp; Fractional CTO</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://damiangalarza.com/tags/architecture/atom.xml" rel="self" type="application/rss+xml"/><item><title>How Buoy Software is Redefining Rails Development with ViewComponents</title><link>https://damiangalarza.com/posts/2024-09-05-react-to-view-components/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://damiangalarza.com/posts/2024-09-05-react-to-view-components/</guid><description>&lt;p>This post was originally posted on the &lt;a href="https://buoy.blog/2024/09/05/react-to-view-components.html">Buoy Software blog&lt;/a>.&lt;/p>
-&lt;p>In the ever-evolving world of web development, choosing the right technology
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Architecture on Damian Galarza | Technical Partner for Startups &amp; Fractional CTO</title><link>https://damiangalarza.com/tags/architecture/</link><description>Recent content in Architecture on Damian Galarza | Technical Partner for Startups &amp; Fractional CTO</description><generator>Hugo</generator><language>en-us</language><lastBuildDate>Thu, 05 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://damiangalarza.com/tags/architecture/atom.xml" rel="self" type="application/rss+xml"/><item><title>How Buoy Software is Redefining Rails Development with ViewComponents</title><link>https://damiangalarza.com/posts/2024-09-05-react-to-view-components/</link><pubDate>Thu, 05 Sep 2024 00:00:00 +0000</pubDate><guid>https://damiangalarza.com/posts/2024-09-05-react-to-view-components/</guid><description>&lt;p&gt;This post was originally posted on the &lt;a href="https://buoy.blog/2024/09/05/react-to-view-components.html"&gt;Buoy Software blog&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the ever-evolving world of web development, choosing the right technology
 stack is crucial for building efficient and maintainable applications. We moved away
 from React and GraphQL, opting instead for traditional REST APIs and Rails-based
-views, leveraging the power of the &lt;a href="https://viewcomponent.org/">ViewComponents gem&lt;/a>.&lt;/p>
-&lt;h2 id="the-initial-tech-stack-react-and-graphql">The initial tech stack: React and GraphQL&lt;/h2>
-&lt;p>Buoy Software&amp;rsquo;s journey began with a mobile application built using React Native
+views, leveraging the power of the &lt;a href="https://viewcomponent.org/"&gt;ViewComponents gem&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="the-initial-tech-stack-react-and-graphql"&gt;The initial tech stack: React and GraphQL&lt;/h2&gt;
+&lt;p&gt;Buoy Software&amp;rsquo;s journey began with a mobile application built using React Native
 and powered by a GraphQL API in a Ruby on Rails application. The success of this
 project led us to adopt similar technologies for our web application, resulting
 in a React based front-end using webpacker. This approach allowed for code reuse
 and consistency across platforms, which seemed like an ideal solution at the time.
 For our small team, it was easier to maintain a shared pattern when moving
-between the React Native application and our web application.&lt;/p></description></item></channel></rss>
+between the React Native application and our web application.&lt;/p&gt;</description></item></channel></rss>
