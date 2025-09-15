@@ -4,9 +4,9 @@
   "description": "Personal website built with Hugo and Tailwind CSS",
   "scripts": {
     "dev": "npm run dev:css & hugo server -D --buildFuture",
-    "dev:css": "tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --watch",
+    "dev:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --watch",
     "build": "npm run build:css && hugo --minify",
-    "build:css": "tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --minify"
+    "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --minify"
   },
   "devDependencies": {
     "tailwindcss": "^4.0.0-alpha.31"
