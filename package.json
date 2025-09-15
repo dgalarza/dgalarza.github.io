@@ -9,6 +9,7 @@
     "build:css": "npx tailwindcss -i ./assets/css/main.css -o ./static/css/style.css --minify"
   },
   "devDependencies": {
-    "tailwindcss": "^4.1.13"
+    "tailwindcss": "^4.1.13",
+    "@tailwindcss/cli": "^4.1.13"
   }
 }
