@@ -157,11 +157,11 @@
 }
 </script>
 {{ else if eq .Type "posts" }}
-<!-- Structured Data - BlogPosting Schema -->
+<!-- Structured Data - BlogPosting or TechArticle Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "BlogPosting",
+  "@type": "{{ .Params.schema_type | default "BlogPosting" }}",
   "headline": "{{ .Title }}",
   "description": "{{ .Description | default .Summary }}",
   "author": {
@@ -181,9 +181,32 @@
     "@type": "WebPage",
     "@id": "{{ .Permalink }}"
   }{{ if .Params.tags }},
-  "keywords": {{ .Params.tags | jsonify }}{{ end }}
+  "keywords": {{ .Params.tags | jsonify }}{{ end }}{{ if .Params.proficiency_level }},
+  "proficiencyLevel": "{{ .Params.proficiency_level }}"{{ end }}{{ if .Params.dependencies }},
+  "dependencies": "{{ .Params.dependencies }}"{{ end }}
 }
 </script>
+{{ if .Params.how_to_steps }}
+<!-- HowTo Schema for Tutorial Posts -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{{ .Title }}",
+  "description": "{{ .Description | default .Summary }}",
+  "step": [
+    {{ range $index, $step := .Params.how_to_steps }}
+    {{ if $index }},{{ end }}
+    {
+      "@type": "HowToStep",
+      "name": "{{ $step.name }}",
+      "text": "{{ $step.text }}"
+    }
+    {{ end }}
+  ]
+}
+</script>
+{{ end }}
 {{ end }}
 
 <!-- Google Fonts -->
