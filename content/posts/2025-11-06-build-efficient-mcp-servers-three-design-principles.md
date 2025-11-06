@@ -52,8 +52,6 @@ I found some existing YNAB MCPs, but most were inactive with limited features. T
 
 ## Understanding Model Context Protocols (MCPs)
 
-If you're already familiar with Model Context Protocol (MCP) servers, feel free to skip ahead to [The Naive Approach](#the-naive-approach-direct-api-wrapping).
-
 The Model Context Protocol (MCP) is a standardized way to extend language models with external capabilities. Unlike traditional APIs where you write code to call endpoints, MCP servers allow AI models to discover and use tools autonomously. The protocol defines how models can:
 
 - **Call tools** - Execute functions that interact with external systems
@@ -62,9 +60,39 @@ The Model Context Protocol (MCP) is a standardized way to extend language models
 
 When you build an MCP server, you're essentially creating a set of capabilities that any MCP-compatible AI assistant (like Claude) can use. The model sees your tool descriptions, understands what they do, and calls them as needed to fulfill user requests.
 
+## Understanding Context Windows
+
+Before we dive into how to make our MCPs more efficient, it's important to understand what we're trying to optimize. When working with LLMs, the context window is the amount of content that the model can "pay attention" to at one time. Each model has a limit to the size of its context window. For example, Claude Sonnet 4.5's context window is about 200,000 tokens.
+
+### What is a Token?
+
+When you send text to an LLM, it doesn't process words one at a time. Instead, text is broken into **tokens**—the fundamental units that language models read and generate. A token typically represents 3-4 characters, or roughly 0.75 words in English.
+
+For API responses and JSON data (which is what MCPs work with), tokenization looks like this:
+
+```json
+{"name": "Checking"}           // ~7 tokens
+"transfer_payee_id"            // ~5 tokens
+{"balance": 125000}            // ~6 tokens
+```
+
+The tokenizer breaks JSON into chunks: brackets, keys, values, and punctuation all consume tokens. Every field name has a cost. Field names like `"debt_escrow_amounts"` and `"direct_import_in_error"` cost ~4-6 tokens each. When you return an API response with 18 fields per object, you're paying the token cost for every field name, every time—even when the model doesn't need them.
+
+### Why Token Efficiency Matters
+
+Given the limited size of the context window, it's critical to consider how much you're placing inside it. Models work best when they have good context, but there's a balance to strike:
+
+- **Context limits are hard boundaries**: Claude Sonnet 4.5's 200k token limit sounds generous until you realize a naive MCP returning a year of transactions can consume 746,800 tokens—nearly 4x the entire context window. Your tool call would fail before the model could even process it.
+
+- **Real sessions are already crowded**: In typical Claude Code sessions, MCP tool definitions, system prompts, and memory can consume 50-60% of the context window before you've had a single conversation. Every inefficient tool response eats into precious space needed for reasoning and multi-turn conversations.
+
+- **Noise degrades performance**: Providing superfluous data doesn't just waste tokens—it forces the model to parse irrelevant fields, increasing the chance of errors or confusion. A focused 262-token summary outperforms a noisy 4,890-token dump of raw data.
+
+The goal isn't to minimize tokens at all costs. It's to give the model exactly what it needs, nothing more, nothing less. Let's look at how this plays out in practice.
+
 ### The Naive Approach: Direct API Wrapping
 
-I started with what seemed obvious: create a thin wrapper around the existing YNAB Python SDK. Each MCP tool would correspond to one API endpoint, passing through the full response. This is a common pattern I've seen in many MCP implementations.
+When I started building the YNAB MCP, I didn't yet appreciate how much token efficiency would matter. I started with what seemed obvious: create a thin wrapper around the existing YNAB Python SDK. Each MCP tool would correspond to one API endpoint, passing through the full response. This is a common pattern I've seen in many MCP implementations.
 
 ```python
 # Naive approach: Just wrap the SDK
@@ -84,7 +112,7 @@ To put this in perspective: tool results compete with everything else for contex
 
 A naive MCP that returns 30k tokens for a budget overview would push that to 74% in a single tool call—leaving just 52k tokens for the actual conversation, reasoning, and additional tool calls. Every inefficient tool response eats into the space you need for multi-turn conversations.
 
-This realization fundamentally changed how I approached the design: MCPs need to be context-aware intermediaries, not transparent proxies. The question shifted from "How do I expose this API to the model?" to "What does the model actually need to help the user?"
+This changed how I approached the design: MCPs need to be context-aware intermediaries, not transparent proxies. The question shifted from "How do I expose this API to the model?" to "What does the model actually need to help the user?"
 
 ## Three Design Principles for Context-Efficient MCPs
 
