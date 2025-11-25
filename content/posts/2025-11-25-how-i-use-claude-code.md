@@ -24,8 +24,8 @@ keywords:
   - AI pair programming
   - code exploration
 reading_time: 10
-og_image: "images/posts/og-my-claude-code-workflow.png"
-og_image_alt: "My Claude Code Workflow - AI-assisted development patterns"
+og_image: "images/posts/og-how-i-use-claude-code.png"
+og_image_alt: "How I Use Claude Code: My Complete Development Workflow - How I combine AI tools for context-rich development"
 schema_type: "TechArticle"
 proficiency_level: "Intermediate"
 dependencies: "Claude Code, Linear, Obsidian, GitHub CLI, MCP Servers"
