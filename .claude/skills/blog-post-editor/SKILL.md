@@ -1,3 +1,7 @@
+---
+name: blog-post-editor
+description: Write new blog posts or edit existing ones to match the established writing voice and style guidelines.
+---
 # Blog Post Editor
 
 Write new blog posts or edit existing ones to match the established writing voice and style guidelines.

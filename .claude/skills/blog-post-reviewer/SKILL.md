@@ -1,3 +1,8 @@
+---
+name: blog-post-reviewer
+description: Review and provide feedback on blog posts to ensure they match the established writing voice and style guidelines.
+---
+
 # Blog Post Reviewer
 
 Review and provide feedback on blog posts to ensure they match the established writing voice and style guidelines.
