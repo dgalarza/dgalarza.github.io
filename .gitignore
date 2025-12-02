@@ -32,3 +32,4 @@ hugo.linux
 # If using environment variables
 .env
 .claude/settings.local.json
+.playwright-mcp
