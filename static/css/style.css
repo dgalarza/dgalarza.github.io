@@ -1040,6 +1040,53 @@ body {
   border-radius: 0.5rem;
   margin: 2rem 0;
 }
+.prose table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.prose thead {
+  background: linear-gradient( to bottom, rgba(32, 208, 188, 0.1), rgba(32, 208, 188, 0.05) );
+}
+.prose th {
+  padding: 0.875rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  border-bottom: 2px solid rgba(32, 208, 188, 0.3);
+}
+.prose td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid #1f2937;
+  color: #d1d5db;
+}
+.prose tbody tr {
+  transition: background-color 0.15s ease;
+}
+.prose tbody tr:nth-child(odd) {
+  background-color: rgba(26, 31, 46, 0.5);
+}
+.prose tbody tr:nth-child(even) {
+  background-color: rgba(26, 31, 46, 0.25);
+}
+.prose tbody tr:hover {
+  background-color: rgba(32, 208, 188, 0.08);
+}
+.prose tbody tr:last-child td {
+  border-bottom: none;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+.prose td:last-child, .prose th:last-child {
+  text-align: right;
+  font-feature-settings: "tnum";
+}
 .bullet-item {
   display: flex;
   align-items: flex-start;
