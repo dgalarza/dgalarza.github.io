@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+/* List styling for blog posts */
+
 @theme {
   --color-dark-bg: #030712;
   --color-dark-surface: #1a1f2e;
@@ -138,11 +140,48 @@ body {
 .prose ul,
 .prose ol {
   margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  padding-left: 0;
+  list-style: none;
 }
 
-.prose li {
+.prose ul li,
+.prose ol li {
   margin-bottom: 0.5rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+/* Unordered list bullets - teal accent dots */
+.prose ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-accent-teal);
+  border-radius: 50%;
+}
+
+/* Ordered list numbers - teal accent counters */
+.prose ol {
+  counter-reset: list-counter;
+}
+
+.prose ol li {
+  counter-increment: list-counter;
+}
+
+.prose ol li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent-teal);
+  font-weight: 600;
+  font-size: 0.95em;
+  font-feature-settings: "tnum";
+  min-width: 1.5rem;
 }
 
 .prose img {
