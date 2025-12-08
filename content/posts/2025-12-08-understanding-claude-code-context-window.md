@@ -6,7 +6,7 @@ summary: "A look at how Claude Code's context window works, what uses tokens, an
 home_summary: "How Claude Code's context window works and practical strategies for managing tokens, MCP servers, and subagents."
 date: 2025-12-08
 author: Damian Galarza
-og_image: "images/posts/og-build-efficient-mcp-servers-three-design-principles.png"
+og_image: "images/posts/og-understanding-claude-code-context-window.png"
 tags:
   - claude-code
   - ai-coding-tools
