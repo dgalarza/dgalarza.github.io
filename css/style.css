@@ -234,6 +234,9 @@
   .relative {
     position: relative;
   }
+  .static {
+    position: static;
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -998,14 +1001,91 @@ body {
 }
 .prose ul, .prose ol {
   margin-bottom: 1.25rem;
-  padding-left: 1.5rem;
+  padding-left: 0;
+  list-style: none;
 }
-.prose li {
+.prose ul li, .prose ol li {
   margin-bottom: 0.5rem;
+  padding-left: 2rem;
+  position: relative;
+}
+.prose ul li::before {
+  content: '';
+  position: absolute;
+  left: 0.5rem;
+  top: 0.6em;
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-accent-teal);
+  border-radius: 50%;
+}
+.prose ol {
+  counter-reset: list-counter;
+}
+.prose ol li {
+  counter-increment: list-counter;
+}
+.prose ol li::before {
+  content: counter(list-counter) ".";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--color-accent-teal);
+  font-weight: 600;
+  font-size: 0.95em;
+  font-feature-settings: "tnum";
+  min-width: 1.5rem;
 }
 .prose img {
   border-radius: 0.5rem;
   margin: 2rem 0;
+}
+.prose table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.prose thead {
+  background: linear-gradient( to bottom, rgba(32, 208, 188, 0.1), rgba(32, 208, 188, 0.05) );
+}
+.prose th {
+  padding: 0.875rem 1.25rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-teal);
+  border-bottom: 2px solid rgba(32, 208, 188, 0.3);
+}
+.prose td {
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid #1f2937;
+  color: #d1d5db;
+}
+.prose tbody tr {
+  transition: background-color 0.15s ease;
+}
+.prose tbody tr:nth-child(odd) {
+  background-color: rgba(26, 31, 46, 0.5);
+}
+.prose tbody tr:nth-child(even) {
+  background-color: rgba(26, 31, 46, 0.25);
+}
+.prose tbody tr:hover {
+  background-color: rgba(32, 208, 188, 0.08);
+}
+.prose tbody tr:last-child td {
+  border-bottom: none;
+  font-weight: 600;
+  color: #f3f4f6;
+}
+.prose td:last-child, .prose th:last-child {
+  text-align: right;
+  font-feature-settings: "tnum";
 }
 .bullet-item {
   display: flex;
