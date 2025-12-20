@@ -14,17 +14,17 @@
 </span></span></code></pre></div><p>Once we have the CSRF meta tags in place, we can move forward and add the authenticity to the parameters which are sent with Uploadify&rsquo;s request. The JavaScript snippet below is an example of pulling the CSRF token information and passing it along with our Uploadify requests using the scriptData configuration parameter.</p><div class=highlight><pre tabindex=0 style=color:#cdd6f4;background-color:#1e1e2e;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-javascript data-lang=javascript><span style=display:flex><span><span style=color:#89dceb;font-weight:700>&lt;</span>script type<span style=color:#89dceb;font-weight:700>=</span><span style=color:#a6e3a1>&#34;text/javascript&#34;</span><span style=color:#89dceb;font-weight:700>&gt;</span>
 </span></span><span style=display:flex><span>$(<span style=color:#f38ba8>function</span> () {
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Create an empty object to store our custom script data
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  <span style=color:#f38ba8>var</span> uploadify_script_data <span style=color:#89dceb;font-weight:700>=</span> {};
+</span></span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> uploadify_script_data <span style=color:#89dceb;font-weight:700>=</span> {};
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Fetch the CSRF meta tag data
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  <span style=color:#f38ba8>var</span> csrf_token <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-token]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
+</span></span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> csrf_token <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-token]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
 </span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> csrf_param <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-param]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Now associate the data in the config, encoding the data safely
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  uploadify_script_data[csrf_token] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>encodeURI</span>(csrf_param);
+</span></span></span><span style=display:flex><span>  uploadify_script_data[csrf_token] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>encodeURI</span>(csrf_param);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>   <span style=color:#6c7086;font-style:italic>// Configure Uploadify
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  $(<span style=color:#a6e3a1>&#39;#photo-upload&#39;</span>).uploadify({
+</span></span></span><span style=display:flex><span>  $(<span style=color:#a6e3a1>&#39;#photo-upload&#39;</span>).uploadify({
 </span></span><span style=display:flex><span>    <span style=color:#a6e3a1>&#39;uploader&#39;</span> <span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;/assets/uploadify.swf&#39;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#a6e3a1>&#39;script&#39;</span> <span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;/photos/&#39;</span>,
 </span></span><span style=display:flex><span>    <span style=color:#a6e3a1>&#39;scriptData&#39;</span> <span style=color:#89dceb;font-weight:700>:</span> uploadify_script_data
@@ -41,14 +41,14 @@ So if you are continuing to run into InvalidAuthenticityToken error, check your 
 </span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> uploadify_script_data <span style=color:#89dceb;font-weight:700>=</span> {};
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Fetch the CSRF meta tag data
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  <span style=color:#f38ba8>var</span> csrf_token <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-token]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
+</span></span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> csrf_token <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-token]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
 </span></span><span style=display:flex><span>  <span style=color:#f38ba8>var</span> csrf_param <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;meta[name=csrf-param]&#39;</span>).attr(<span style=color:#a6e3a1>&#39;content&#39;</span>);
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Now associate the data in the config, encoding the data safely
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  uploadify_script_data[csrf_token] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>encodeURI</span>(csrf_param)
+</span></span></span><span style=display:flex><span>  uploadify_script_data[csrf_token] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>encodeURI</span>(csrf_param)
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  <span style=color:#6c7086;font-style:italic>// Associate the session information
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>  uploadify_script_data[<span style=color:#a6e3a1>&#39;&lt;%= session_key %&gt;&#39;</span>] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#a6e3a1>&#39;&lt;%= cookies[session_key] %&gt;&#39;</span>;
+</span></span></span><span style=display:flex><span>  uploadify_script_data[<span style=color:#a6e3a1>&#39;&lt;%= session_key %&gt;&#39;</span>] <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#a6e3a1>&#39;&lt;%= cookies[session_key] %&gt;&#39;</span>;
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>  $(<span style=color:#a6e3a1>&#39;#upload-photo&#39;</span>).uploadify({
 </span></span><span style=display:flex><span>    script <span style=color:#89dceb;font-weight:700>:</span> <span style=color:#a6e3a1>&#39;/photos/&#39;</span>,

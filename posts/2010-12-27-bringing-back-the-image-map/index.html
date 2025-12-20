@@ -45,22 +45,22 @@
 </span></span><span style=display:flex><span>		e.preventDefault();
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Cache all instances of the image
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		<span style=color:#f38ba8>var</span> $all_instances <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;.my-node img&#39;</span>);
+</span></span></span><span style=display:flex><span>		<span style=color:#f38ba8>var</span> $all_instances <span style=color:#89dceb;font-weight:700>=</span> $(<span style=color:#a6e3a1>&#39;.my-node img&#39;</span>);
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Store the usemap in order to re-enable later
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		<span style=color:#f38ba8>var</span> usemap <span style=color:#89dceb;font-weight:700>=</span> $all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>);
+</span></span></span><span style=display:flex><span>		<span style=color:#f38ba8>var</span> usemap <span style=color:#89dceb;font-weight:700>=</span> $all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>);
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Reset the use of an image map on all instances of it
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		$all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>, <span style=color:#a6e3a1>&#39;&#39;</span>);
+</span></span></span><span style=display:flex><span>		$all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>, <span style=color:#a6e3a1>&#39;&#39;</span>);
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Grap the actual trigger we were looking for
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		<span style=color:#f38ba8>var</span> trigger <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>document</span>.elementFromPoint(e.clientX, e.clientY);
+</span></span></span><span style=display:flex><span>		<span style=color:#f38ba8>var</span> trigger <span style=color:#89dceb;font-weight:700>=</span> <span style=color:#89dceb>document</span>.elementFromPoint(e.clientX, e.clientY);
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Re-enable the image map on all the instances we disabled it on
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		$all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>, usemap);
+</span></span></span><span style=display:flex><span>		$all_instances.attr(<span style=color:#a6e3a1>&#39;usemap&#39;</span>, usemap);
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#6c7086;font-style:italic>// Do something useful with the information
-</span></span></span><span style=display:flex><span><span style=color:#6c7086;font-style:italic></span>		alert(trigger.id);
+</span></span></span><span style=display:flex><span>		alert(trigger.id);
 </span></span><span style=display:flex><span>	});
 </span></span><span style=display:flex><span>});
 </span></span></code></pre></div></div><footer class="mt-16 pt-8 border-t border-gray-800"><div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4"><a href=https://damiangalarza.com/posts/2010-12-23-css-gradient-definitions/ class=group><span class="text-sm text-gray-500 group-hover:text-gray-400">← Previous</span><h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">CSS Gradient Definitions</h3></a><a href=https://damiangalarza.com/posts/2012-04-02-simple-sinatra-service-proxy/ class="group text-right"><span class="text-sm text-gray-500 group-hover:text-gray-400">Next →</span><h3 class="font-semibold group-hover:text-[var(--color-accent-teal)] transition-colors">Simple Sinatra Service Proxy</h3></a></div></footer></div></article></main><footer class="border-t border-gray-800 py-8 px-6 lg:px-8 section-alt flex items-center min-h-[120px]"><div class="max-w-6xl mx-auto w-full"><div class="flex flex-col md:flex-row justify-between items-center gap-4"><div class="text-center md:text-left"><div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mb-3 mx-auto md:mx-0"></div><p class="text-sm text-gray-500">Ready to build something great together?</p><p class="text-xs text-gray-500 mt-2">© 2025 Damian Galarza. All rights reserved.</p></div><div class="flex items-center gap-6"><a href=https://www.linkedin.com/in/dgalarza/ target=_blank rel=noopener class="text-gray-400 hover:text-accent-teal transition-colors" aria-label="LinkedIn profile"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0H5C2.239.0.0 2.239.0 5v14c0 2.761 2.239 5 5 5h14c2.762.0 5-2.239 5-5V5c0-2.761-2.238-5-5-5zM8 19H5V8h3v11zM6.5 6.732c-.966.0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zM20 19h-3v-5.604c0-3.368-4-3.113-4 0V19h-3V8h3v1.765c1.396-2.586 7-2.777 7 2.476V19z"/></svg>
