@@ -1,12 +1,13 @@
 {{ define "main" }}
-<!-- Intro/About Section -->
-<section class="relative px-6 lg:px-24 py-24 flex items-center min-h-screen max-w-7xl mx-auto">
-    <div class="w-full">
-        <p class="text-[var(--color-accent)] font-mono text-base mb-6">Hi, my name is</p>
-        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-[var(--color-text-primary)]">
-            Damian Galarza.
-        </h1>
-        <div class="max-w-2xl">
+<!-- Intro/About Section with Writing Sidebar -->
+<section class="relative px-6 lg:px-24 py-24 min-h-screen max-w-7xl mx-auto">
+    <div class="homepage-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Introduction (5 cols) -->
+        <div class="intro-col lg:col-span-5">
+            <p class="text-[var(--color-accent)] font-mono text-base mb-6">Hi, my name is</p>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-[var(--color-text-primary)]">
+                Damian Galarza.
+            </h1>
             <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
                 I'm a Senior Software Engineer at August Health, where I work on systems that support care delivery — including the AI features we're building into the platform.
             </p>
@@ -23,45 +24,42 @@
                 Get in touch
             </a>
         </div>
-    </div>
-</section>
 
-<!-- Blog Section -->
-<section id="writing" class="px-6 lg:px-24 py-24 max-w-7xl mx-auto">
-    <div class="writing-content-wrapper">
-        <div class="section-numbered-heading">
-            <span class="section-number">01.</span>
-            <h2 class="section-title">Writing</h2>
-            <div class="section-divider"></div>
-        </div>
+        <!-- Spacer (1 col) -->
+        <div class="spacer-col hidden lg:block lg:col-span-1"></div>
 
-        <div class="space-y-1">
-            {{ range first 10 (where .Site.RegularPages "Type" "posts") }}
-            <a href="{{ .Permalink }}" class="blog-post-item block group">
-                <div class="blog-post-date">
-                    {{ .Date.Format "Jan 2006" }}
+        <!-- Right: Writing (6 cols) -->
+        <div id="writing" class="writing-col lg:col-span-6">
+                <p class="text-[var(--color-accent)] font-mono text-base mb-6">Writings</p>
+
+                <div class="space-y-1">
+                    {{ range first 6 (where .Site.RegularPages "Type" "posts") }}
+                    <a href="{{ .Permalink }}" class="blog-post-item block group">
+                        <div class="blog-post-date">
+                            {{ .Date.Format "Jan 2006" }}
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="flex items-start gap-2">
+                                <h3 class="blog-post-title flex-1">{{ .Title }}</h3>
+                                <svg class="blog-post-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 3L10 8L5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <p class="blog-post-description">{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 100 }}{{ end }}</p>
+                        </div>
+                    </a>
+                    {{ end }}
                 </div>
-                <div class="blog-post-content">
-                    <div class="flex items-start gap-2">
-                        <h3 class="blog-post-title flex-1">{{ .Title }}</h3>
-                        <svg class="blog-post-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 3L10 8L5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <div class="mt-8">
+                    <a href="/posts/" class="inline-flex items-center gap-2 text-[var(--color-accent)] font-mono text-sm font-medium group">
+                        <span class="group-hover:underline">View full archive</span>
+                        <svg class="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    </div>
-                    <p class="blog-post-description">{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 180 }}{{ end }}</p>
+                    </a>
                 </div>
-            </a>
-            {{ end }}
+            </div>
         </div>
-
-        <div class="mt-16">
-            <a href="/posts/" class="inline-flex items-center gap-2 text-[var(--color-accent)] font-mono text-sm font-medium group">
-                <span class="group-hover:underline">View full archive</span>
-                <svg class="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </a>
-        </div>
-    </div>
 </section>
 {{ end }}
