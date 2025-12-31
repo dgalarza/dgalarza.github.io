@@ -1,282 +1,65 @@
 {{ define "main" }}
-<!-- Hero Section -->
-<section class="relative px-6 lg:px-12 py-32 text-center flex items-center min-h-[calc(100vh-80px)]">
-    <div class="max-w-7xl mx-auto w-full">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-                A technical partner to help<br>
-                you build the <span class="gradient-text">right thing</span>—<br>
-                faster.
+<!-- Intro/About Section with Writing Sidebar -->
+<section class="relative px-6 lg:px-24 py-24 min-h-screen max-w-7xl mx-auto">
+    <div class="homepage-grid grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Introduction (5 cols) -->
+        <div class="intro-col lg:col-span-5">
+            <p class="text-[var(--color-accent)] font-mono text-base mb-6">Hi, my name is</p>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-[var(--color-text-primary)]">
+                Damian Galarza
             </h1>
-            <p class="text-xl text-gray-300 mb-16 max-w-3xl mx-auto leading-relaxed">
-                I help early-stage founders ship high-quality software with confidence—<br>
-                whether that means building the first version, reviewing architecture,<br>
-                managing consultants, or using AI to move faster.
+            <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
+                I'm a Senior Software Engineer at August Health, where I work on systems that support care delivery — including the AI features we're building into the platform.
             </p>
-            <a href="#contact" class="btn-primary inline-block">
-                Let's talk about your startup →
+            <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
+                Before this, I was CTO at Buoy Software. I grew the engineering team from zero to 50+, shipped FDA-cleared medical device software, and helped build the systems behind blood collection operations across the country.
+            </p>
+            <p class="text-lg text-[var(--color-text-secondary)] mb-6 leading-relaxed">
+                Outside of my day job, I occasionally advise early-stage founders as a fractional CTO. I've spent a lot of time thinking about product, process, and code — and I genuinely enjoy helping teams move faster without sacrificing quality. Whether it's scoping an MVP, making architectural calls, hiring engineers who think like product people, or figuring out how AI fits into the picture, I'm happy to dig in.
+            </p>
+            <p class="text-lg text-[var(--color-text-secondary)] mb-12 leading-relaxed">
+                If you're building something in healthcare, SaaS, or applied AI, I'd love to hear about it.
+            </p>
+            <a href="mailto:info@damiangalarza.com" class="btn-primary">
+                Get in touch
             </a>
         </div>
-    </div>
-    
-    <!-- Decorative gradient lines -->
-    <div class="fixed left-0 top-0 z-10" style="width: 2px; height: 100vh; background: linear-gradient(to bottom, transparent, #20D0BC, transparent);"></div>
-    <div class="fixed right-0 top-0 z-10" style="width: 2px; height: 100vh; background: linear-gradient(to bottom, #9333ea, transparent, #9333ea);"></div>
-</section>
 
-<!-- Who I Work With Section -->
-<section class="py-32 px-6 lg:px-12 section-alt">
-    <div class="max-w-5xl mx-auto">
-        <div class="text-center mb-12">
-            <h2 class="text-4xl font-bold mb-4">Who I Work With</h2>
-            <div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mx-auto"></div>
-        </div>
-        
-        <div class="max-w-3xl mx-auto">
-            <div class="card">
-                <p class="text-gray-300 mb-6">
-                    You're a non-technical founder, or a small startup team, trying to:
-                </p>
-                
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 text-[var(--color-accent-teal)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-gray-300">Turn a product vision into working software</p>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 text-[var(--color-accent-teal)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-gray-300">Make early architecture decisions that won't impede progress later</p>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 text-[var(--color-accent-teal)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-gray-300">Add AI features or speed up development using AI tools</p>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 text-[var(--color-accent-teal)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-gray-300">Vet engineers or consultants you've hired</p>
-                    </div>
-                    
-                    <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 text-[var(--color-accent-teal)] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                        <p class="text-gray-300">Avoid wasting time on the wrong build</p>
-                    </div>
-                </div>
-                
-                <p class="text-[var(--color-accent-teal)] font-semibold mt-6">
-                    That's where I come in.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
+        <!-- Spacer (1 col) -->
+        <div class="spacer-col hidden lg:block lg:col-span-1"></div>
 
-<!-- How I Help Section -->
-<section class="py-32 px-6 lg:px-12">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-4xl font-bold mb-4">How I Help</h2>
-            <div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mx-auto"></div>
-        </div>
-        
-        <div class="grid md:grid-cols-3 gap-12">
-            <!-- Fractional CTO -->
-            <div class="card">
-                <div class="flex items-center gap-3 mb-6">
-                    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[var(--color-accent-teal)] flex-shrink-0" aria-label="Fractional CTO services icon">
-                        <g clip-path="url(#clip0_19_13)">
-                            <path d="M21.3433 28V25.3333C21.3433 23.9188 20.7814 22.5623 19.7812 21.5621C18.781 20.5619 17.4245 20 16.01 20H8.00997C6.59548 20 5.23893 20.5619 4.23873 21.5621C3.23854 22.5623 2.67664 23.9188 2.67664 25.3333V28" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12.01 14.6667C14.9555 14.6667 17.3433 12.2789 17.3433 9.33333C17.3433 6.38781 14.9555 4 12.01 4C9.06445 4 6.67664 6.38781 6.67664 9.33333C6.67664 12.2789 9.06445 14.6667 12.01 14.6667Z" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M29.3434 28V25.3333C29.3425 24.1516 28.9492 23.0037 28.2252 22.0698C27.5012 21.1358 26.4876 20.4688 25.3434 20.1733" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21.3434 4.17334C22.4906 4.46707 23.5074 5.13427 24.2336 6.06975C24.9597 7.00523 25.3538 8.15578 25.3538 9.34001C25.3538 10.5242 24.9597 11.6748 24.2336 12.6103C23.5074 13.5457 22.4906 14.2129 21.3434 14.5067" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_19_13">
-                                <rect width="32" height="32" fill="white" transform="translate(0.0100098)"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <h3 class="text-xl font-bold text-[var(--color-accent-teal)]">Fractional CTO</h3>
-                </div>
-                
-                <p class="text-gray-400 text-sm mb-4">
-                  For early-stage startups without a technical co-founder or those who need interim leadership.
-                </p>
-                
-                <ul class="space-y-2 text-sm text-gray-300">
-                    <li class="bullet-item">Team and individual coaching</li>
-                    <li class="bullet-item">Make or advise on architecture and stack decisions</li>
-                    <li class="bullet-item">Anticipate architecture trade-offs and provide recommendations to build for impact, speed, and quality</li>
-                    <li class="bullet-item">Set up product and development processes</li>
-                    <li class="bullet-item">Translate business goals into technical execution</li>
-                </ul>
-                
-                <blockquote class="mt-6 p-4 bg-[var(--color-dark-surface)] rounded-lg border-l-4 border-[var(--color-accent-teal)]">
-                    <p class="text-sm text-gray-400 italic">
-                      "Think of me as your co-founder-level advisor who knows when to ship fast and when to build strong foundations."
-                    </p>
-                </blockquote>
-            </div>
-            
-            <!-- Hands-On Engineering -->
-            <div class="card">
-                <div class="flex items-center gap-3 mb-6">
-                    <svg class="w-6 h-6 text-[var(--color-accent-teal)] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Hands-on engineering services icon">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
-                    </svg>
-                    <h3 class="text-xl font-bold text-[var(--color-accent-teal)]">Hands-On<br>Engineering</h3>
-                </div>
-                
-                <p class="text-gray-400 text-sm mb-4">
-                    Sometimes you need someone to roll up their sleeves:
-                </p>
-                
-                <ul class="space-y-2 text-sm text-gray-300">
-                    <li class="bullet-item">Build prototypes or MVP features</li>
-                    <li class="bullet-item">Write tests, reviews, and refactor core logic</li>
-                    <li class="bullet-item">Pair with your team to level up quality and velocity</li>
-                    <li class="bullet-item">Audit your codebase and processes</li>
-                </ul>
-            </div>
-            
-            <!-- Coaching and Mentorship -->
-            <div class="card">
-                <div class="flex items-center gap-3 mb-6">
-                    <svg width="24" height="26" viewBox="0 0 29 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[var(--color-accent-teal)] flex-shrink-0" aria-label="Coaching and mentorship services icon">
-                        <g clip-path="url(#clip0_19_75)">
-                            <path d="M13.4108 21.9458L15.7891 24.3241C16.0233 24.5583 16.3014 24.7442 16.6075 24.8709C16.9135 24.9977 17.2416 25.0629 17.5728 25.0629C17.9041 25.0629 18.2322 24.9977 18.5382 24.8709C18.8443 24.7442 19.1224 24.5583 19.3566 24.3241C19.5908 24.0898 19.7767 23.8118 19.9034 23.5057C20.0302 23.1996 20.0955 22.8716 20.0955 22.5403C20.0955 22.2091 20.0302 21.881 19.9034 21.575C19.7767 21.2689 19.5908 20.9908 19.3566 20.7566" stroke="currentColor" stroke-width="2.4975" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16.9783 18.3784L19.9512 21.3512C20.4243 21.8243 21.066 22.09 21.735 22.09C22.404 22.09 23.0457 21.8243 23.5187 21.3512C23.9918 20.8781 24.2576 20.2365 24.2576 19.5675C24.2576 18.8985 23.9918 18.2569 23.5187 17.7838L18.9048 13.17C18.2359 12.5019 17.3291 12.1267 16.3837 12.1267C15.4384 12.1267 14.5316 12.5019 13.8627 13.17L12.8162 14.2164C12.3432 14.6895 11.7015 14.9553 11.0325 14.9553C10.3635 14.9553 9.72182 14.6895 9.24874 14.2164C8.77566 13.7434 8.50989 13.1018 8.50989 12.4327C8.50989 11.7637 8.77566 11.1221 9.24874 10.649L12.5903 7.30759C13.6751 6.22565 15.0898 5.53644 16.6104 5.34906C18.1311 5.16168 19.6708 5.48683 20.9858 6.27305L21.5447 6.606C22.0511 6.91159 22.6531 7.01758 23.2333 6.90329L25.3025 6.48709" stroke="currentColor" stroke-width="2.4975" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M25.3024 5.29797L26.4916 18.3784H24.1133" stroke="currentColor" stroke-width="2.4975" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M3.89742 5.29797L2.70825 18.3784L10.4378 26.1077C10.9109 26.5808 11.5525 26.8466 12.2216 26.8466C12.8906 26.8466 13.5323 26.5808 14.0053 26.1077C14.4784 25.6347 14.7442 24.9931 14.7442 24.324C14.7442 23.655 14.4784 23.0134 14.0053 22.5403" stroke="currentColor" stroke-width="2.4975" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M3.89746 6.48718H13.4108" stroke="currentColor" stroke-width="2.4975" stroke-linecap="round" stroke-linejoin="round"/>
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_19_75">
-                                <rect width="28.54" height="32" fill="white" transform="translate(0.329956)"/>
-                            </clipPath>
-                        </defs>
-                    </svg>
-                    <h3 class="text-xl font-bold text-[var(--color-accent-teal)]">Coaching and<br>Mentorship</h3>
-                </div>
-                
-                <p class="text-gray-400 text-sm mb-4">
-                  Guiding engineers and technical leaders to grow with confidence—through hands-on pairing, thoughtful feedback, and practical strategy.
-                </p>
-                
-                <ul class="space-y-2 text-sm text-gray-300">
-                    <li class="bullet-item">Mentor senior ICs and emerging tech leads</li>
-                    <li class="bullet-item">Guide teams through architecture, code reviews, and decision-making</li>
-                    <li class="bullet-item">Improve communication across engineering and product</li>
-                    <li class="bullet-item">Train engineers to work more effectively with AI tools like Cursor and Claude Code</li>
-                    <li class="bullet-item">Build a culture of ownership, clarity, and technical excellence</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</section>
+        <!-- Right: Writing (6 cols) -->
+        <div id="writing" class="writing-col lg:col-span-6">
+                <p class="text-[var(--color-accent)] font-mono text-base mb-6">Writings</p>
 
-<!-- Why Work With Me Section -->
-<section class="py-32 px-6 lg:px-12 section-alt">
-    <div class="max-w-4xl mx-auto text-center">
-        <div class="mb-12">
-            <h2 class="text-4xl font-bold mb-4">Why Work With Me?</h2>
-            <div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mx-auto"></div>
-        </div>
-        
-        <div class="card">
-            <div class="space-y-6 text-lg text-gray-300">
-                <p>
-                  I've led engineering at venture-backed startups, scaled teams from 0 to 50+, and helped build FDA-cleared software. With deep executive and hands-on experience, I bring calm, clarity, and momentum to fast-moving, high-stakes environments. I'm a builder who knows how to ship—consistently and strategically.
-                </p>
-                
-                <p class="text-[var(--color-accent-teal)] font-semibold">
-                    Whether you need technical leadership or hands-on support,<br>
-                    I'm here to help you build smarter and efficiently.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Let's Talk Section -->
-<section id="contact" class="py-32 px-6 lg:px-12">
-    <div class="max-w-4xl mx-auto text-center">
-        <div class="mb-8">
-            <h2 class="text-4xl font-bold mb-4">Let's Talk</h2>
-            <div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mx-auto"></div>
-        </div>
-        
-        <p class="text-lg text-gray-300 mb-4">
-            Not sure what you need yet?
-        </p>
-        
-        <p class="text-xl text-[var(--color-accent-teal)] font-semibold mb-12">
-            That's normal. I can help you figure it out.
-        </p>
-        
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="https://calendly.com/damian-galarza/intro-call" class="btn-primary">
-                <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                </svg>
-                Schedule a free intro call
-            </a>
-            <a href="mailto:info@damiangalarza.com" class="btn-secondary">
-                <svg class="inline-block w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                </svg>
-                Email me directly
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- Latest Insights Section -->
-<section class="py-32 px-6 lg:px-12">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-8">
-            <h2 class="text-4xl font-bold mb-4">Latest Insights</h2>
-            <div class="w-16 h-0.5 bg-[var(--color-accent-teal)] mx-auto"></div>
-        </div>
-        
-        <p class="text-center text-gray-400 mb-12 text-lg">
-            Practical advice for building better software faster
-        </p>
-        
-        <div class="grid md:grid-cols-3 gap-8">
-            {{ range first 3 (where .Site.RegularPages "Type" "posts") }}
-            <article class="group">
-                <time class="text-sm text-gray-500">{{ .Date.Format "January 2, 2006" }}</time>
-                <h3 class="text-xl font-bold mt-2 mb-3">
-                    <a href="{{ .Permalink }}" class="group-hover:text-[var(--color-accent-teal)] transition-colors">
-                        {{ .Title }}
+                <div class="space-y-1">
+                    {{ range first 6 (where .Site.RegularPages "Type" "posts") }}
+                    <a href="{{ .Permalink }}" class="blog-post-item block group">
+                        <div class="blog-post-date">
+                            {{ .Date.Format "Jan 2006" }}
+                        </div>
+                        <div class="blog-post-content">
+                            <div class="flex items-start gap-2">
+                                <h3 class="blog-post-title flex-1">{{ .Title }}</h3>
+                                <svg class="blog-post-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 3L10 8L5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <p class="blog-post-description">{{ with .Params.description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 100 }}{{ end }}</p>
+                        </div>
                     </a>
-                </h3>
-                <p class="text-gray-400 text-sm mb-4{{ if not .Params.home_summary }} line-clamp-3{{ end }}">{{ with .Params.home_summary }}{{ . | plainify }}{{ else }}{{ .Summary | plainify | truncate 150 }}{{ end }}</p>
-                <a href="{{ .Permalink }}" class="text-[var(--color-accent-teal)] text-sm font-medium hover:underline">
-                    Read more →
-                </a>
-            </article>
-            {{ end }}
+                    {{ end }}
+                </div>
+
+                <div class="mt-8">
+                    <a href="/posts/" class="inline-flex items-center gap-2 text-[var(--color-accent)] font-mono text-sm font-medium group">
+                        <span class="group-hover:underline">View full archive</span>
+                        <svg class="group-hover:translate-x-1 transition-transform" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <div class="text-center mt-12">
-            <a href="/posts/" class="btn-secondary">
-                View all articles →
-            </a>
-        </div>
-    </div>
 </section>
 {{ end }}
