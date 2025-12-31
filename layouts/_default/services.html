@@ -14,10 +14,13 @@
     </div>
 
     <!-- Services Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {{ range .Params.services }}
         <div class="bg-[var(--color-dark-surface)] rounded-lg p-8">
-            <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">{{ .title }}</h2>
+            <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-2">{{ .title }}</h2>
+            {{ with .audience }}
+            <p class="text-sm text-[var(--color-accent)] font-mono mb-4">{{ . }}</p>
+            {{ end }}
             <p class="text-[var(--color-text-secondary)] mb-8 leading-relaxed">{{ .description }}</p>
 
             <ul class="space-y-4">
@@ -32,6 +35,24 @@
         {{ end }}
     </div>
 
+    <!-- Course Section -->
+    {{ with .Params.course }}
+    <div class="mt-16 bg-gradient-to-r from-[var(--color-accent)]/10 to-[var(--color-accent-purple)]/10 rounded-lg p-8 border border-[var(--color-accent)]/20">
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+            <div>
+                <p class="text-sm text-[var(--color-accent)] font-mono mb-2">Coming Soon</p>
+                <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-2">{{ .title }}</h2>
+                <p class="text-[var(--color-text-secondary)] leading-relaxed max-w-xl">{{ .description }}</p>
+            </div>
+            <div class="flex-shrink-0">
+                <a href="{{ .cta_url }}" class="btn-primary">
+                    {{ .cta_text }}
+                </a>
+            </div>
+        </div>
+    </div>
+    {{ end }}
+
     <!-- CTA Section -->
     <div class="mt-20 pt-16 border-t border-[var(--color-dark-surface)]">
         <div class="max-w-2xl">
@@ -39,8 +60,8 @@
             <p class="text-[var(--color-text-secondary)] mb-8 leading-relaxed">
                 If any of this sounds like what you're looking for, I'd love to hear more about what you're working on.
             </p>
-            <a href="mailto:info@damiangalarza.com" class="btn-primary">
-                Get in touch
+            <a href="https://calendly.com/damian-galarza/intro-call" class="btn-primary">
+                Schedule an intro call
             </a>
         </div>
     </div>
