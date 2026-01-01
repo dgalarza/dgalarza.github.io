@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="relative px-6 lg:px-24 py-24 min-h-screen max-w-4xl mx-auto flex items-center">
+    <div class="text-center mx-auto">
+        <div class="mb-8">
+            <svg class="w-16 h-16 mx-auto text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 text-[var(--color-text-primary)]">
+            You're on the list!
+        </h1>
+
+        <p class="text-xl text-[var(--color-text-secondary)] mb-8 max-w-lg mx-auto">
+            Thanks for your interest in the Rails LLM Course. I'll email you when it's ready to launch.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a href="/" class="btn-primary">
+                Back to home
+            </a>
+            <a href="/posts/" class="inline-flex items-center gap-2 px-6 py-3 text-[var(--color-accent)] font-medium border border-[var(--color-accent)]/30 rounded-lg hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 transition-all">
+                Read the blog
+            </a>
+        </div>
+    </div>
+</section>
+{{ end }}

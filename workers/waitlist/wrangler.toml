@@ -1,0 +1,15 @@
+name = "waitlist"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# KV Namespace binding
+# After running: wrangler kv:namespace create WAITLIST_KV
+# Replace the id below with your actual namespace ID
+kv_namespaces = [
+  { binding = "WAITLIST_KV", id = "a8ad34b7b3d448c8bd8d59621e45db5d" }
+]
+
+# Optional: Custom domain (configure in Cloudflare dashboard)
+# routes = [
+#   { pattern = "api.damiangalarza.com/waitlist", zone_name = "damiangalarza.com" }
+# ]

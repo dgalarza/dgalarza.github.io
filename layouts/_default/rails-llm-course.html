@@ -1,0 +1,173 @@
+{{ define "main" }}
+<section class="relative px-6 lg:px-24 py-24 min-h-screen max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="mb-12">
+        <p class="text-[var(--color-accent)] font-mono text-base mb-6">Coming Soon</p>
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-[var(--color-text-primary)]">
+            Rails LLM Course
+        </h1>
+        <p class="text-xl text-[var(--color-text-secondary)] leading-relaxed max-w-2xl">
+            Build production-ready LLM features in Rails. Not another Python tutorial translated to Ruby — this is Rails-first, built on patterns from real SaaS and regulated software.
+        </p>
+    </div>
+
+    <!-- Who this is for -->
+    <div class="mb-12 callout-accent">
+        <p class="text-lg text-[var(--color-text-secondary)] leading-relaxed">
+            <span class="text-[var(--color-accent)] font-medium">For Rails developers</span> who want to add AI features to their applications without switching stacks or wading through Python-centric tutorials.
+        </p>
+    </div>
+
+    <!-- What you'll learn -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-6">What you'll build</h2>
+        <ul class="space-y-4">
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">Streaming responses</span> with Hotwire — real-time AI output without JavaScript complexity</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">Tool use and agents</span> — multi-step workflows where the LLM calls your Rails code</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">RAG with pgvector</span> — embeddings, vector search, and knowledge bases in PostgreSQL</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">Structured outputs</span> — getting reliable JSON from LLMs with validation</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">Evals and testing</span> — measure and improve AI feature quality systematically</span>
+            </li>
+            <li class="flex items-start gap-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] mt-2 flex-shrink-0" style="min-width: 6px; min-height: 6px;"></span>
+                <span class="text-[var(--color-text-secondary)]"><span class="text-[var(--color-text-primary)]">Production patterns</span> — background jobs, cost control, error handling, and monitoring</span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tech stack -->
+    <div class="mb-12">
+        <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-6">Tech stack</h2>
+        <div class="flex flex-wrap gap-3">
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">Rails 7+</span>
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">Hotwire</span>
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">Anthropic Claude API</span>
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">OpenAI API</span>
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">PostgreSQL + pgvector</span>
+            <span class="px-3 py-1.5 bg-[var(--color-dark-surface)] rounded-lg text-sm text-[var(--color-text-secondary)]">Stimulus</span>
+        </div>
+    </div>
+
+    <!-- Waitlist form -->
+    <div class="bg-[var(--color-dark-surface)] rounded-lg p-8">
+        <h2 class="text-2xl font-bold text-[var(--color-text-primary)] mb-4">Join the waitlist</h2>
+        <p class="text-[var(--color-text-secondary)] mb-6">
+            Be the first to know when the course launches. No spam, just updates on the course.
+        </p>
+
+        {{ $error := "" }}
+        {{ with .Page.Site.Params }}{{ end }}
+
+        <form
+            action="https://waitlist.damiangalarza.workers.dev"
+            method="POST"
+            class="flex flex-col sm:flex-row gap-4"
+        >
+            <div class="flex-1">
+                <label for="email" class="sr-only">Email address</label>
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    required
+                    placeholder="you@example.com"
+                    class="w-full px-4 py-3 bg-[var(--color-dark-bg)] border border-[var(--color-dark-surface)] rounded-lg text-[var(--color-text-primary)] placeholder-[var(--color-text-secondary)]/50 focus:outline-none focus:border-[var(--color-accent)] focus:ring-1 focus:ring-[var(--color-accent)] transition-colors"
+                >
+            </div>
+            <button
+                type="submit"
+                class="btn-primary whitespace-nowrap"
+            >
+                Join the waitlist
+            </button>
+        </form>
+
+        <!-- Error message display -->
+        <div id="form-error" class="hidden mt-4 text-red-400 text-sm"></div>
+    </div>
+
+    <!-- About the author -->
+    <div class="mt-16 pt-12 border-t border-[var(--color-dark-surface)]">
+        <h2 class="text-xl font-bold text-[var(--color-text-primary)] mb-4">About the instructor</h2>
+        <p class="text-[var(--color-text-secondary)] leading-relaxed">
+            I'm Damian Galarza — a Senior Software Engineer at August Health building AI-powered clinical software, and former CTO at Buoy Software where I led engineering for FDA-cleared medical devices. I've been working with Rails for 15+ years and integrating AI into production systems since the early GPT days. This course shares the patterns I've learned shipping real AI features, not theoretical exercises.
+        </p>
+    </div>
+</section>
+
+<script>
+// Handle error query param
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get('error');
+if (error) {
+    const errorEl = document.getElementById('form-error');
+    errorEl.classList.remove('hidden');
+    if (error === 'invalid-email') {
+        errorEl.textContent = 'Please enter a valid email address.';
+    } else {
+        errorEl.textContent = 'Something went wrong. Please try again.';
+    }
+}
+</script>
+
+<!-- Structured Data - Course Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Rails LLM Course",
+  "description": "Build production-ready LLM features in Rails. Streaming with Hotwire, tool use and agents, RAG with pgvector, structured outputs, evals, and production patterns.",
+  "url": "{{ .Permalink }}",
+  "provider": {
+    "@type": "Person",
+    "name": "Damian Galarza",
+    "url": "https://damiangalarza.com",
+    "jobTitle": "Senior Software Engineer"
+  },
+  "educationalLevel": "Advanced",
+  "teaches": [
+    "LLM integration in Rails applications",
+    "Streaming responses with Hotwire",
+    "Tool use and AI agents",
+    "RAG with PostgreSQL and pgvector",
+    "Structured outputs from LLMs",
+    "AI feature evaluation and testing"
+  ],
+  "about": [
+    {
+      "@type": "Thing",
+      "name": "Ruby on Rails"
+    },
+    {
+      "@type": "Thing",
+      "name": "Large Language Models"
+    },
+    {
+      "@type": "Thing",
+      "name": "Artificial Intelligence"
+    }
+  ],
+  "inLanguage": "en",
+  "isAccessibleForFree": false,
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    "courseWorkload": "Self-paced"
+  }
+}
+</script>
+{{ end }}

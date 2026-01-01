@@ -66,4 +66,38 @@
         </div>
     </div>
 </section>
+
+<!-- Structured Data - Service Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Damian Galarza - Software Engineering & AI Consulting",
+  "description": "{{ .Params.subtitle }}",
+  "url": "{{ .Permalink }}",
+  "provider": {
+    "@type": "Person",
+    "name": "Damian Galarza",
+    "url": "https://damiangalarza.com"
+  },
+  "areaServed": "Worldwide",
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Consulting Services",
+    "itemListElement": [
+      {{ range $index, $service := .Params.services }}
+      {{ if $index }},{{ end }}
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "{{ $service.title }}",
+          "description": "{{ $service.description }}"
+        }
+      }
+      {{ end }}
+    ]
+  }
+}
+</script>
 {{ end }}

@@ -1,6 +1,6 @@
 baseURL = 'https://damiangalarza.com'
 languageCode = 'en-us'
-title = 'Damian Galarza | Technical Partner for Startups & Fractional CTO'
+title = 'Damian Galarza | Software Engineering & AI Consulting'
 #paginate = 3
 # theme = 'maverick' # Removed theme to use custom layouts
 
@@ -9,7 +9,7 @@ title = 'Damian Galarza | Technical Partner for Startups & Fractional CTO'
 
 [params]
   logo = '/assets/favicon.ico'
-  description = "I help early-stage startup founders build better software, faster — from MVPs and architecture reviews to AI integration and fractional CTO support"
+  description = "I help experienced engineers and teams ship better software with AI, smarter workflows, and real-world decision-making."
   author = 'Damian Galarza'
   
   [params.social]

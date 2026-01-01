@@ -1,7 +1,10 @@
 ---
 title: "How I Can Help"
+description: "Consulting, coaching, and AI integration for experienced engineers and teams. Architecture reviews, hands-on mentorship, and practical AI workflow strategy."
 subtitle: "I help experienced engineers and teams ship better software with AI, smarter workflows, and real-world decision-making."
 layout: "services"
+og_image: "images/og-services.png"
+og_image_alt: "Damian Galarza - Software Engineering & AI Consulting Services"
 services:
   - title: "Consulting & Advisory"
     audience: "Best for teams and leaders who need clear direction on AI and engineering execution"
@@ -34,5 +37,5 @@ course:
   title: "Rails LLM Course"
   description: "Practical, example-driven guide to building AI-powered apps on Rails — built from real workflows, not toy demos."
   cta_text: "Join the waitlist"
-  cta_url: "#"
+  cta_url: "/rails-llm-course/"
 ---

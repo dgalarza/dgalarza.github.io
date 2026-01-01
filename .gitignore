@@ -11,7 +11,9 @@
 .DS_Store
 
 # Node modules (if you're using npm packages)
-/node_modules
+**/node_modules
+
+**/.wrangler
 
 # Executable may be added to repository
 hugo.exe
@@ -33,3 +35,5 @@ hugo.linux
 .env
 .claude/settings.local.json
 .playwright-mcp
+
+static/css/**
