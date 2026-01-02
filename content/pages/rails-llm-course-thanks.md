@@ -4,4 +4,6 @@ description: "Thanks for joining the Rails LLM Course waitlist."
 url: "/rails-llm-course/thanks/"
 layout: "rails-llm-thanks"
 robots: "noindex, nofollow"
+_build:
+  list: never
 ---
